@@ -1,0 +1,32 @@
+Player,Team,Game,Points,Passing Attempts,Passing Completions,Passing Yards,Passing TDs,Interceptions,Passing 2Pt Conv,Rushing Attempts,Rushing Yards,Rushing TDs,Rushing 2Pt Conv,Receptions,Receiving Yards,Receiving TDs,Receiving 2Pt Conv,Fumbles,Fumble TDs
+Arizona CardinalsARI,ARI,DAL@ARI,24.00,5.0,2,0,1,0,2,26,199,183,382
+Minnesota VikingsMIN,MIN,MIN@PHI,22.00,6.0,1,0,2,0,1,14,224,107,331
+Pittsburgh SteelersPIT,PIT,CAR@PIT,18.00,4.0,1,0,1,0,0,3,45,74,119
+Kansas City ChiefsKC,KC,TEN@KC,17.00,3.0,2,0,0,0,1,14,213,57,270
+Green Bay PackersGB,GB,NYG@GB,17.00,1.0,4,0,2,0,0,17,296,90,386
+Atlanta FalconsATL,ATL,NO@ATL,15.00,1.0,2,0,0,0,1,17,296,72,368
+Baltimore RavensBAL,BAL,BAL@CLE,15.00,0.0,3,0,1,0,0,10,178,102,280
+Detroit LionsDET,DET,DET@MIA,15.00,2.0,2,0,1,0,1,27,271,154,425
+St. Louis RamsSTL,STL,SF@STL,14.00,4.0,1,1,1,0,0,17,246,85,331
+Washington RedskinsWAS,WAS,WAS@JAX,12.00,4.0,2,0,0,0,0,17,258,78,336
+San Francisco 49ersSF,SF,SF@STL,10.00,1.0,0,0,1,0,1,25,275,60,335
+New York JetsNYJ,NYJ,NYJ@CHI,10.00,2.0,1,0,0,0,1,38,202,120,322
+Oakland RaidersOAK,OAK,IND@OAK,10.00,0.0,2,0,0,0,1,31,179,191,370
+Cincinnati BengalsCIN,CIN,SD@CIN,9.00,1.0,1,0,1,0,0,20,249,64,313
+New Orleans SaintsNO,NO,NO@ATL,9.00,1.0,0,0,2,0,0,14,140,75,215
+Carolina PanthersCAR,CAR,CAR@PIT,8.00,3.0,0,0,2,0,0,27,293,115,408
+Tampa Bay BuccaneersTB,TB,SEA@TB,7.00,3.0,0,0,0,0,0,15,84,90,174
+Jacksonville JaguarsJAX,JAX,WAS@JAX,7.00,1.0,1,0,0,0,0,20,172,79,251
+Cleveland BrownsCLE,CLE,BAL@CLE,7.00,1.0,1,0,0,0,0,20,97,161,258
+Tennessee TitansTEN,TEN,TEN@KC,5.00,1.0,1,0,1,0,0,34,306,152,458
+Philadelphia EaglesPHI,PHI,MIN@PHI,5.00,2.0,0,0,1,0,0,24,176,161,337
+Houston TexansHOU,HOU,HOU@DEN,4.00,1.0,1,0,0,0,0,24,305,126,431
+Seattle SeahawksSEA,SEA,SEA@TB,4.00,2.0,0,0,0,1,0,38,231,208,439
+Chicago BearsCHI,CHI,NYJ@CHI,4.00,0.0,1,0,1,0,0,34,269,124,393
+New York GiantsNYG,NYG,NYG@GB,4.00,2.0,0,0,1,0,0,45,396,119,515
+Indianapolis ColtsIND,IND,IND@OAK,4.00,3.0,0,0,0,0,0,26,210,80,290
+Denver BroncosDEN,DEN,HOU@DEN,3.00,0.0,1,0,0,0,0,23,310,91,401
+San Diego ChargersSD,SD,SD@CIN,2.00,0.0,0,0,1,0,0,34,269,102,371
+Miami DolphinsMIA,MIA,DET@MIA,2.00,2.0,0,0,0,0,0,34,208,67,275
+Dallas CowboysDAL,DAL,DAL@ARI,2.00,1.0,0,0,0,0,0,27,178,93,271
+Buffalo BillsBUF,BUF,NE@BUF,1.00,1.0,0,0,0,0,0,34,131,217,348

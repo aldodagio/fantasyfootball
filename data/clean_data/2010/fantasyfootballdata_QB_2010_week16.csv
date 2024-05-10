@@ -1,0 +1,39 @@
+Player,Team,Game,Points,Passing Attempts,Passing Completions,Passing Yards,Passing TDs,Interceptions,Passing 2Pt Conv,Rushing Attempts,Rushing Yards,Rushing TDs,Rushing 2Pt Conv,Receptions,Receiving Yards,Receiving TDs,Receiving 2Pt Conv,Fumbles,Fumble TDs
+Aaron Rodgers,Green Bay Packers,New York Giants@Green Bay Packers,42.0,37,25,404,4,0,0,2,26,0,0,0,0,0,0,0,0
+Josh Freeman,Tampa Bay Buccaneers,Seattle Seahawks@Tampa Bay Buccaneers,41.0,26,21,237,5,0,0,4,23,0,0,0,0,0,0,0,0
+Carson Palmer,Cincinnati Bengals,Los Angeles Chargers@Cincinnati Bengals,34.0,21,16,269,4,0,0,2,-1,0,0,0,0,0,0,0,0
+Matt Cassel,Kansas City Chiefs,Tennessee Titans@Kansas City Chiefs,32.0,34,24,314,3,0,0,3,20,0,0,0,0,0,0,0,0
+Jay Cutler,Chicago Bears,New York Jets@Chicago Bears,30.0,25,13,215,3,1,0,4,3,1,0,0,0,0,0,0,0
+Tom Brady,New England Patriots,New England Patriots@Buffalo Bills,24.0,27,15,140,3,0,0,3,13,0,0,0,0,0,0,0,0
+Tim Tebow,Denver Broncos,Houston Texans@Denver Broncos,24.0,29,16,308,1,1,0,10,27,1,0,0,0,0,0,0,0
+Michael Vick,Philadelphia Eagles,Minnesota Vikings@Philadelphia Eagles,24.0,43,25,263,1,1,0,8,63,1,0,0,0,0,0,2,0
+Peyton Manning,Indianapolis Colts,Indianapolis Colts@Las Vegas Raiders,23.0,30,16,179,3,2,0,3,25,0,0,0,0,0,0,0,0
+David Garrard,Jacksonville Jaguars,Washington Commanders@Jacksonville Jaguars,22.0,38,22,299,1,2,0,6,39,1,0,0,0,0,0,0,0
+Ben Roethlisberger,Pittsburgh Steelers,Carolina Panthers@Pittsburgh Steelers,22.0,32,22,320,1,0,0,7,2,1,0,0,0,0,0,2,0
+Shaun Hill,Detroit Lions,Detroit Lions@Miami Dolphins,21.0,26,14,222,2,0,0,1,10,0,0,0,0,0,0,0,0
+Kerry Collins,Tennessee Titans,Tennessee Titans@Kansas City Chiefs,17.0,37,14,235,2,2,0,2,-1,0,0,0,0,0,0,0,0
+Eli Manning,New York Giants,New York Giants@Green Bay Packers,17.0,33,17,301,2,4,0,1,12,0,0,0,0,0,0,0,0
+Sam Bradford,Los Angeles Rams,San Francisco 49ers@Los Angeles Rams,16.0,37,28,292,1,0,0,0,0,0,0,0,0,0,0,1,0
+Jason Campbell,Las Vegas Raiders,Indianapolis Colts@Las Vegas Raiders,16.0,42,29,231,1,0,0,3,10,0,0,0,0,0,0,0,0
+Matt Schaub,Houston Texans,Houston Texans@Denver Broncos,16.0,33,23,310,1,1,0,1,0,0,0,0,0,0,0,0,0
+Joe Webb,Minnesota Vikings,Minnesota Vikings@Philadelphia Eagles,16.0,26,17,195,0,0,0,6,31,1,0,0,0,0,0,0,0
+Joe Flacco,Baltimore Ravens,Baltimore Ravens@Cleveland Browns,15.0,19,12,102,2,1,0,3,16,0,0,0,0,0,0,0,0
+John Skelton,Arizona Cardinals,Dallas Cowboys@Arizona Cardinals,15.0,25,11,183,1,0,0,3,21,0,0,0,0,0,0,0,0
+Drew Brees,New Orleans Saints,New Orleans Saints@Atlanta Falcons,14.0,49,35,302,1,2,0,2,-2,0,0,0,0,0,0,0,0
+Chad Henne,Miami Dolphins,Detroit Lions@Miami Dolphins,14.0,44,29,278,1,2,0,5,14,0,0,0,0,0,0,0,0
+Philip Rivers,Los Angeles Chargers,Los Angeles Chargers@Cincinnati Bengals,14.0,40,27,256,1,1,0,1,2,0,0,0,0,0,0,0,0
+Mark Sanchez,New York Jets,New York Jets@Chicago Bears,14.0,37,24,269,1,1,0,0,0,0,0,0,0,0,0,0,0
+Matt Ryan,Atlanta Falcons,New Orleans Saints@Atlanta Falcons,13.0,29,15,148,1,0,0,4,26,0,0,0,0,0,0,0,0
+Troy Smith,San Francisco 49ers,San Francisco 49ers@Los Angeles Rams,12.0,19,7,153,1,1,0,5,28,0,0,0,0,0,0,0,0
+Rex Grossman,Washington Commanders,Washington Commanders@Jacksonville Jaguars,11.0,39,19,182,1,1,0,1,5,0,0,0,0,0,0,0,0
+Stephen McGee,Dallas Cowboys,Dallas Cowboys@Arizona Cardinals,11.0,17,11,111,1,0,0,4,19,0,0,0,0,0,0,0,0
+Matt Hasselbeck,Seattle Seahawks,Seattle Seahawks@Tampa Bay Buccaneers,6.0,4,3,24,0,0,0,1,1,1,0,0,0,0,0,0,0
+Jon Kitna,Dallas Cowboys,Dallas Cowboys@Arizona Cardinals,6.0,20,12,115,1,2,0,1,7,0,0,0,0,0,0,0,0
+Charlie Whitehurst,Seattle Seahawks,Seattle Seahawks@Tampa Bay Buccaneers,4.0,18,11,66,0,0,1,3,5,0,0,0,0,0,0,0,0
+Ryan Fitzpatrick,Buffalo Bills,New England Patriots@Buffalo Bills,3.0,37,18,251,0,3,0,1,14,0,0,0,0,0,0,2,0
+Alex Smith,San Francisco 49ers,San Francisco 49ers@Los Angeles Rams,3.0,15,10,120,0,0,0,0,0,0,0,0,0,0,0,1,0
+Colt McCoy,Cleveland Browns,Baltimore Ravens@Cleveland Browns,2.0,29,15,149,0,3,0,4,30,0,0,0,0,0,0,0,0
+Jimmy Clausen,Carolina Panthers,Carolina Panthers@Pittsburgh Steelers,0.0,23,10,72,0,1,0,0,0,0,0,0,0,0,0,0,0
+Brian Hoyer,New England Patriots,New England Patriots@Buffalo Bills,0.0,0,0,0,0,0,0,4,-2,0,0,0,0,0,0,0,0
+Josh Johnson,Tampa Bay Buccaneers,Seattle Seahawks@Tampa Bay Buccaneers,0.0,2,2,15,0,0,0,0,0,0,0,0,0,0,0,0,0
+Brodie Croyle,Kansas City Chiefs,Tennessee Titans@Kansas City Chiefs,-2.0,2,1,-2,0,1,0,0,0,0,0,0,0,0,0,0,0

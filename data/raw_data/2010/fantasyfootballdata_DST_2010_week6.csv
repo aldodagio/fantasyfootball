@@ -1,0 +1,28 @@
+Player,Team,Game,Points,Passing Attempts,Passing Completions,Passing Yards,Passing TDs,Interceptions,Passing 2Pt Conv,Rushing Attempts,Rushing Yards,Rushing TDs,Rushing 2Pt Conv,Receptions,Receiving Yards,Receiving TDs,Receiving 2Pt Conv,Fumbles,Fumble TDs
+Pittsburgh SteelersPIT,PIT,CLE@PIT,19.00,6.0,2,0,1,0,0,10,258,69,327
+St. Louis RamsSTL,STL,SD@STL,15.00,7.0,1,0,0,1,0,17,208,79,287
+Seattle SeahawksSEA,SEA,SEA@CHI,14.00,6.0,0,1,0,1,0,20,246,61,307
+San Francisco 49ersSF,SF,OAK@SF,13.00,2.0,2,0,0,0,0,9,69,110,179
+New Orleans SaintsNO,NO,NO@TB,13.00,1.0,0,0,1,0,0,6,235,42,277
+New York GiantsNYG,NYG,DET@NYG,12.00,2.0,1,0,2,0,0,20,302,64,366
+Philadelphia EaglesPHI,PHI,ATL@PHI,11.00,3.0,1,0,1,0,0,17,228,65,293
+Miami DolphinsMIA,MIA,MIA@GB,11.00,5.0,1,0,0,0,0,20,283,76,359
+Minnesota VikingsMIN,MIN,DAL@MIN,11.00,0.0,2,0,0,0,1,21,220,94,314
+Washington RedskinsWAS,WAS,IND@WAS,10.00,1.0,0,0,3,1,0,27,299,170,469
+Denver BroncosDEN,DEN,NYJ@DEN,9.00,2.0,2,0,1,0,0,24,190,129,319
+New York JetsNYJ,NYJ,NYJ@DEN,9.00,1.0,0,0,2,0,0,20,201,145,346
+Baltimore RavensBAL,BAL,BAL@NE,8.00,3.0,2,0,0,0,0,23,267,127,394
+Indianapolis ColtsIND,IND,IND@WAS,8.00,3.0,2,0,0,0,0,24,222,113,335
+New England PatriotsNE,NE,BAL@NE,7.00,3.0,0,0,0,0,0,20,278,99,377
+San Diego ChargersSD,SD,SD@STL,7.00,3.0,0,0,0,0,0,20,183,117,300
+Chicago BearsCHI,CHI,SEA@CHI,7.00,0.0,0,0,0,0,1,23,242,111,353
+Oakland RaidersOAK,OAK,OAK@SF,6.00,2.0,0,0,0,0,0,17,191,158,349
+Dallas CowboysDAL,DAL,DAL@MIN,6.00,3.0,0,0,1,0,0,24,93,95,188
+Detroit LionsDET,DET,DET@NYG,4.00,2.0,0,0,1,0,0,28,167,167,334
+Green Bay PackersGB,GB,MIA@GB,3.00,0.0,1,0,0,0,0,23,231,150,381
+Atlanta FalconsATL,ATL,ATL@PHI,3.00,1.0,1,0,0,0,0,31,320,154,474
+Kansas City ChiefsKC,KC,KC@HOU,2.00,2.0,0,0,0,0,0,35,289,132,421
+Cleveland BrownsCLE,CLE,CLE@PIT,2.00,0.0,1,0,0,0,0,28,257,121,378
+Tampa Bay BuccaneersTB,TB,NO@TB,2.00,0.0,1,0,0,0,0,31,263,212,475
+Houston TexansHOU,HOU,KC@HOU,1.00,1.0,0,0,0,0,0,31,189,228,417
+Jacksonville JaguarsJAX,JAX,TEN@JAX,0.00,0.0,0,0,0,0,0,30,171,153,324

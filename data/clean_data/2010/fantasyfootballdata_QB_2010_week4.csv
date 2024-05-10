@@ -1,0 +1,37 @@
+Player,Team,Game,Points,Passing Attempts,Passing Completions,Passing Yards,Passing TDs,Interceptions,Passing 2Pt Conv,Rushing Attempts,Rushing Yards,Rushing TDs,Rushing 2Pt Conv,Receptions,Receiving Yards,Receiving TDs,Receiving 2Pt Conv,Fumbles,Fumble TDs
+David Garrard,Jacksonville Jaguars,Indianapolis Colts@Jacksonville Jaguars,28.0,22,17,163,2,0,0,5,44,1,0,0,0,0,0,0,0
+Shaun Hill,Detroit Lions,Detroit Lions@Green Bay Packers,26.0,54,34,331,2,2,0,4,53,0,0,0,0,0,0,0,0
+Ryan Fitzpatrick,Buffalo Bills,New York Jets@Buffalo Bills,24.0,27,12,128,2,0,0,7,74,0,0,0,0,0,0,0,0
+Peyton Manning,Indianapolis Colts,Indianapolis Colts@Jacksonville Jaguars,24.0,46,33,352,2,1,0,1,-1,0,0,0,0,0,0,0,0
+Kyle Orton,Denver Broncos,Denver Broncos@Tennessee Titans,24.0,50,35,341,2,1,0,3,11,0,0,0,0,0,0,0,0
+Carson Palmer,Cincinnati Bengals,Cincinnati Bengals@Cleveland Browns,24.0,36,25,371,2,0,0,1,0,0,0,0,0,0,0,2,0
+Aaron Rodgers,Green Bay Packers,Detroit Lions@Green Bay Packers,23.0,17,12,181,3,2,0,3,20,0,0,0,0,0,0,0,0
+Sam Bradford,Los Angeles Rams,Seattle Seahawks@Los Angeles Rams,21.0,41,23,289,2,1,0,2,8,0,0,0,0,0,0,0,0
+Philip Rivers,Los Angeles Chargers,Arizona Cardinals@Los Angeles Chargers,21.0,20,15,241,2,0,0,0,0,0,0,0,0,0,0,0,0
+Bruce Gradkowski,Las Vegas Raiders,Houston Texans@Las Vegas Raiders,19.0,39,24,278,2,2,0,3,16,0,0,0,0,0,0,1,0
+Matt Schaub,Houston Texans,Houston Texans@Las Vegas Raiders,19.0,29,16,192,2,0,0,3,1,0,0,0,0,0,0,0,0
+Chad Henne,Miami Dolphins,New England Patriots@Miami Dolphins,18.0,38,28,305,2,3,0,0,0,0,0,0,0,0,0,0,0
+Mark Sanchez,New York Jets,New York Jets@Buffalo Bills,18.0,24,14,161,2,0,0,1,0,0,0,0,0,0,0,0,0
+Drew Brees,New Orleans Saints,Carolina Panthers@New Orleans Saints,17.0,48,33,275,1,0,0,1,-1,0,0,0,0,0,0,0,0
+Joe Flacco,Baltimore Ravens,Baltimore Ravens@Pittsburgh Steelers,14.0,37,24,256,1,1,0,2,1,0,0,0,0,0,0,0,0
+Kevin Kolb,Philadelphia Eagles,Washington Commanders@Philadelphia Eagles,14.0,35,22,201,1,1,0,2,21,0,0,0,0,0,0,0,0
+Matt Ryan,Atlanta Falcons,San Francisco 49ers@Atlanta Falcons,13.0,43,26,273,1,2,0,4,15,0,0,0,0,0,0,0,0
+Vince Young,Tennessee Titans,Denver Broncos@Tennessee Titans,13.0,28,17,173,1,0,0,1,18,0,0,0,0,0,0,0,0
+Tom Brady,New England Patriots,New England Patriots@Miami Dolphins,12.0,24,19,153,1,0,0,5,6,0,0,0,0,0,0,0,0
+Jimmy Clausen,Carolina Panthers,Carolina Panthers@New Orleans Saints,12.0,21,11,146,1,0,0,2,11,0,0,0,0,0,0,0,0
+Donovan McNabb,Washington Commanders,Washington Commanders@Philadelphia Eagles,12.0,19,8,125,1,1,0,5,39,0,0,0,0,0,0,0,0
+Seneca Wallace,Cleveland Browns,Cincinnati Bengals@Cleveland Browns,11.0,30,18,184,1,1,0,5,5,0,0,0,0,0,0,0,0
+Alex Smith,San Francisco 49ers,San Francisco 49ers@Atlanta Falcons,9.0,32,21,188,1,2,0,1,1,0,0,0,0,0,0,0,0
+Eli Manning,New York Giants,Chicago Bears@New York Giants,5.0,30,18,195,0,0,0,3,-2,0,0,0,0,0,0,2,0
+Matt Hasselbeck,Seattle Seahawks,Seattle Seahawks@Los Angeles Rams,4.0,36,20,191,0,1,0,1,3,0,0,0,0,0,0,1,0
+Charlie Batch,Pittsburgh Steelers,Baltimore Ravens@Pittsburgh Steelers,3.0,21,12,141,0,1,0,1,4,0,0,0,0,0,0,0,0
+Max Hall,Arizona Cardinals,Arizona Cardinals@Los Angeles Chargers,2.0,14,8,82,0,0,0,0,0,0,0,0,0,0,0,1,0
+Michael Vick,Philadelphia Eagles,Washington Commanders@Philadelphia Eagles,2.0,7,5,49,0,0,0,3,17,0,0,0,0,0,0,0,0
+Caleb Hanie,Chicago Bears,Chicago Bears@New York Giants,1.0,4,3,36,0,0,0,0,0,0,0,0,0,0,0,0,0
+Mark Brunell,New York Jets,New York Jets@Buffalo Bills,0.0,1,1,7,0,0,0,0,0,0,0,0,0,0,0,0,0
+Brian Hoyer,New England Patriots,New England Patriots@Miami Dolphins,0.0,0,0,0,0,0,0,1,-2,0,0,0,0,0,0,0,0
+Billy Volek,Los Angeles Chargers,Arizona Cardinals@Los Angeles Chargers,0.0,1,1,8,0,0,0,2,-2,0,0,0,0,0,0,0,0
+Todd Collins,Chicago Bears,Chicago Bears@New York Giants,-1.0,11,4,36,0,1,0,0,0,0,0,0,0,0,0,0,0
+Tyler Thigpen,Miami Dolphins,New England Patriots@Miami Dolphins,-1.0,6,2,15,0,1,0,1,12,0,0,0,0,0,0,0,0
+Derek Anderson,Arizona Cardinals,Arizona Cardinals@Los Angeles Chargers,-2.0,14,7,64,0,2,0,0,0,0,0,0,0,0,0,0,0
+Jay Cutler,Chicago Bears,Chicago Bears@New York Giants,-2.0,11,8,42,0,1,0,0,0,0,0,0,0,0,0,1,0

@@ -1,0 +1,32 @@
+Player,Team,Game,Points,Passing Attempts,Passing Completions,Passing Yards,Passing TDs,Interceptions,Passing 2Pt Conv,Rushing Attempts,Rushing Yards,Rushing TDs,Rushing 2Pt Conv,Receptions,Receiving Yards,Receiving TDs,Receiving 2Pt Conv,Fumbles,Fumble TDs
+New York JetsNYJ,NYJ,CIN@NYJ,24.00,3.0,2,1,1,0,1,10,117,46,163
+Houston TexansHOU,HOU,TEN@HOU,17.00,1.0,3,0,0,0,0,0,138,24,162
+Carolina PanthersCAR,CAR,CAR@CLE,15.00,2.0,2,0,1,0,1,24,227,152,379
+San Francisco 49ersSF,SF,SF@ARI,15.00,1.0,1,0,1,0,0,6,190,13,203
+Minnesota VikingsMIN,MIN,MIN@WAS,13.00,4.0,1,0,0,0,0,13,187,29,216
+Seattle SeahawksSEA,SEA,KC@SEA,12.00,0.0,0,0,1,2,1,42,233,270,503
+New York GiantsNYG,NYG,JAX@NYG,12.00,4.0,1,0,1,0,0,20,121,207,328
+Oakland RaidersOAK,OAK,MIA@OAK,11.00,3.0,1,0,0,0,1,33,285,186,471
+Miami DolphinsMIA,MIA,MIA@OAK,11.00,1.0,2,0,1,0,0,17,247,16,263
+Buffalo BillsBUF,BUF,PIT@BUF,11.00,5.0,0,0,1,0,0,19,220,206,426
+Pittsburgh SteelersPIT,PIT,PIT@BUF,10.00,2.0,1,0,1,0,0,16,255,74,329
+Tampa Bay BuccaneersTB,TB,TB@BAL,10.00,4.0,1,0,0,0,0,17,257,92,349
+Kansas City ChiefsKC,KC,KC@SEA,9.00,2.0,2,0,1,0,0,24,268,20,288
+New Orleans SaintsNO,NO,NO@DAL,8.00,1.0,1,0,2,0,0,27,313,144,457
+Atlanta FalconsATL,ATL,GB@ATL,7.00,1.0,0,0,1,0,0,17,341,77,418
+New England PatriotsNE,NE,NE@DET,7.00,2.0,2,0,0,0,0,24,277,129,406
+St. Louis RamsSTL,STL,STL@DEN,7.00,3.0,0,0,2,0,0,33,330,119,449
+Chicago BearsCHI,CHI,PHI@CHI,7.00,4.0,1,0,0,0,0,26,293,105,398
+Baltimore RavensBAL,BAL,TB@BAL,7.00,0.0,0,0,0,0,0,10,162,101,263
+Green Bay PackersGB,GB,GB@ATL,6.00,2.0,0,0,0,0,0,20,177,117,294
+Dallas CowboysDAL,DAL,NO@DAL,6.00,2.0,1,0,1,0,0,30,333,81,414
+Cleveland BrownsCLE,CLE,CAR@CLE,6.00,3.0,1,0,0,0,0,23,175,151,326
+Arizona CardinalsARI,ARI,SF@ARI,6.00,1.0,1,0,0,1,0,27,125,261,386
+Tennessee TitansTEN,TEN,TEN@HOU,6.00,2.0,0,0,0,0,0,20,158,188,346
+Washington RedskinsWAS,WAS,MIN@WAS,6.00,2.0,0,0,0,0,0,17,162,137,299
+Cincinnati BengalsCIN,CIN,CIN@NYJ,5.00,2.0,1,0,0,0,0,26,149,170,319
+Philadelphia EaglesPHI,PHI,PHI@CHI,4.00,4.0,0,0,0,0,0,31,218,131,349
+Indianapolis ColtsIND,IND,SD@IND,2.00,2.0,0,0,0,0,0,36,172,129,301
+Denver BroncosDEN,DEN,STL@DEN,2.00,2.0,0,0,0,0,0,36,308,123,431
+Jacksonville JaguarsJAX,JAX,JAX@NYG,1.00,0.0,0,0,0,0,0,24,226,135,361
+Detroit LionsDET,DET,NE@DET,1.00,1.0,0,0,0,0,0,45,338,109,447

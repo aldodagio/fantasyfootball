@@ -1,0 +1,50 @@
+Player,Team,Game,Points,Passing Attempts,Passing Completions,Passing Yards,Passing TDs,Interceptions,Passing 2Pt Conv,Rushing Attempts,Rushing Yards,Rushing TDs,Rushing 2Pt Conv,Receptions,Receiving Yards,Receiving TDs,Receiving 2Pt Conv,Fumbles,Fumble TDs
+Joel Dreessen,Houston Texans,Houston Texans@New York Jets,20.0,0,0,0,0,0,0,0,0,0,0,4,106,1,0,0,0
+Marcedes Lewis,Jacksonville Jaguars,Cleveland Browns@Jacksonville Jaguars,17.0,0,0,0,0,0,0,0,0,0,0,5,66,1,0,0,0
+Chris Cooley,Washington Commanders,Washington Commanders@Tennessee Titans,16.0,0,0,0,0,0,0,0,0,0,0,7,91,0,0,0,0
+Brandon Pettigrew,Detroit Lions,Detroit Lions@Dallas Cowboys,15.0,0,0,0,0,0,0,0,0,0,0,8,75,0,0,0,0
+Michael Hoomanawanui,Los Angeles Rams,Atlanta Falcons@Los Angeles Rams,14.0,0,0,0,0,0,0,0,0,0,0,4,46,1,0,0,0
+Jacob Tamme,Indianapolis Colts,Indianapolis Colts@New England Patriots,13.0,0,0,0,0,0,0,0,0,0,0,7,60,0,0,0,0
+Jimmy Graham,New Orleans Saints,Seattle Seahawks@New Orleans Saints,12.0,0,0,0,0,0,0,0,0,0,0,5,72,0,0,0,0
+Todd Heap,Baltimore Ravens,Baltimore Ravens@Carolina Panthers,11.0,0,0,0,0,0,0,0,0,0,0,5,69,0,0,0,0
+Evan Moore,Cleveland Browns,Cleveland Browns@Jacksonville Jaguars,9.0,0,0,0,0,0,0,0,0,0,0,3,69,0,0,0,0
+Justin Peelle,Atlanta Falcons,Atlanta Falcons@Los Angeles Rams,9.0,0,0,0,0,0,0,0,0,0,0,2,14,1,0,0,0
+Bo Scaife,Tennessee Titans,Washington Commanders@Tennessee Titans,9.0,0,0,0,0,0,0,0,0,0,0,4,51,0,0,0,0
+Tony Gonzalez,Atlanta Falcons,Atlanta Falcons@Los Angeles Rams,8.0,0,0,0,0,0,0,0,0,0,0,4,46,0,0,0,0
+Greg Olsen,Chicago Bears,Chicago Bears@Miami Dolphins,8.0,0,0,0,0,0,0,0,0,0,0,4,40,0,0,0,0
+Jason Witten,Dallas Cowboys,Detroit Lions@Dallas Cowboys,8.0,0,0,0,0,0,0,0,0,0,0,4,48,0,0,0,0
+Travis Beckum,New York Giants,New York Giants@Philadelphia Eagles,7.0,0,0,0,0,0,0,0,0,0,0,1,2,1,0,0,0
+Aaron Hernandez,New England Patriots,Indianapolis Colts@New England Patriots,7.0,0,0,0,0,0,0,0,0,0,0,1,8,1,0,0,0
+Gijon Robinson,Indianapolis Colts,Indianapolis Colts@New England Patriots,7.0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0
+Kellen Winslow,Tampa Bay Buccaneers,Tampa Bay Buccaneers@San Francisco 49ers,7.0,0,0,0,0,0,0,0,0,0,0,4,34,0,0,0,0
+Fred Davis,Washington Commanders,Washington Commanders@Tennessee Titans,6.0,0,0,0,0,0,0,0,0,0,0,2,44,0,0,0,0
+Jermaine Gresham,Cincinnati Bengals,Buffalo Bills@Cincinnati Bengals,5.0,0,0,0,0,0,0,0,0,0,0,2,33,0,0,0,0
+Heath Miller,Pittsburgh Steelers,Las Vegas Raiders@Pittsburgh Steelers,5.0,0,0,0,0,0,0,0,0,0,0,3,26,0,0,0,0
+Zach Miller,Jacksonville Jaguars,Cleveland Browns@Jacksonville Jaguars,5.0,0,0,0,0,0,0,0,0,0,0,3,27,0,0,0,0
+Brandon Myers,Las Vegas Raiders,Las Vegas Raiders@Pittsburgh Steelers,5.0,0,0,0,0,0,0,0,0,0,0,3,28,0,0,0,0
+Ben Patrick,Arizona Cardinals,Arizona Cardinals@Kansas City Chiefs,5.0,0,0,0,0,0,0,0,0,0,0,3,24,0,0,0,0
+Delanie Walker,San Francisco 49ers,Tampa Bay Buccaneers@San Francisco 49ers,5.0,0,0,0,0,0,0,1,3,0,0,3,27,0,0,0,0
+Kevin Boss,New York Giants,New York Giants@Philadelphia Eagles,4.0,0,0,0,0,0,0,0,0,0,0,2,22,0,0,0,0
+John Carlson,Seattle Seahawks,Seattle Seahawks@New Orleans Saints,4.0,0,0,0,0,0,0,0,0,0,0,3,14,0,0,0,0
+Jake O'Connell,Kansas City Chiefs,Arizona Cardinals@Kansas City Chiefs,4.0,0,0,0,0,0,0,0,0,0,0,2,24,0,0,0,0
+Kory Sperry,Denver Broncos,Denver Broncos@Los Angeles Chargers,4.0,0,0,0,0,0,0,0,0,0,0,2,21,0,0,0,0
+David Thomas,New Orleans Saints,Seattle Seahawks@New Orleans Saints,4.0,0,0,0,0,0,0,0,0,0,0,2,26,0,0,0,0
+Jared Cook,Tennessee Titans,Washington Commanders@Tennessee Titans,3.0,0,0,0,0,0,0,0,0,0,0,2,11,0,0,0,0
+Rob Gronkowski,New England Patriots,Indianapolis Colts@New England Patriots,3.0,0,0,0,0,0,0,0,0,0,0,1,25,0,0,0,0
+David Martin,Buffalo Bills,Buffalo Bills@Cincinnati Bengals,3.0,0,0,0,0,0,0,0,0,0,0,2,15,0,0,0,0
+Matt Spaeth,Pittsburgh Steelers,Las Vegas Raiders@Pittsburgh Steelers,3.0,0,0,0,0,0,0,0,0,0,0,2,16,0,0,0,0
+Anthony Fasano,Miami Dolphins,Chicago Bears@Miami Dolphins,2.0,0,0,0,0,0,0,0,0,0,0,1,16,0,0,0,0
+Daniel Fells,Los Angeles Rams,Atlanta Falcons@Los Angeles Rams,2.0,0,0,0,0,0,0,0,0,0,0,1,11,0,0,0,0
+Daniel Graham,Denver Broncos,Denver Broncos@Los Angeles Chargers,2.0,0,0,0,0,0,0,0,0,0,0,2,6,0,0,0,0
+Tory Humphrey,New Orleans Saints,Seattle Seahawks@New Orleans Saints,2.0,0,0,0,0,0,0,0,0,0,0,1,12,0,0,0,0
+Dustin Keller,New York Jets,Houston Texans@New York Jets,2.0,0,0,0,0,0,0,0,0,0,0,2,7,0,0,0,0
+Jeff King,Carolina Panthers,Baltimore Ravens@Carolina Panthers,2.0,0,0,0,0,0,0,0,0,0,0,2,4,0,0,0,0
+Zach Miller,Las Vegas Raiders,Las Vegas Raiders@Pittsburgh Steelers,2.0,0,0,0,0,0,0,0,0,0,0,2,9,0,0,0,0
+Andrew Quarless,Green Bay Packers,Green Bay Packers@Minnesota Vikings,2.0,0,0,0,0,0,0,0,0,0,0,1,14,0,0,0,0
+Tony Scheffler,Detroit Lions,Detroit Lions@Dallas Cowboys,2.0,0,0,0,0,0,0,0,0,0,0,1,10,0,0,0,0
+Visanthe Shiancoe,Minnesota Vikings,Green Bay Packers@Minnesota Vikings,2.0,0,0,0,0,0,0,0,0,0,0,2,6,0,0,0,0
+Billy Bajema,Los Angeles Rams,Atlanta Falcons@Los Angeles Rams,1.0,0,0,0,0,0,0,0,0,0,0,1,9,0,0,0,0
+Vernon Davis,San Francisco 49ers,Tampa Bay Buccaneers@San Francisco 49ers,1.0,0,0,0,0,0,0,0,0,0,0,1,3,0,0,0,0
+Clay Harbor,Philadelphia Eagles,New York Giants@Philadelphia Eagles,1.0,0,0,0,0,0,0,0,0,0,0,1,6,0,0,0,0
+Donald Lee,Green Bay Packers,Green Bay Packers@Minnesota Vikings,1.0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+Shawn Nelson,Buffalo Bills,Buffalo Bills@Cincinnati Bengals,1.0,0,0,0,0,0,0,0,0,0,0,1,9,0,0,0,0

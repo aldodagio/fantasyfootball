@@ -1,0 +1,37 @@
+Player,Team,Game,Points,Passing Attempts,Passing Completions,Passing Yards,Passing TDs,Interceptions,Passing 2Pt Conv,Rushing Attempts,Rushing Yards,Rushing TDs,Rushing 2Pt Conv,Receptions,Receiving Yards,Receiving TDs,Receiving 2Pt Conv,Fumbles,Fumble TDs
+Tom Brady,New England Patriots,New York Jets@New England Patriots,37.0,29,21,326,4,0,0,1,3,0,0,0,0,0,0,0,0
+Aaron Rodgers,Green Bay Packers,San Francisco 49ers@Green Bay Packers,32.0,30,21,298,3,0,0,4,39,0,0,0,0,0,0,0,0
+Michael Vick,Philadelphia Eagles,Houston Texans@Philadelphia Eagles,32.0,33,22,302,2,1,0,10,48,1,0,0,0,0,0,0,0
+Drew Brees,New Orleans Saints,New Orleans Saints@Cincinnati Bengals,22.0,29,24,313,2,1,0,0,0,0,0,0,0,0,0,0,0
+Matt Schaub,Houston Texans,Houston Texans@Philadelphia Eagles,22.0,36,22,337,2,1,0,0,0,0,0,0,0,0,0,1,0
+Drew Stanton,Detroit Lions,Chicago Bears@Detroit Lions,20.0,24,16,178,1,0,0,5,12,1,0,0,0,0,0,0,0
+Jason Campbell,Las Vegas Raiders,Las Vegas Raiders@Los Angeles Chargers,19.0,16,10,117,1,0,0,7,37,1,0,0,0,0,0,0,0
+Peyton Manning,Indianapolis Colts,Dallas Cowboys@Indianapolis Colts,18.0,48,36,365,2,4,0,1,-1,0,0,0,0,0,0,0,0
+Carson Palmer,Cincinnati Bengals,New Orleans Saints@Cincinnati Bengals,17.0,33,23,249,1,0,1,0,0,0,0,0,0,0,0,0,0
+Joe Flacco,Baltimore Ravens,Pittsburgh Steelers@Baltimore Ravens,16.0,33,17,266,1,0,0,3,15,0,0,0,0,0,0,1,0
+Jon Kitna,Dallas Cowboys,Dallas Cowboys@Indianapolis Colts,16.0,26,18,167,1,0,1,4,28,0,0,0,0,0,0,0,0
+Matt Ryan,Atlanta Falcons,Atlanta Falcons@Tampa Bay Buccaneers,16.0,36,18,205,2,2,0,3,-3,0,0,0,0,0,0,0,0
+Jay Cutler,Chicago Bears,Chicago Bears@Detroit Lions,15.0,26,21,234,1,0,0,5,12,0,0,0,0,0,0,1,0
+Tarvaris Jackson,Minnesota Vikings,Buffalo Bills@Minnesota Vikings,15.0,22,15,187,2,3,0,2,22,0,0,0,0,0,0,0,0
+Philip Rivers,Los Angeles Chargers,Las Vegas Raiders@Los Angeles Chargers,15.0,39,23,280,1,1,0,1,5,0,0,0,0,0,0,0,0
+Jake Delhomme,Cleveland Browns,Cleveland Browns@Miami Dolphins,14.0,34,24,217,1,0,0,4,-5,0,0,0,0,0,0,0,0
+Ben Roethlisberger,Pittsburgh Steelers,Pittsburgh Steelers@Baltimore Ravens,14.0,38,22,253,1,1,0,1,-1,0,0,0,0,0,0,0,0
+Matt Cassel,Kansas City Chiefs,Denver Broncos@Kansas City Chiefs,13.0,31,17,196,1,0,0,2,5,0,0,0,0,0,0,0,0
+Josh Freeman,Tampa Bay Buccaneers,Atlanta Falcons@Tampa Bay Buccaneers,13.0,38,19,181,1,1,0,4,28,0,0,0,0,0,0,0,0
+Troy Smith,San Francisco 49ers,San Francisco 49ers@Green Bay Packers,13.0,25,10,194,1,1,0,3,28,0,0,0,0,0,0,0,0
+David Garrard,Jacksonville Jaguars,Jacksonville Jaguars@Tennessee Titans,12.0,19,14,126,0,0,0,10,19,1,0,0,0,0,0,0,0
+Donovan McNabb,Washington Commanders,Washington Commanders@New York Giants,12.0,44,26,296,1,2,0,2,5,0,0,0,0,0,0,1,0
+Ryan Fitzpatrick,Buffalo Bills,Buffalo Bills@Minnesota Vikings,8.0,25,15,158,1,1,0,4,5,0,0,0,0,0,0,2,0
+Chad Henne,Miami Dolphins,Cleveland Browns@Miami Dolphins,7.0,32,16,174,1,3,0,5,17,0,0,0,0,0,0,0,0
+Sam Bradford,Los Angeles Rams,Los Angeles Rams@Arizona Cardinals,5.0,29,18,187,0,1,0,3,7,0,0,0,0,0,0,0,0
+Matt Hasselbeck,Seattle Seahawks,Carolina Panthers@Seattle Seahawks,5.0,30,17,229,0,2,0,1,-1,0,0,0,0,0,0,0,0
+Jimmy Clausen,Carolina Panthers,Carolina Panthers@Seattle Seahawks,4.0,34,18,169,0,1,0,1,0,0,0,0,0,0,0,0,0
+Eli Manning,New York Giants,Washington Commanders@New York Giants,4.0,25,15,161,0,1,0,1,-1,0,0,0,0,0,0,0,0
+Kyle Orton,Denver Broncos,Denver Broncos@Kansas City Chiefs,3.0,28,9,117,0,0,0,0,0,0,0,0,0,0,0,1,0
+Kerry Collins,Tennessee Titans,Jacksonville Jaguars@Tennessee Titans,2.0,32,14,169,0,2,0,1,4,0,0,0,0,0,0,0,0
+Mark Sanchez,New York Jets,New York Jets@New England Patriots,2.0,33,17,164,0,3,0,4,20,0,0,0,0,0,0,0,0
+Derek Anderson,Arizona Cardinals,Los Angeles Rams@Arizona Cardinals,1.0,20,7,93,0,1,0,0,0,0,0,0,0,0,0,0,0
+John Skelton,Arizona Cardinals,Los Angeles Rams@Arizona Cardinals,1.0,6,3,45,0,0,0,0,0,0,0,0,0,0,0,0,0
+Matt Flynn,Green Bay Packers,San Francisco 49ers@Green Bay Packers,0.0,0,0,0,0,0,0,2,-2,0,0,0,0,0,0,0,0
+Brett Favre,Minnesota Vikings,Buffalo Bills@Minnesota Vikings,-2.0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+Max Hall,Arizona Cardinals,Los Angeles Rams@Arizona Cardinals,-2.0,3,1,10,0,1,0,0,0,0,0,0,0,0,0,0,0

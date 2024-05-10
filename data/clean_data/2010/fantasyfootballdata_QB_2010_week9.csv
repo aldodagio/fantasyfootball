@@ -1,0 +1,34 @@
+Player,Team,Game,Points,Passing Attempts,Passing Completions,Passing Yards,Passing TDs,Interceptions,Passing 2Pt Conv,Rushing Attempts,Rushing Yards,Rushing TDs,Rushing 2Pt Conv,Receptions,Receiving Yards,Receiving TDs,Receiving 2Pt Conv,Fumbles,Fumble TDs
+Philip Rivers,Los Angeles Chargers,Los Angeles Chargers@Houston Texans,33.0,23,17,295,4,1,0,4,-7,0,0,0,0,0,0,0,0
+Aaron Rodgers,Green Bay Packers,Dallas Cowboys@Green Bay Packers,33.0,34,27,289,3,0,0,5,41,0,0,0,0,0,0,0,0
+Eli Manning,New York Giants,New York Giants@Seattle Seahawks,29.0,32,21,290,3,0,0,1,-1,0,0,0,0,0,0,0,0
+Matthew Stafford,Detroit Lions,New York Jets@Detroit Lions,28.0,36,20,240,2,0,0,4,11,1,0,0,0,0,0,0,0
+Michael Vick,Philadelphia Eagles,Indianapolis Colts@Philadelphia Eagles,27.0,29,17,218,1,0,0,10,74,1,0,0,0,0,0,0,0
+Brett Favre,Minnesota Vikings,Arizona Cardinals@Minnesota Vikings,25.0,47,36,446,2,2,0,2,1,0,0,0,0,0,0,0,0
+Jay Cutler,Chicago Bears,Chicago Bears@Buffalo Bills,23.0,30,17,188,2,0,1,5,39,0,0,0,0,0,0,1,0
+Mark Sanchez,New York Jets,New York Jets@Detroit Lions,23.0,39,22,336,1,1,0,3,1,1,0,0,0,0,0,0,0
+Joe Flacco,Baltimore Ravens,Miami Dolphins@Baltimore Ravens,22.0,27,20,266,2,0,0,4,7,0,0,0,0,0,0,0,0
+Tom Brady,New England Patriots,New England Patriots@Cleveland Browns,20.0,36,19,224,2,0,0,1,1,0,0,0,0,0,0,0,0
+Drew Brees,New Orleans Saints,New Orleans Saints@Carolina Panthers,20.0,43,27,253,2,1,0,0,0,0,0,0,0,0,0,0,0
+Matt Cassel,Kansas City Chiefs,Kansas City Chiefs@Las Vegas Raiders,19.0,35,20,216,2,1,0,3,14,0,0,0,0,0,0,0,0
+Carson Palmer,Cincinnati Bengals,Pittsburgh Steelers@Cincinnati Bengals,19.0,36,22,248,2,1,0,0,0,0,0,0,0,0,0,0,0
+Josh Freeman,Tampa Bay Buccaneers,Tampa Bay Buccaneers@Atlanta Falcons,17.0,22,11,189,2,2,0,4,26,0,0,0,0,0,0,0,0
+Matt Ryan,Atlanta Falcons,Tampa Bay Buccaneers@Atlanta Falcons,15.0,36,24,235,1,0,0,3,5,0,0,0,0,0,0,0,0
+Derek Anderson,Arizona Cardinals,Arizona Cardinals@Minnesota Vikings,14.0,26,15,179,1,0,0,3,16,0,0,0,0,0,0,0,0
+Colt McCoy,Cleveland Browns,New England Patriots@Cleveland Browns,14.0,19,14,174,0,0,0,3,20,1,0,0,0,0,0,0,0
+Jason Campbell,Las Vegas Raiders,Kansas City Chiefs@Las Vegas Raiders,13.0,33,19,229,1,1,0,2,0,0,0,0,0,0,0,0,0
+Ryan Fitzpatrick,Buffalo Bills,Chicago Bears@Buffalo Bills,13.0,51,31,299,1,2,0,2,9,0,0,0,0,0,0,0,0
+Peyton Manning,Indianapolis Colts,Indianapolis Colts@Philadelphia Eagles,13.0,51,31,294,1,2,0,0,0,0,0,0,0,0,0,0,0
+Ben Roethlisberger,Pittsburgh Steelers,Pittsburgh Steelers@Cincinnati Bengals,11.0,27,17,163,1,1,0,5,13,0,0,0,0,0,0,0,0
+Jon Kitna,Dallas Cowboys,Dallas Cowboys@Green Bay Packers,9.0,30,19,183,1,2,0,0,0,0,0,0,0,0,0,0,0
+Matt Schaub,Houston Texans,Los Angeles Chargers@Houston Texans,8.0,32,21,267,0,1,0,2,1,0,0,0,0,0,0,0,0
+Charlie Whitehurst,Seattle Seahawks,New York Giants@Seattle Seahawks,6.0,23,12,113,1,2,0,2,2,0,0,0,0,0,0,0,0
+Chad Henne,Miami Dolphins,Miami Dolphins@Baltimore Ravens,4.0,34,22,231,0,3,0,6,13,0,0,0,0,0,0,0,0
+Chase Daniel,New Orleans Saints,New Orleans Saints@Carolina Panthers,1.0,0,0,0,0,0,0,1,16,0,0,0,0,0,0,0,0
+Tony Pike,Carolina Panthers,New Orleans Saints@Carolina Panthers,1.0,12,6,47,0,0,0,0,0,0,0,0,0,0,0,0,0
+Jimmy Clausen,Carolina Panthers,New Orleans Saints@Carolina Panthers,0.0,18,8,47,0,1,0,1,11,0,0,0,0,0,0,0,0
+Matt Flynn,Green Bay Packers,Dallas Cowboys@Green Bay Packers,0.0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Matt Moore,Carolina Panthers,New Orleans Saints@Carolina Panthers,0.0,6,3,13,0,0,0,0,0,0,0,0,0,0,0,0,0
+Sage Rosenfels,New York Giants,New York Giants@Seattle Seahawks,0.0,0,0,0,0,0,0,3,-3,0,0,0,0,0,0,0,0
+Drew Stanton,Detroit Lions,New York Jets@Detroit Lions,0.0,1,0,0,0,0,0,1,6,0,0,0,0,0,0,0,0
+Brian Hoyer,New England Patriots,New England Patriots@Cleveland Browns,-2.0,2,0,0,0,1,0,1,-1,0,0,0,0,0,0,0,0

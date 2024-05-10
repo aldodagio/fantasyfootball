@@ -1,0 +1,38 @@
+Player,Team,Game,Points,Passing Attempts,Passing Completions,Passing Yards,Passing TDs,Interceptions,Passing 2Pt Conv,Rushing Attempts,Rushing Yards,Rushing TDs,Rushing 2Pt Conv,Receptions,Receiving Yards,Receiving TDs,Receiving 2Pt Conv,Fumbles,Fumble TDs
+Matt Schaub,Houston Texans,Baltimore Ravens@Houston Texans,31.0,62,31,393,3,2,1,1,8,0,0,0,0,0,0,0,0
+Alex Smith,San Francisco 49ers,Seattle Seahawks@San Francisco 49ers,29.0,27,17,255,3,0,0,4,12,0,0,0,0,0,0,0,0
+Kerry Collins,Tennessee Titans,Indianapolis Colts@Tennessee Titans,27.0,39,28,244,3,0,0,0,0,0,0,0,0,0,0,0,0
+Tom Brady,New England Patriots,New England Patriots@Chicago Bears,26.0,40,27,369,2,0,0,0,0,0,0,0,0,0,0,0,0
+David Garrard,Jacksonville Jaguars,Las Vegas Raiders@Jacksonville Jaguars,25.0,22,11,159,3,1,0,5,32,0,0,0,0,0,0,0,0
+Michael Vick,Philadelphia Eagles,Philadelphia Eagles@Dallas Cowboys,25.0,26,16,270,2,2,0,8,16,1,0,0,0,0,0,0,0
+Jason Campbell,Las Vegas Raiders,Las Vegas Raiders@Jacksonville Jaguars,24.0,30,21,324,2,0,0,0,0,0,0,0,0,0,0,0,0
+Peyton Manning,Indianapolis Colts,Indianapolis Colts@Tennessee Titans,24.0,35,25,319,2,0,0,0,0,0,0,0,0,0,0,0,0
+Drew Brees,New Orleans Saints,Los Angeles Rams@New Orleans Saints,22.0,40,25,221,3,2,0,1,7,0,0,0,0,0,0,0,0
+Joe Flacco,Baltimore Ravens,Baltimore Ravens@Houston Texans,21.0,33,22,235,2,0,0,0,0,0,0,0,0,0,0,0,0
+Donovan McNabb,Washington Commanders,Tampa Bay Buccaneers@Washington Commanders,21.0,35,22,228,2,0,0,0,0,0,0,0,0,0,0,0,0
+Jon Kitna,Dallas Cowboys,Philadelphia Eagles@Dallas Cowboys,19.0,35,24,242,2,2,0,3,27,0,0,0,0,0,0,0,0
+Josh Freeman,Tampa Bay Buccaneers,Tampa Bay Buccaneers@Washington Commanders,18.0,25,15,266,1,0,0,6,10,0,1,0,0,0,0,1,0
+Philip Rivers,Los Angeles Chargers,Kansas City Chiefs@Los Angeles Chargers,18.0,24,18,226,2,1,0,2,5,0,0,0,0,0,0,1,0
+Ryan Fitzpatrick,Buffalo Bills,Cleveland Browns@Buffalo Bills,14.0,23,14,142,1,0,0,4,49,0,0,0,0,0,0,1,0
+Matt Hasselbeck,Seattle Seahawks,Seattle Seahawks@San Francisco 49ers,14.0,42,27,285,2,4,0,1,5,0,0,0,0,0,0,1,0
+Matt Ryan,Atlanta Falcons,Atlanta Falcons@Carolina Panthers,13.0,34,20,227,1,1,0,1,4,0,0,0,0,0,0,0,0
+Ben Roethlisberger,Pittsburgh Steelers,Cincinnati Bengals@Pittsburgh Steelers,12.0,33,21,258,0,0,0,3,23,0,0,0,0,0,0,0,0
+Sam Bradford,Los Angeles Rams,Los Angeles Rams@New Orleans Saints,11.0,32,18,231,0,2,0,2,5,1,0,0,0,0,0,0,0
+Drew Stanton,Detroit Lions,Green Bay Packers@Detroit Lions,10.0,22,10,117,1,2,0,4,44,0,0,0,0,0,0,0,0
+Eli Manning,New York Giants,New York Giants@Minnesota Vikings,9.0,37,22,187,1,2,0,0,0,0,0,0,0,0,0,0,0
+Carson Palmer,Cincinnati Bengals,Cincinnati Bengals@Pittsburgh Steelers,7.0,32,20,178,1,3,0,2,0,0,0,0,0,0,0,0,0
+Mark Sanchez,New York Jets,Miami Dolphins@New York Jets,7.0,44,17,216,0,1,0,2,20,0,0,0,0,0,0,1,0
+Matt Flynn,Green Bay Packers,Green Bay Packers@Detroit Lions,6.0,26,15,177,0,1,0,3,10,0,0,0,0,0,0,0,0
+Chad Henne,Miami Dolphins,Miami Dolphins@New York Jets,6.0,18,5,55,1,0,0,4,7,0,0,0,0,0,0,2,0
+John Skelton,Arizona Cardinals,Denver Broncos@Arizona Cardinals,5.0,37,15,146,0,0,0,3,9,0,0,0,0,0,0,0,0
+Jay Cutler,Chicago Bears,New England Patriots@Chicago Bears,3.0,26,12,152,0,2,0,2,21,0,0,0,0,0,0,1,0
+Jimmy Clausen,Carolina Panthers,Atlanta Falcons@Carolina Panthers,2.0,24,14,107,0,1,0,0,0,0,0,0,0,0,0,0,0
+Tarvaris Jackson,Minnesota Vikings,New York Giants@Minnesota Vikings,2.0,30,15,118,0,1,0,4,8,0,0,0,0,0,0,0,0
+Brodie Croyle,Kansas City Chiefs,Kansas City Chiefs@Los Angeles Chargers,1.0,17,7,40,0,0,0,0,0,0,0,0,0,0,0,0,0
+Aaron Rodgers,Green Bay Packers,Green Bay Packers@Detroit Lions,1.0,11,7,46,0,1,0,2,25,0,0,0,0,0,0,0,0
+Joe Webb,Minnesota Vikings,New York Giants@Minnesota Vikings,1.0,5,2,8,0,0,0,1,16,0,0,0,0,0,0,0,0
+Jake Delhomme,Cleveland Browns,Cleveland Browns@Buffalo Bills,0.0,20,12,86,0,1,0,0,0,0,0,0,0,0,0,1,0
+Brian Hoyer,New England Patriots,New England Patriots@Chicago Bears,0.0,0,0,0,0,0,0,3,-2,0,0,0,0,0,0,0,0
+Tyler Palko,Kansas City Chiefs,Kansas City Chiefs@Los Angeles Chargers,0.0,3,2,8,0,0,0,1,-1,0,0,0,0,0,0,0,0
+Kyle Orton,Denver Broncos,Denver Broncos@Arizona Cardinals,-1.0,41,19,166,0,3,0,2,5,0,0,0,0,0,0,1,0
+Kyle Boller,Las Vegas Raiders,Las Vegas Raiders@Jacksonville Jaguars,-2.0,3,1,20,0,1,0,1,7,0,0,0,0,0,0,0,0

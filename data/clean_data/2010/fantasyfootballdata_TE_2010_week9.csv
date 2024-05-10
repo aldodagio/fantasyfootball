@@ -1,0 +1,39 @@
+Player,Team,Game,Points,Passing Attempts,Passing Completions,Passing Yards,Passing TDs,Interceptions,Passing 2Pt Conv,Rushing Attempts,Rushing Yards,Rushing TDs,Rushing 2Pt Conv,Receptions,Receiving Yards,Receiving TDs,Receiving 2Pt Conv,Fumbles,Fumble TDs
+Jacob Tamme,Indianapolis Colts,Indianapolis Colts@Philadelphia Eagles,27.0,0,0,0,0,0,0,0,0,0,0,11,108,1,0,0,0
+Aaron Hernandez,New England Patriots,New England Patriots@Cleveland Browns,21.0,0,0,0,0,0,0,0,0,0,0,5,48,2,0,0,0
+Randy McMichael,Los Angeles Chargers,Los Angeles Chargers@Houston Texans,16.0,0,0,0,0,0,0,0,0,0,0,2,23,2,0,0,0
+Visanthe Shiancoe,Minnesota Vikings,Arizona Cardinals@Minnesota Vikings,16.0,0,0,0,0,0,0,0,0,0,0,4,66,1,0,0,0
+Tony Gonzalez,Atlanta Falcons,Tampa Bay Buccaneers@Atlanta Falcons,15.0,0,0,0,0,0,0,0,0,0,0,8,72,0,0,0,0
+Jimmy Graham,New Orleans Saints,New Orleans Saints@Carolina Panthers,13.0,0,0,0,0,0,0,0,0,0,0,3,49,1,0,0,0
+Tony Moeaki,Kansas City Chiefs,Kansas City Chiefs@Las Vegas Raiders,12.0,0,0,0,0,0,0,0,0,0,0,6,63,0,0,0,0
+Joel Dreessen,Houston Texans,Los Angeles Chargers@Houston Texans,11.0,0,0,0,0,0,0,0,0,0,0,5,67,0,0,0,0
+Greg Olsen,Chicago Bears,Chicago Bears@Buffalo Bills,11.0,0,0,0,0,0,0,0,0,0,0,3,29,1,0,0,0
+Brandon Pettigrew,Detroit Lions,New York Jets@Detroit Lions,10.0,0,0,0,0,0,0,0,0,0,0,3,18,1,0,0,0
+Dustin Keller,New York Jets,New York Jets@Detroit Lions,9.0,0,0,0,0,0,0,0,0,0,0,4,59,0,0,0,0
+Michael Palmer,Atlanta Falcons,Tampa Bay Buccaneers@Atlanta Falcons,9.0,0,0,0,0,0,0,0,0,0,0,2,11,1,0,0,0
+Kevin Boss,New York Giants,New York Giants@Seattle Seahawks,8.0,0,0,0,0,0,0,0,0,0,0,2,15,1,0,1,0
+David Thomas,New Orleans Saints,New Orleans Saints@Carolina Panthers,8.0,0,0,0,0,0,0,0,0,0,0,4,45,0,0,0,0
+Rob Gronkowski,New England Patriots,New England Patriots@Cleveland Browns,7.0,0,0,0,0,0,0,0,0,0,0,4,47,0,0,1,0
+Jeremy Shockey,New Orleans Saints,New Orleans Saints@Carolina Panthers,7.0,0,0,0,0,0,0,0,0,0,0,1,7,1,0,0,0
+Jason Witten,Dallas Cowboys,Dallas Cowboys@Green Bay Packers,7.0,0,0,0,0,0,0,0,0,0,0,3,44,0,0,0,0
+Kellen Winslow,Tampa Bay Buccaneers,Tampa Bay Buccaneers@Atlanta Falcons,6.0,0,0,0,0,0,0,0,0,0,0,3,31,0,0,0,0
+Martellus Bennett,Dallas Cowboys,Dallas Cowboys@Green Bay Packers,5.0,0,0,0,0,0,0,0,0,0,0,3,20,0,0,0,0
+Anthony Fasano,Miami Dolphins,Miami Dolphins@Baltimore Ravens,5.0,0,0,0,0,0,0,0,0,0,0,3,26,0,0,0,0
+Heath Miller,Pittsburgh Steelers,Pittsburgh Steelers@Cincinnati Bengals,5.0,0,0,0,0,0,0,0,0,0,0,3,21,0,0,0,0
+Brandon Myers,Las Vegas Raiders,Kansas City Chiefs@Las Vegas Raiders,5.0,0,0,0,0,0,0,0,0,0,0,3,20,0,0,0,0
+Todd Heap,Baltimore Ravens,Miami Dolphins@Baltimore Ravens,4.0,0,0,0,0,0,0,0,0,0,0,2,23,0,0,0,0
+Jeff King,Carolina Panthers,New Orleans Saints@Carolina Panthers,4.0,0,0,0,0,0,0,0,0,0,0,3,17,0,0,0,0
+Tony Scheffler,Detroit Lions,New York Jets@Detroit Lions,4.0,0,0,0,0,0,0,0,0,0,0,2,22,0,0,0,0
+Jermaine Gresham,Cincinnati Bengals,Pittsburgh Steelers@Cincinnati Bengals,3.0,0,0,0,0,0,0,0,0,0,0,2,11,0,0,0,0
+Dante Rosario,Carolina Panthers,New Orleans Saints@Carolina Panthers,3.0,0,0,0,0,0,0,0,0,0,0,2,10,0,0,0,0
+Benjamin Watson,Cleveland Browns,New England Patriots@Cleveland Browns,3.0,0,0,0,0,0,0,0,0,0,0,1,24,0,0,0,0
+John Carlson,Seattle Seahawks,New York Giants@Seattle Seahawks,2.0,0,0,0,0,0,0,0,0,0,0,2,9,0,0,0,0
+Jim Dray,Arizona Cardinals,Arizona Cardinals@Minnesota Vikings,2.0,0,0,0,0,0,0,0,0,0,0,1,17,0,0,0,0
+David Martin,Buffalo Bills,Chicago Bears@Buffalo Bills,2.0,0,0,0,0,0,0,0,0,0,0,1,11,0,0,0,0
+Evan Moore,Cleveland Browns,New England Patriots@Cleveland Browns,2.0,0,0,0,0,0,0,0,0,0,0,1,17,0,0,0,0
+Matt Spaeth,Pittsburgh Steelers,Pittsburgh Steelers@Cincinnati Bengals,2.0,0,0,0,0,0,0,0,0,0,0,1,12,0,0,0,0
+Chris Baker,Seattle Seahawks,New York Giants@Seattle Seahawks,1.0,0,0,0,0,0,0,0,0,0,0,1,7,0,0,0,0
+Tom Crabtree,Green Bay Packers,Dallas Cowboys@Green Bay Packers,1.0,0,0,0,0,0,0,0,0,0,0,1,4,0,0,0,0
+Jeff Dugan,Minnesota Vikings,Arizona Cardinals@Minnesota Vikings,1.0,0,0,0,0,0,0,0,0,0,0,1,3,0,0,0,0
+Brandon Manumaleuna,Chicago Bears,Chicago Bears@Buffalo Bills,1.0,0,0,0,0,0,0,0,0,0,0,1,9,0,0,0,0
+Stephen Spach,Arizona Cardinals,Arizona Cardinals@Minnesota Vikings,1.0,0,0,0,0,0,0,0,0,0,0,1,4,0,0,0,0

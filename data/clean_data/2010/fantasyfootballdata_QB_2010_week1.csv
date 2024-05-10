@@ -1,0 +1,38 @@
+Player,Team,Game,Points,Passing Attempts,Passing Completions,Passing Yards,Passing TDs,Interceptions,Passing 2Pt Conv,Rushing Attempts,Rushing Yards,Rushing TDs,Rushing 2Pt Conv,Receptions,Receiving Yards,Receiving TDs,Receiving 2Pt Conv,Fumbles,Fumble TDs
+Peyton Manning,Indianapolis Colts,Indianapolis Colts@Houston Texans,35.0,57,40,433,3,0,0,0,0,0,0,0,0,0,0,0,0
+Tom Brady,New England Patriots,Cincinnati Bengals@New England Patriots,28.0,35,25,258,3,0,0,0,0,0,0,0,0,0,0,0,0
+Jay Cutler,Chicago Bears,Detroit Lions@Chicago Bears,25.0,35,23,372,2,1,0,5,22,0,0,0,0,0,0,1,0
+David Garrard,Jacksonville Jaguars,Denver Broncos@Jacksonville Jaguars,25.0,21,16,170,3,0,0,7,10,0,0,0,0,0,0,0,0
+Carson Palmer,Cincinnati Bengals,Cincinnati Bengals@New England Patriots,23.0,50,34,345,2,1,0,4,9,0,0,0,0,0,0,0,0
+Philip Rivers,Los Angeles Chargers,Los Angeles Chargers@Kansas City Chiefs,23.0,39,22,298,2,0,0,3,5,0,0,0,0,0,0,0,0
+Michael Vick,Philadelphia Eagles,Green Bay Packers@Philadelphia Eagles,23.0,24,16,175,1,0,0,11,103,0,0,0,0,0,0,0,0
+Matt Hasselbeck,Seattle Seahawks,San Francisco 49ers@Seattle Seahawks,22.0,23,18,170,2,1,0,2,4,1,0,0,0,0,0,0,0
+Eli Manning,New York Giants,Carolina Panthers@New York Giants,22.0,30,20,263,3,3,0,4,-2,0,0,0,0,0,0,0,0
+Josh Freeman,Tampa Bay Buccaneers,Cleveland Browns@Tampa Bay Buccaneers,20.0,28,17,182,2,1,0,2,34,0,0,0,0,0,0,0,0
+Vince Young,Tennessee Titans,Las Vegas Raiders@Tennessee Titans,20.0,17,13,154,2,0,0,7,30,0,0,0,0,0,0,1,0
+Tony Romo,Dallas Cowboys,Dallas Cowboys@Washington Commanders,17.0,47,31,282,1,0,0,0,0,0,0,0,0,0,0,0,0
+Derek Anderson,Arizona Cardinals,Arizona Cardinals@Los Angeles Rams,16.0,41,22,297,1,0,0,1,9,0,0,0,0,0,0,1,0
+Kyle Orton,Denver Broncos,Denver Broncos@Jacksonville Jaguars,16.0,33,21,295,1,1,0,2,12,0,0,0,0,0,0,0,0
+Drew Brees,New Orleans Saints,Minnesota Vikings@New Orleans Saints,15.0,36,27,237,1,0,0,4,-6,0,0,0,0,0,0,0,0
+Aaron Rodgers,Green Bay Packers,Green Bay Packers@Philadelphia Eagles,15.0,31,19,188,2,2,0,5,9,0,0,0,0,0,0,0,0
+Jason Campbell,Las Vegas Raiders,Las Vegas Raiders@Tennessee Titans,13.0,37,22,180,1,1,0,7,35,0,0,0,0,0,0,1,0
+Trent Edwards,Miami Dolphins,Miami Dolphins@Buffalo Bills,12.0,34,18,139,1,0,0,2,12,0,0,0,0,0,0,0,0
+Jake Delhomme,Cleveland Browns,Cleveland Browns@Tampa Bay Buccaneers,11.0,37,20,227,1,2,0,1,1,0,0,0,0,0,0,0,0
+Sam Bradford,Los Angeles Rams,Arizona Cardinals@Los Angeles Rams,10.0,55,32,253,1,3,0,0,0,0,0,0,0,0,0,0,0
+Brett Favre,Minnesota Vikings,Minnesota Vikings@New Orleans Saints,10.0,27,15,171,1,1,0,0,0,0,0,0,0,0,0,0,0
+Matt Cassel,Kansas City Chiefs,Los Angeles Chargers@Kansas City Chiefs,8.0,22,10,68,1,0,0,2,4,0,0,0,0,0,0,0,0
+Matt Ryan,Atlanta Falcons,Atlanta Falcons@Pittsburgh Steelers,8.0,44,27,252,0,1,0,2,4,0,0,0,0,0,0,0,0
+Matt Schaub,Houston Texans,Indianapolis Colts@Houston Texans,8.0,17,9,107,1,1,0,3,-3,0,0,0,0,0,0,0,0
+Dennis Dixon,Pittsburgh Steelers,Atlanta Falcons@Pittsburgh Steelers,7.0,26,18,236,0,1,0,2,4,0,0,0,0,0,0,0,0
+Chad Henne,Miami Dolphins,Miami Dolphins@Buffalo Bills,7.0,34,21,182,0,0,0,2,-1,0,0,0,0,0,0,0,0
+Donovan McNabb,Washington Commanders,Dallas Cowboys@Washington Commanders,7.0,32,15,171,0,0,0,1,17,0,0,0,0,0,0,0,0
+Matt Moore,Carolina Panthers,Carolina Panthers@New York Giants,7.0,33,14,182,1,3,0,2,15,0,0,0,0,0,0,1,0
+Joe Flacco,Baltimore Ravens,Baltimore Ravens@New York Jets,6.0,38,20,248,0,1,0,4,2,0,0,0,0,0,0,1,0
+Alex Smith,San Francisco 49ers,San Francisco 49ers@Seattle Seahawks,5.0,45,26,225,0,2,0,0,0,0,0,0,0,0,0,0,0
+Mark Sanchez,New York Jets,Baltimore Ravens@New York Jets,2.0,21,10,74,0,0,0,2,5,0,0,0,0,0,0,0,0
+Matthew Stafford,Detroit Lions,Detroit Lions@Chicago Bears,2.0,15,11,83,0,0,0,0,0,0,0,0,0,0,0,1,0
+Seneca Wallace,Cleveland Browns,Cleveland Browns@Tampa Bay Buccaneers,1.0,0,0,0,0,0,0,0,0,0,0,1,9,0,0,0,0
+Jimmy Clausen,Carolina Panthers,Carolina Panthers@New York Giants,0.0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Shaun Hill,Detroit Lions,Detroit Lions@Chicago Bears,0.0,19,9,88,0,1,0,3,-4,0,0,0,0,0,0,1,0
+Kevin Kolb,Philadelphia Eagles,Green Bay Packers@Philadelphia Eagles,0.0,10,5,24,0,0,0,0,0,0,0,0,0,0,0,0,0
+Tim Tebow,Denver Broncos,Denver Broncos@Jacksonville Jaguars,0.0,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0

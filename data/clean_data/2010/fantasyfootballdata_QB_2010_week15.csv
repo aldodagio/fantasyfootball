@@ -1,0 +1,37 @@
+Player,Team,Game,Points,Passing Attempts,Passing Completions,Passing Yards,Passing TDs,Interceptions,Passing 2Pt Conv,Rushing Attempts,Rushing Yards,Rushing TDs,Rushing 2Pt Conv,Receptions,Receiving Yards,Receiving TDs,Receiving 2Pt Conv,Fumbles,Fumble TDs
+Michael Vick,Philadelphia Eagles,Philadelphia Eagles@New York Giants,44.0,35,21,242,3,1,0,10,130,1,0,0,0,0,0,0,0
+Rex Grossman,Washington Commanders,Washington Commanders@Dallas Cowboys,35.0,43,25,322,4,2,2,1,-1,0,0,0,0,0,0,1,0
+Eli Manning,New York Giants,Philadelphia Eagles@New York Giants,33.0,39,23,289,4,1,0,0,0,0,0,0,0,0,0,0,0
+Philip Rivers,Los Angeles Chargers,San Francisco 49ers@Los Angeles Chargers,28.0,25,19,273,3,0,0,0,0,0,0,0,0,0,0,0,0
+Drew Brees,New Orleans Saints,New Orleans Saints@Baltimore Ravens,26.0,46,29,267,3,1,0,0,0,0,0,0,0,0,0,0,0
+Matt Flynn,Green Bay Packers,Green Bay Packers@New England Patriots,26.0,37,24,251,3,1,0,3,13,0,0,0,0,0,0,1,0
+Jon Kitna,Dallas Cowboys,Washington Commanders@Dallas Cowboys,25.0,37,25,305,2,0,0,4,11,0,0,0,0,0,0,0,0
+Tim Tebow,Denver Broncos,Denver Broncos@Las Vegas Raiders,24.0,16,8,138,1,0,0,8,78,1,0,0,0,0,0,0,0
+Jay Cutler,Chicago Bears,Chicago Bears@Minnesota Vikings,23.0,24,14,194,3,1,0,1,-1,0,0,0,0,0,0,0,0
+Matt Schaub,Houston Texans,Houston Texans@Tennessee Titans,23.0,54,35,325,2,1,0,0,0,0,0,0,0,0,0,0,0
+Matt Ryan,Atlanta Falcons,Atlanta Falcons@Seattle Seahawks,22.0,35,20,174,3,1,0,6,6,0,0,0,0,0,0,0,0
+David Garrard,Jacksonville Jaguars,Jacksonville Jaguars@Indianapolis Colts,21.0,38,24,294,2,1,0,4,8,0,0,0,0,0,0,0,0
+Peyton Manning,Indianapolis Colts,Jacksonville Jaguars@Indianapolis Colts,21.0,39,29,229,2,0,0,0,0,0,0,0,0,0,0,0,0
+Colt McCoy,Cleveland Browns,Cleveland Browns@Cincinnati Bengals,21.0,25,19,243,2,0,0,0,0,0,0,0,0,0,0,0,0
+Kerry Collins,Tennessee Titans,Houston Texans@Tennessee Titans,19.0,24,14,237,2,1,0,2,-2,0,0,0,0,0,0,0,0
+Ryan Fitzpatrick,Buffalo Bills,Buffalo Bills@Miami Dolphins,19.0,26,16,223,2,1,0,3,19,0,0,0,0,0,0,0,0
+Tom Brady,New England Patriots,Green Bay Packers@New England Patriots,18.0,24,15,163,2,0,0,0,0,0,0,0,0,0,0,0,0
+Joe Flacco,Baltimore Ravens,New Orleans Saints@Baltimore Ravens,18.0,20,10,172,2,0,0,1,2,0,0,0,0,0,0,0,0
+Josh Freeman,Tampa Bay Buccaneers,Detroit Lions@Tampa Bay Buccaneers,18.0,32,21,251,1,0,0,5,29,0,0,0,0,0,0,0,0
+Ben Roethlisberger,Pittsburgh Steelers,New York Jets@Pittsburgh Steelers,18.0,44,23,264,1,0,0,2,25,0,0,0,0,0,0,0,0
+Drew Stanton,Detroit Lions,Detroit Lions@Tampa Bay Buccaneers,18.0,37,23,252,1,0,0,2,24,0,0,0,0,0,0,0,0
+Jason Campbell,Las Vegas Raiders,Denver Broncos@Las Vegas Raiders,15.0,26,15,238,1,2,0,5,41,0,0,0,0,0,0,0,0
+Chad Henne,Miami Dolphins,Buffalo Bills@Miami Dolphins,15.0,45,33,276,1,1,0,0,0,0,0,0,0,0,0,0,0
+Mark Sanchez,New York Jets,New York Jets@Pittsburgh Steelers,13.0,29,19,170,0,0,0,3,15,1,0,0,0,0,0,0,0
+Matt Cassel,Kansas City Chiefs,Kansas City Chiefs@Los Angeles Rams,12.0,29,15,184,1,1,0,6,17,0,0,0,0,0,0,0,0
+Jimmy Clausen,Carolina Panthers,Arizona Cardinals@Carolina Panthers,12.0,19,13,141,1,0,0,5,14,0,0,0,0,0,0,0,0
+Charlie Whitehurst,Seattle Seahawks,Atlanta Falcons@Seattle Seahawks,12.0,16,8,83,0,0,1,3,10,1,0,0,0,0,0,0,0
+Joe Webb,Minnesota Vikings,Chicago Bears@Minnesota Vikings,10.0,26,15,129,0,2,0,6,38,1,0,0,0,0,0,0,0
+Carson Palmer,Cincinnati Bengals,Cleveland Browns@Cincinnati Bengals,8.0,23,14,209,0,0,0,5,-1,0,0,0,0,0,0,0,0
+Brett Favre,Minnesota Vikings,Chicago Bears@Minnesota Vikings,6.0,7,5,63,1,1,0,1,0,0,0,0,0,0,0,0,0
+John Skelton,Arizona Cardinals,Arizona Cardinals@Carolina Panthers,5.0,33,17,196,0,1,0,2,10,0,0,0,0,0,0,1,0
+Alex Smith,San Francisco 49ers,San Francisco 49ers@Los Angeles Chargers,4.0,29,19,165,0,1,0,1,6,0,0,0,0,0,0,0,0
+Sam Bradford,Los Angeles Rams,Kansas City Chiefs@Los Angeles Rams,3.0,43,21,181,0,2,0,2,2,0,0,0,0,0,0,0,0
+Josh Johnson,Tampa Bay Buccaneers,Detroit Lions@Tampa Bay Buccaneers,0.0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+Billy Volek,Los Angeles Chargers,San Francisco 49ers@Los Angeles Chargers,0.0,0,0,0,0,0,0,3,-2,0,0,0,0,0,0,0,0
+Matt Hasselbeck,Seattle Seahawks,Atlanta Falcons@Seattle Seahawks,-3.0,17,10,71,0,2,0,2,4,0,0,0,0,0,0,1,0
