@@ -47,7 +47,7 @@ class Scraper:
           table = soup.find('table', {'class': 'statistics scrollable'})
           if table:
               # Create a CSV file for writing
-              with open('C:/Users/aldod/PycharmProjects/fantasyfootball/data/raw_data/' + str(self.year) + '/fantasyfootballdata_' + self.pos + '_' + str(
+              with open('C:/Users/aldod/PycharmProjects/fantasyfootball/data/raw_data/' + str(self.year) + '/fantasyfootballdata_' + self.pos + str(
                       self.year) + '_week' + str(self.week) + '.csv', 'w+', newline='') as csv_file:
                   csv_writer = csv.writer(csv_file)
 

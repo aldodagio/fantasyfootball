@@ -25,6 +25,7 @@ team_mapping = {
     'LAC': 'Los Angeles Chargers',
     'STL': 'Los Angeles Rams',
     'LAR': 'Los Angeles Rams',
+    'LA': 'Los Angeles Rams',
     'MIA': 'Miami Dolphins',
     'MIN': 'Minnesota Vikings',
     'NE': 'New England Patriots',

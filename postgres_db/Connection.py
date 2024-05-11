@@ -138,6 +138,13 @@ class Connection:
             id = result.scalar()
             return id
 
+    def select_position(self, first_name, last_name):
+        with self.engine.connect() as conn:
+            query = text("""SELECT position FROM player WHERE first_name = :first_name AND last_name = :last_name""")
+            result = conn.execute(query, {'first_name' : first_name, 'last_name' : last_name})
+            position = result.scalar()
+            return position
+
     def select_game_id(self, home_team_id, away_team_id, year):
         with self.engine.connect() as conn:
             query = text("""SELECT game_id FROM game WHERE home_team_id = :home_team_id AND away_team_id = :away_team_id AND season_id = :year""")
@@ -208,11 +215,16 @@ class Connection:
     def insert_rushing(self, rushing):
         with self.engine.connect() as conn:
             query = text("""INSERT INTO rushing (rushing_attempts, rushing_yards, rushing_touchdowns, rushing_two_point_conversions, game_id, player_id) 
-                                SELECT :rushing_attempts, :rushing.rushing_yards, :rushing.rushing_touchdowns, :rushing.rushing_two_point_conversions, :rushing.game_id, :rushing.player_id
-                                WHERE NOT EXISTS (SELECT 1 FROM rushing WHERE game_id=:rushing.game_id AND player_id=:rushing.player_id)""")
-            result = conn.execute(query,
-                                  {'rushing_attempts': int(rushing.rushing_attempts), 'rushing_yards': int(rushing.rushing_yards), 'rushing_touchdowns': int(rushing.rushing_touchdowns), 'rushing_two_point_conversions': int(rushing.rushing_two_point_conversions),
-                                   'game_id': rushing.game_id, 'player_id': rushing.player_id})
+                                SELECT :attempts, :yards, :touchdowns, :two_pt_conv, :game_id, :player_id
+                                WHERE NOT EXISTS (SELECT 1 FROM rushing WHERE game_id=:game_id AND player_id=:player_id)""")
+            result = conn.execute(query, {
+                'attempts': int(rushing.attempts),
+                'yards': int(rushing.yards),
+                'touchdowns': int(rushing.touchdowns),
+                'two_pt_conv': int(rushing.two_pt_conv),
+                'game_id': rushing.game_id,
+                'player_id': rushing.player_id
+            })
             conn.commit()
 
     def insert_receiving(self, receptions, receiving_yards, receiving_touchdowns, receiving_two_point_conversions, game_id, player_id):
@@ -230,19 +242,30 @@ class Connection:
     def insert_receiving(self, receiving):
         with self.engine.connect() as conn:
             query = text("""INSERT INTO receiving (receptions, receiving_yards, receiving_touchdowns, receiving_two_point_conversions, game_id, player_id) 
-                                            SELECT :receiving.receptions, :receiving.receiving_yards, :receiving.receiving_touchdowns, :receiving.receiving_two_point_conversions, :receiving.game_id, :receiving.player_id
-                                            WHERE NOT EXISTS (SELECT 1 FROM receiving WHERE game_id=:receiving.game_id AND player_id=:receiving.player_id)""")
-            result = conn.execute(query,
-                                  {'receptions': int(receiving.receptions), 'receiving_yards': int(receiving.receiving_yards),
-                                   'receiving_touchdowns': int(receiving.receiving_touchdowns),
-                                   'receiving_two_point_conversions': int(receiving.receiving_two_point_conversions),
-                                   'game_id': receiving.game_id, 'player_id': receiving.player_id})
-
+                                            SELECT :receptions, :yards, :touchdowns, :two_pt_conv, :game_id, :player_id
+                                            WHERE NOT EXISTS (SELECT 1 FROM receiving WHERE game_id=:game_id AND player_id=:player_id)""")
+            result = conn.execute(query, {
+                'receptions': int(receiving.receptions),
+                'yards': int(receiving.yards),
+                'touchdowns': int(receiving.touchdowns),
+                'two_pt_conv': int(receiving.two_pt_conv),
+                'game_id': receiving.game_id,
+                'player_id': receiving.player_id
+            })
+            conn.commit()
     def insert_passing(self, passing):
         with self.engine.connect() as conn:
             query = text("""INSERT INTO passing (passing_attempts, passing_completions, passing_yards, passing_touchdowns, passing_two_point_conversions, interceptions, game_id, player_id) 
-                                            SELECT :passing.passing_attempts, :passing.passing_completions, :passing.passing_yards, :passing.passing_touchdowns, :passing.passing_two_point_conversions, :passing.interceptions, :passing.game_id, :passing.player_id
-                                            WHERE NOT EXISTS (SELECT 1 FROM passing WHERE game_id=:passing.game_id AND player_id=:passing.player_id)""")
-            result = conn.execute(query,
-                                  {'passing_attempts' : passing.passing_attempts, 'passing_completions' : passing.passing_completions, 'passing_yards' : passing.passing_yards, 'passing_touchdowns' : passing.passing_touchdowns, 'passing_two_point_conversions' : passing.passing_two_point_conversions, 'interceptions' : passing.interceptions, 'game_id' : passing.game_id, 'player_id' : passing.player_id})
+                                            SELECT :attempts, :completions, :yards, :touchdowns, :two_pt_conv, :interceptions, :game_id, :player_id
+                                            WHERE NOT EXISTS (SELECT 1 FROM passing WHERE game_id=:game_id AND player_id=:player_id)""")
+            result = conn.execute(query, {
+                'attempts': passing.attempts,
+                'completions': passing.completions,
+                'yards': passing.yards,
+                'touchdowns': passing.touchdowns,
+                'two_pt_conv': passing.two_pt_conv,
+                'interceptions': passing.interceptions,
+                'game_id': passing.game_id,
+                'player_id': passing.player_id
+            })
             conn.commit()
