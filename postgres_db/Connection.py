@@ -163,9 +163,24 @@ class Connection:
     def insert_stats(self, stats):
         with self.engine.connect() as conn:
             query = text("""INSERT INTO stats (pass_id, rush_id, reception_id, total_points, fumbles, game_id, player_id) 
-                         SELECT :stats.pass_id, :stats.rush_id, :stats.reception_id, :stats.total_points, :stats.fumbles, :stats.game_id, :stats.player_id 
-                         WHERE NOT EXISTS (SELECT 1 FROM stats WHERE game_id=:stats.game_id AND player_id=:stats.player_id AND pass_id=:stats.pass_id AND rush_id=:stats.rush_id AND reception_id=:stats.reception_id)""")
-            result = conn.execute(query, {'fumbles' : int(stats.fumbles), 'game_id' : stats.game_id, 'player_id' : stats.player_id, 'pass_id' : stats.pass_id, 'rush_id' : stats.rush_id, 'reception_id' : stats.reception_id, 'total_points' : float(stats.total_points)})
+                            SELECT :pass_id, :rush_id, :reception_id, :total_points, :fumbles, :game_id, :player_id 
+                            WHERE NOT EXISTS (
+                                SELECT 1 FROM stats 
+                                WHERE game_id = :game_id 
+                                AND player_id = :player_id 
+                                AND pass_id = :pass_id 
+                                AND rush_id = :rush_id 
+                                AND reception_id = :reception_id
+                            )""")
+            result = conn.execute(query, {
+                'fumbles': int(stats.fumbles),
+                'game_id': stats.game_id,
+                'player_id': stats.player_id,
+                'pass_id': stats.pass_id,
+                'rush_id': stats.rush_id,
+                'reception_id': stats.reception_id,
+                'total_points': float(stats.total_points)
+            })
             conn.commit()
 
     def select_pass_id(self, game_id, player_id):

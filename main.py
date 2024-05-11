@@ -39,7 +39,6 @@ def insert_players(row, pos):
         # Handle the exception gracefully (e.g., log an error message)
         print(f"Failed to insert data: {e}")
 
-
 def insert_games_and_players(row, year, pos):
     # INSERT GAMES
     game = row[2]
@@ -58,6 +57,73 @@ def insert_games_and_players(row, year, pos):
     team_id = db.select_team_id(row[1])
     try:
         db.insert_player(first_name, last_name, pos, team_id)
+    except IntegrityError as e:
+        # Handle the exception gracefully (e.g., log an error message)
+        print(f"Failed to insert data: {e}")
+
+def insert_rushing_passing_receiving_stats(row, game_id, player_id):
+    player_full_name = row[0]
+    player = player_full_name.split(' ', 1)
+    first_name = player[0]
+    last_name = player[1]
+    pass_atts = row[4]
+    pass_comps = row[5]
+    pass_yards = row[6]
+    pass_tds = row[7]
+    ints = row[8]
+    pass_two_pt = row[9]
+    rush_atts = row[10]
+    rush_yards = row[11]
+    rush_tds = row[12]
+    rush_two_pt = row[13]
+    recs = row[14]
+    rec_yards = row[15]
+    rec_tds = row[16]
+    rec_two_pt = row[17]
+    rushing = Rushing(rush_atts, rush_yards, rush_tds, rush_two_pt, game_id, player_id)
+    receiving = Receiving(recs, rec_yards, rec_tds, rec_two_pt, game_id, player_id)
+    passing = Passing(pass_atts, pass_comps, pass_yards, pass_tds, pass_two_pt, ints, game_id, player_id)
+    position = db.select_position(first_name, last_name)
+    if position == 'Running Back':
+        try:
+            db.insert_rushing(rushing)
+            if recs:
+                db.insert_receiving(receiving)
+            if pass_atts:
+                db.insert_passing(passing)
+        except IntegrityError as e:
+            # Handle the exception gracefully (e.g., log an error message)
+            print(f"Failed to insert data: {e}")
+    elif position == 'Wide Receiver':
+        try:
+            db.insert_receiving(receiving)
+            if rush_atts:
+                db.insert_rushing(rushing)
+            if pass_atts:
+                db.insert_passing(passing)
+        except IntegrityError as e:
+            # Handle the exception gracefully (e.g., log an error message)
+            print(f"Failed to insert data: {e}")
+    elif position == 'Quarterback':
+        try:
+            db.insert_passing(passing)
+            if rush_atts:
+                db.insert_rushing(rushing)
+            if recs:
+                db.insert_receiving(receiving)
+        except IntegrityError as e:
+            # Handle the exception gracefully (e.g., log an error message)
+            print(f"Failed to insert data: {e}")
+
+def insert_stats(row, game_id, player_id):
+    pass_id = db.select_pass_id(game_id, player_id)
+    rush_id = db.select_rush_id(game_id, player_id)
+    rec_id = db.select_reception_id(game_id, player_id)
+    total_points = row[3]
+    fumbles = row[18]
+    stats = Stats(pass_id, rush_id, rec_id, total_points, fumbles, game_id, player_id)
+    try:
+        db.insert_stats(stats)
     except IntegrityError as e:
         # Handle the exception gracefully (e.g., log an error message)
         print(f"Failed to insert data: {e}")
@@ -106,78 +172,19 @@ if __name__ == '__main__':
                     # insert_players(row, pos)
                     # insert_games_and_players(row, year, pos)
 
-                    game = row[2]
-                    home_team_id = get_home_team_id(game)
-                    away_team_id = get_away_team_id(game)
-                    season_id = db.select_season_id(year)
-                    game_id = db.select_game_id(home_team_id, away_team_id, season_id)
-                    player_full_name = row[0]
-                    player = player_full_name.split(' ', 1)
-                    first_name = player[0]
-                    last_name = player[1]
-                    team_name = row[1]
-                    team_id = db.select_team_id(team_name)
-                    position = db.select_position(first_name, last_name)
-                    player_id = db.select_player_id(first_name, last_name)
-                    pass_atts = row[4]
-                    pass_comps = row[5]
-                    pass_yards = row[6]
-                    pass_tds = row[7]
-                    ints = row[8]
-                    pass_two_pt = row[9]
-                    rush_atts = row[10]
-                    rush_yards = row[11]
-                    rush_tds = row[12]
-                    rush_two_pt = row[13]
-                    recs = row[14]
-                    rec_yards = row[15]
-                    rec_tds = row[16]
-                    rec_two_pt = row[17]
-                    rushing = Rushing(rush_atts, rush_yards, rush_tds, rush_two_pt, game_id, player_id)
-                    #def __init__(self, attempts, yards, touchdowns, two_pt_conv, game_id, player_id):
-                    receiving = Receiving(recs, rec_yards, rec_tds, rec_two_pt, game_id, player_id)
-                    #def __init__(self, receptions, yards, touchdowns, two_pt_conv, game_id, player_id):
-                    passing = Passing(pass_atts, pass_comps, pass_yards, pass_tds, pass_two_pt, ints, game_id, player_id)
-                    #def __init__(self, attempts, completions, yards, touchdowns, two_pt_conv, interceptions, game_id, player_id):
-                    if position == 'Running Back':
-                        try:
-                            db.insert_rushing(rushing)
-                            if recs:
-                                db.insert_receiving(receiving)
-                            if pass_atts:
-                                db.insert_passing(passing)
-                        except IntegrityError as e:
-                            # Handle the exception gracefully (e.g., log an error message)
-                            print(f"Failed to insert data: {e}")
-                    elif position == 'Wide Receiver':
-                        try:
-                            db.insert_receiving(receiving)
-                            if rush_atts:
-                                db.insert_rushing(rushing)
-                            if pass_atts:
-                                db.insert_passing(passing)
-                        except IntegrityError as e:
-                            # Handle the exception gracefully (e.g., log an error message)
-                            print(f"Failed to insert data: {e}")
-                    elif position == 'Quarterback':
-                        try:
-                            db.insert_passing(passing)
-                            if rush_atts:
-                                db.insert_rushing(rushing)
-                            if recs:
-                                db.insert_receiving(receiving)
-                        except IntegrityError as e:
-                            # Handle the exception gracefully (e.g., log an error message)
-                            print(f"Failed to insert data: {e}")
-                    # pass_id = db.select_pass_id(game_id,player_id)
-                    # rush_id = db.select_rush_id(game_id,player_id)
-                    # rec_id = db.select_reception_id(game_id,player_id)
-                    # stats = Stats(pass_id, rush_id, rec_id, row[3], row[18], game_id, player_id)
-                    # try:
-                    #     db.insert_stats(stats)
-                    # except IntegrityError as e:
-                    #     # Handle the exception gracefully (e.g., log an error message)
-                    #     print(f"Failed to insert data: {e}")
+                    # game = row[2]
+                    # home_team_id = get_home_team_id(game)
+                    # away_team_id = get_away_team_id(game)
+                    # season_id = db.select_season_id(year)
+                    # game_id = db.select_game_id(home_team_id, away_team_id, season_id)
+                    # player_full_name = row[0]
+                    # player = player_full_name.split(' ', 1)
+                    # first_name = player[0]
+                    # last_name = player[1]
+                    # team_name = row[1]
+                    # team_id = db.select_team_id(team_name)
+                    # position = db.select_position(first_name, last_name)
+                    # player_id = db.select_player_id(first_name, last_name)
             week = week + 1
         year = year + 1
 
