@@ -1,0 +1,105 @@
+<!-- season_view.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Season View</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Add Chart.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1>Season View</h1>
+    <hr>
+
+    <!-- Season Details -->
+    <div class="card mb-4">
+        <div class="card-header">
+            Season Details
+        </div>
+        <div class="card-body">
+            <p><strong>Fantasy Football Season:</strong> {{ season }}/{{ season_end }}</p>
+            <!-- Add more season details as needed -->
+        </div>
+    </div>
+
+    <!-- Player Dropdown Form -->
+    <div class="card">
+        <div class="card-header">
+            Player Focus
+        </div>
+        <div class="card-body">
+            <form action="/search" method="GET">
+                <div class="form-group">
+                    <label for="player_select">Select Player:</label>
+                    <select class="form-control" id="player_select" name="player_select">
+                        {% for player in players %}
+                        <option value="{{ player.id }}">{{ player.first_name }} {{ player.last_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Player Search Results (will be displayed dynamically) -->
+    <div class="mt-4" id="search_results">
+        <!-- Search results will be displayed here -->
+    </div>
+
+    <!-- Graph of best performers -->
+    <canvas id="performanceChart"></canvas>
+    <!-- List of Top Performers -->
+<div class="mt-4">
+    <h2>Top Performers</h2>
+    <ul class="list-group">
+        {% for player in players_with_points[:25] %}
+        <li class="list-group-item">
+            {{ loop.index }}. {{ player.first_name }} {{ player.last_name }}: {{ player.points }} points
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+</div>
+
+<!-- Script to create the graph -->
+<script>
+    // Get player names and points from the template
+    var playerNames = [];
+    var playerPoints = [];
+    {% for player in players_with_points %}
+        playerNames.push("{{ player.first_name }} {{ player.last_name }}");
+        playerPoints.push({{ player.points }});
+    {% endfor %}
+
+    // Create the chart
+    var ctx = document.getElementById('performanceChart').getContext('2d');
+    var performanceChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: playerNames,
+            datasets: [{
+                label: 'Points',
+                data: playerPoints,
+                backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

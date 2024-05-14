@@ -1,7 +1,20 @@
 class Player:
-    def __init__(self, first_name, last_name, position, team_id, id):
+    def __init__(self, first_name, last_name, position, team_id=None, id=None, points=None):
         self.first_name = first_name
         self.last_name = last_name
         self.position = position
         self.team_id = team_id
         self.id = id
+        self.points = points
+
+    @classmethod
+    def with_team_id(cls, first_name, last_name, position, team_id):
+        return cls(first_name, last_name, position, team_id=team_id)
+
+    @classmethod
+    def with_id(cls, first_name, last_name, position, id):
+        return cls(first_name, last_name, position, id=id)
+
+    @classmethod
+    def with_points(cls, first_name, last_name, position, points):
+        return cls(first_name, last_name, position, points=points)

@@ -4,7 +4,6 @@ from Cleaner import Cleaner
 from Intersection import Intersection
 from Scraper import Scraper
 import csv
-
 from nfl.Passing import Passing
 from nfl.Receiving import Receiving
 from nfl.Rushing import Rushing
@@ -18,17 +17,17 @@ def setup_cleaner(input_csv_path, output_csv_path, cleaner):
 def build_path(path, fantasy_year, position, week_num):
     return path + str(fantasy_year) + '/fantasyfootballdata_' + position + str(fantasy_year) + '_week' + str(week_num) + '.csv'
 
-def get_home_team_id(game):
+def get_home_team_id(game, db):
     teams = game.split('@', 1)
     team = teams[0]
     return db.select_team_id(team)
 
-def get_away_team_id(game):
+def get_away_team_id(game, db):
     teams = game.split('@', 1)
     team = teams[1]
     return db.select_team_id(team)
 
-def insert_players(row, pos):
+def insert_players(row, pos, db):
     player = row[0].split(' ', 1)
     first_name = player[0]
     last_name = player[1]
@@ -39,7 +38,7 @@ def insert_players(row, pos):
         # Handle the exception gracefully (e.g., log an error message)
         print(f"Failed to insert data: {e}")
 
-def insert_games_and_players(row, year, pos):
+def insert_games_and_players(row, year, pos, db, week):
     # INSERT GAMES
     game = row[2]
     home_team_id = get_home_team_id(game)
@@ -61,7 +60,7 @@ def insert_games_and_players(row, year, pos):
         # Handle the exception gracefully (e.g., log an error message)
         print(f"Failed to insert data: {e}")
 
-def insert_rushing_passing_receiving_stats(row, game_id, player_id):
+def insert_rushing_passing_receiving_stats(row, game_id, player_id, db):
     player_full_name = row[0]
     player = player_full_name.split(' ', 1)
     first_name = player[0]
@@ -115,7 +114,7 @@ def insert_rushing_passing_receiving_stats(row, game_id, player_id):
             # Handle the exception gracefully (e.g., log an error message)
             print(f"Failed to insert data: {e}")
 
-def insert_stats(row, game_id, player_id):
+def insert_stats(row, game_id, player_id, db):
     pass_id = db.select_pass_id(game_id, player_id)
     rush_id = db.select_rush_id(game_id, player_id)
     rec_id = db.select_reception_id(game_id, player_id)
@@ -137,27 +136,27 @@ if __name__ == '__main__':
         if year == 2023:
             end_week = 19
         while week < end_week:
-            #pos = 'OFF'
+            pos = 'OFF'
             #scraper = Scraper(year,week,'b6406b7aea3872d5bb677f064673c57f', pos)
             #scraper.scrape()
             root = 'C:/Users/aldod/PycharmProjects/fantasyfootball/data'
-            # input_folder = '/raw_data/'
-            # output_folder = '/clean_data_1/'
-            # input_path = build_path(root + input_folder, str(scraper.getYear()), pos, str(scraper.getWeek()))
-            # output_path = build_path(root + output_folder,str(scraper.getYear()), pos, str(scraper.getWeek()))
-            # cleaner = Cleaner(input_path, output_path)
-            # cleaner.clean_player_column()
-            # input_folder = '/clean_data_1/'
+            #input_folder = '/raw_data/'
+            #output_folder = '/clean_data_1/'
+            #input_path = build_path(root + input_folder, str(scraper.getYear()), pos, str(scraper.getWeek()))
+            #output_path = build_path(root + output_folder,str(scraper.getYear()), pos, str(scraper.getWeek()))
+            #cleaner = Cleaner(input_path, output_path)
+            #cleaner.clean_player_column()
+            #input_folder = '/clean_data_1/'
             output_folder = '/clean_data/'
-            # input_path = build_path(root + input_folder, str(scraper.getYear()), pos, str(scraper.getWeek()))
-            pos = 'QB'
+            #input_path = build_path(root + input_folder, str(scraper.getYear()), pos, str(scraper.getWeek()))
+            #pos = 'QB'
             output_path = build_path(root + output_folder, year, pos, week)
-            # cleaner = Cleaner(input_path, output_path)
-            # cleaner.clean_team_names()
+            #cleaner = Cleaner(input_path, output_path)
+            #cleaner.clean_team_names()
 
             db = Connection()
 
-            #pos = 'Kicker'
+            #pos = ''
 
             #Open the CSV file in read mode
             with open(output_path, "r", newline="") as file:
@@ -167,24 +166,26 @@ if __name__ == '__main__':
                 # Skip the first row
                 next(reader)
 
-                # Iterate through each row in the CSV file
+                #Iterate through each row in the CSV file
                 for row in reader:
-                    # insert_players(row, pos)
-                    # insert_games_and_players(row, year, pos)
+                    #insert_players(row, pos)
+                    #insert_games_and_players(row, year, pos)
 
-                    # game = row[2]
-                    # home_team_id = get_home_team_id(game)
-                    # away_team_id = get_away_team_id(game)
-                    # season_id = db.select_season_id(year)
-                    # game_id = db.select_game_id(home_team_id, away_team_id, season_id)
-                    # player_full_name = row[0]
-                    # player = player_full_name.split(' ', 1)
-                    # first_name = player[0]
-                    # last_name = player[1]
-                    # team_name = row[1]
-                    # team_id = db.select_team_id(team_name)
-                    # position = db.select_position(first_name, last_name)
-                    # player_id = db.select_player_id(first_name, last_name)
+                    game = row[2]
+                    home_team_id = get_home_team_id(game,db)
+                    away_team_id = get_away_team_id(game,db)
+                    season_id = db.select_season_id(year)
+                    game_id = db.select_game_id(home_team_id, away_team_id, season_id)
+                    player_full_name = row[0]
+                    player = player_full_name.split(' ', 1)
+                    first_name = player[0]
+                    last_name = player[1]
+                    team_name = row[1]
+                    team_id = db.select_team_id(team_name)
+                    #position = db.select_position(first_name, last_name)
+                    player_id = db.select_player_id(first_name, last_name)
+                    insert_stats(row, game_id, player_id, db)
+                    #insert_rushing_passing_receiving_stats(row, game_id, player_id, db)
             week = week + 1
         year = year + 1
 

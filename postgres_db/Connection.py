@@ -31,6 +31,64 @@ class Connection:
                 players.append(Player(row.first_name, row.last_name, row.position, row.team_id, row.id))
         return players
 
+    def player_dropdown(self, year):
+        players = []
+        with self.engine.connect() as conn:
+            query = text(f"select DISTINCT(concat(first_name,' ', last_name)) as player_name, first_name, last_name, position, year from player "
+                         f"inner join stats s on player.id = s.player_id "
+                         f"inner join game g on g.game_id = s.game_id "
+                         f"inner join season s2 on s2.season_id = g.season_id "
+                         f"where g.season_id = {year}")
+            res = conn.execute(query)
+            for row in res.all():
+                players.append(Player(row.first_name, row.last_name, row.position))
+        return players
+
+    def qb_dropdown(self, year):
+        players = []
+        with self.engine.connect() as conn:
+            qb = 'Quarterback'
+            query = text(f"select DISTINCT(concat(first_name,' ', last_name)) as player_name, first_name, last_name, position, year from player "
+                         f"inner join stats s on player.id = s.player_id "
+                         f"inner join game g on g.game_id = s.game_id "
+                         f"inner join season s2 on s2.season_id = g.season_id "
+                         f"where g.season_id = {year} and position = \'{qb}\'")
+            res = conn.execute(query)
+            for row in res.all():
+                players.append(Player(row.first_name, row.last_name, row.position))
+        return players
+
+    def select_players_with_total_points(self, year):
+        players = []
+        with self.engine.connect() as conn:
+            query = text(f"select first_name, last_name, position, year, sum(total_points) as points from player "
+                         f"inner join stats s on player.id = s.player_id "
+                         f"inner join game g on g.game_id = s.game_id "
+                         f"inner join season s2 on s2.season_id = g.season_id "
+                         f"where g.season_id = {year} "
+                         f"group by last_name, position, year, first_name "
+                         f"order by points desc")
+            res = conn.execute(query)
+            for row in res.all():
+                players.append(Player.with_points(row.first_name, row.last_name, row.position, points=row.points))
+        return players
+
+    def select_qbs_with_total_points(self, year):
+        players = []
+        with self.engine.connect() as conn:
+            qb = 'Quarterback'
+            query = text(f"select first_name, last_name, position, year, sum(total_points) as points from player "
+                         f"inner join stats s on player.id = s.player_id "
+                         f"inner join game g on g.game_id = s.game_id "
+                         f"inner join season s2 on s2.season_id = g.season_id "
+                         f"where g.season_id = {year} and position = \'{qb}\' "
+                         f"group by last_name, position, year, first_name "
+                         f"order by points desc")
+            res = conn.execute(query)
+            for row in res.all():
+                players.append(Player.with_points(row.first_name, row.last_name, row.position, points=row.points))
+        return players
+
     def select_teams(self):
         teams = []
         with self.engine.connect() as conn:
@@ -56,6 +114,99 @@ class Connection:
             result = conn.execute(query)
             id = result.scalar()
             return id
+
+    def select_rbs_with_total_points(self, year):
+        players = []
+        with self.engine.connect() as conn:
+            rb = 'Running Back'
+            query = text(f"select first_name, last_name, position, year, sum(total_points) as points from player "
+                         f"inner join stats s on player.id = s.player_id "
+                         f"inner join game g on g.game_id = s.game_id "
+                         f"inner join season s2 on s2.season_id = g.season_id "
+                         f"where g.season_id = {year} and position = \'{rb}\' "
+                         f"group by last_name, position, year, first_name "
+                         f"order by points desc")
+            res = conn.execute(query)
+            for row in res.all():
+                players.append(Player.with_points(row.first_name, row.last_name, row.position, points=row.points))
+        return players
+
+    def rb_dropdown(self, year):
+        players = []
+        with self.engine.connect() as conn:
+            rb = 'Running Back'
+            query = text(
+                f"select DISTINCT(concat(first_name,' ', last_name)) as player_name, first_name, last_name, position, year from player "
+                f"inner join stats s on player.id = s.player_id "
+                f"inner join game g on g.game_id = s.game_id "
+                f"inner join season s2 on s2.season_id = g.season_id "
+                f"where g.season_id = {year} and position = \'{rb}\'")
+            res = conn.execute(query)
+            for row in res.all():
+                players.append(Player(row.first_name, row.last_name, row.position))
+        return players
+
+    def select_wrs_with_total_points(self, year):
+        players = []
+        with self.engine.connect() as conn:
+            wr = 'Wide Receiver'
+            query = text(f"select first_name, last_name, position, year, sum(total_points) as points from player "
+                         f"inner join stats s on player.id = s.player_id "
+                         f"inner join game g on g.game_id = s.game_id "
+                         f"inner join season s2 on s2.season_id = g.season_id "
+                         f"where g.season_id = {year} and position = \'{wr}\' "
+                         f"group by last_name, position, year, first_name "
+                         f"order by points desc")
+            res = conn.execute(query)
+            for row in res.all():
+                players.append(Player.with_points(row.first_name, row.last_name, row.position, points=row.points))
+        return players
+
+    def wr_dropdown(self, year):
+        players = []
+        with self.engine.connect() as conn:
+            wr = 'Wide Receiver'
+            query = text(
+                f"select DISTINCT(concat(first_name,' ', last_name)) as player_name, first_name, last_name, position, year from player "
+                f"inner join stats s on player.id = s.player_id "
+                f"inner join game g on g.game_id = s.game_id "
+                f"inner join season s2 on s2.season_id = g.season_id "
+                f"where g.season_id = {year} and position = \'{wr}\'")
+            res = conn.execute(query)
+            for row in res.all():
+                players.append(Player(row.first_name, row.last_name, row.position))
+        return players
+
+    def select_tes_with_total_points(self, year):
+        players = []
+        with self.engine.connect() as conn:
+            te = 'Tight End'
+            query = text(f"select first_name, last_name, position, year, sum(total_points) as points from player "
+                         f"inner join stats s on player.id = s.player_id "
+                         f"inner join game g on g.game_id = s.game_id "
+                         f"inner join season s2 on s2.season_id = g.season_id "
+                         f"where g.season_id = {year} and position = \'{te}\' "
+                         f"group by last_name, position, year, first_name "
+                         f"order by points desc")
+            res = conn.execute(query)
+            for row in res.all():
+                players.append(Player.with_points(row.first_name, row.last_name, row.position, points=row.points))
+        return players
+
+    def te_dropdown(self, year):
+        players = []
+        with self.engine.connect() as conn:
+            te = 'Tight End'
+            query = text(
+                f"select DISTINCT(concat(first_name,' ', last_name)) as player_name, first_name, last_name, position, year from player "
+                f"inner join stats s on player.id = s.player_id "
+                f"inner join game g on g.game_id = s.game_id "
+                f"inner join season s2 on s2.season_id = g.season_id "
+                f"where g.season_id = {year} and position = \'{te}\'")
+            res = conn.execute(query)
+            for row in res.all():
+                players.append(Player(row.first_name, row.last_name, row.position))
+        return players
 
     def select_stats(self):
         stats = []
