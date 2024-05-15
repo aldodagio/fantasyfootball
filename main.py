@@ -136,7 +136,7 @@ if __name__ == '__main__':
         if year == 2023:
             end_week = 19
         while week < end_week:
-            pos = 'OFF'
+            pos = 'QB'
             #scraper = Scraper(year,week,'b6406b7aea3872d5bb677f064673c57f', pos)
             #scraper.scrape()
             root = 'C:/Users/aldod/PycharmProjects/fantasyfootball/data'
@@ -185,7 +185,7 @@ if __name__ == '__main__':
                     #position = db.select_position(first_name, last_name)
                     player_id = db.select_player_id(first_name, last_name)
                     insert_stats(row, game_id, player_id, db)
-                    #insert_rushing_passing_receiving_stats(row, game_id, player_id, db)
+                    insert_rushing_passing_receiving_stats(row, game_id, player_id, db)
             week = week + 1
         year = year + 1
 

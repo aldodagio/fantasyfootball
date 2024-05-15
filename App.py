@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask import render_template
+from flask import request
 from postgres_db.Connection import Connection
 
 app = Flask(__name__)
@@ -84,7 +85,7 @@ def season_QB_view(season_id):
     connection = Connection()
     players = connection.qb_dropdown(id)
     players_with_points = connection.select_qbs_with_total_points(id)
-    return render_template('season_view.html', season=season_id, season_end=season_end, players=players, players_with_points=players_with_points)
+    return render_template('season_view.html', position='Quarterback',season_id=id, season=season_id, season_end=season_end, players=players, players_with_points=players_with_points)
 
 @app.route('/season/<season_id>/RB')
 def season_RB_view(season_id):
@@ -121,7 +122,7 @@ def season_RB_view(season_id):
     connection = Connection()
     players = connection.rb_dropdown(id)
     players_with_points = connection.select_rbs_with_total_points(id)
-    return render_template('season_view.html', season=season_id, season_end=season_end, players=players, players_with_points=players_with_points)
+    return render_template('season_view.html', position='Running Back',season_id=id, season=season_id, season_end=season_end, players=players, players_with_points=players_with_points)
 
 @app.route('/season/<season_id>/WR')
 def season_WR_view(season_id):
@@ -158,7 +159,7 @@ def season_WR_view(season_id):
     connection = Connection()
     players = connection.wr_dropdown(id)
     players_with_points = connection.select_wrs_with_total_points(id)
-    return render_template('season_view.html', season=season_id, season_end=season_end, players=players, players_with_points=players_with_points)
+    return render_template('season_view.html', position='Wide Receiver', season=season_id, season_end=season_end, players=players, players_with_points=players_with_points)
 
 @app.route('/season/<season_id>/TE')
 def season_TE_view(season_id):
@@ -195,9 +196,19 @@ def season_TE_view(season_id):
     connection = Connection()
     players = connection.te_dropdown(id)
     players_with_points = connection.select_tes_with_total_points(id)
-    return render_template('season_view.html', season=season_id, season_end=season_end, players=players, players_with_points=players_with_points)
+    return render_template('season_view.html', season_id=id, season=season_id, season_end=season_end, players=players, players_with_points=players_with_points)
 
-@app.route('/search')
+@app.route('/search', methods=['GET'])
 def player_search():
     # Logic to handle player search and render the player search template
-    return render_template('player_search.html')
+    player_id = request.args.get('player_select')
+    season_id = request.args.get('season_id')
+    pos = request.args.get('position')
+    connection = Connection()
+    if pos == 'Quarterback':
+        player_stats = connection.get_qb_stats(player_id, season_id)
+    elif pos == 'Running Back':
+        player_stats = connection.get_rb_stats(player_id, season_id)
+    elif pos == 'Wide Receiver':
+        player_stats = connection.get_wrs_stats(player_id, season_id)
+    return render_template('player_search.html', player_stats=player_stats)

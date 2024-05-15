@@ -37,10 +37,12 @@
                 <div class="form-group">
                     <label for="player_select">Select Player:</label>
                     <select class="form-control" id="player_select" name="player_select">
-                        {% for player in players %}
+                        {% for player in players_with_points %}
                         <option value="{{ player.id }}">{{ player.first_name }} {{ player.last_name }}</option>
                         {% endfor %}
                     </select>
+                    <input type="hidden" value="{{ season_id }}" id="season_id" name="season_id">
+                    <input type="hidden" value="{{ position }}" id="position" name="position">
                 </div>
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
