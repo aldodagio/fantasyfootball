@@ -198,6 +198,18 @@ def season_TE_view(season_id):
     players_with_points = connection.select_tes_with_total_points(id)
     return render_template('season_view.html', position='Tight End', season_id=id, season=season_id, season_end=season_end, players=players, players_with_points=players_with_points)
 
+@app.route('/linear_regression')
+def linear_regression():
+    connection = Connection()
+    seasons = connection.select_seasons()
+    return render_template('linear_regression.html',seasons=seasons)
+
+@app.route('/classification')
+def classification():
+    connection = Connection()
+    seasons = connection.select_seasons()
+    return render_template('classification.html',seasons=seasons)
+
 @app.route('/search', methods=['GET'])
 def player_search():
     # Logic to handle player search and render the player search template

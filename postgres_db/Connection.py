@@ -1,3 +1,11 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import tensorflow as tf
+import pandas as pd
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sqlalchemy import create_engine, text, insert, select, MetaData
 
 from nfl.Game import Game
@@ -21,6 +29,75 @@ class Connection:
         self.connection_string = f"postgresql+psycopg2://{self.username}:{self.password}@{self.host_url}:{self.port}/{self.database_name}"
         self.engine = create_engine(self.connection_string,
                                     connect_args={"options": f"-csearch_path={self.app_schema}"})
+
+    def linear_regression_model(self):
+
+
+    def classification_model(self, position, season_id):
+        # Load and preprocess the training data from the PostgreSQL database
+        train_query = f"SELECT concat(first_name, ' ', last_name) as player_name, total_points, passing_attempts, passing_completions, passing_yards, passing_touchdowns, interceptions," \
+                      f" receptions, receiving_yards, receiving_touchdowns, rushing_attempts, rushing_yards, rushing_touchdowns FROM player" \
+                      f" inner join stats s on player.id = s.player_id" \
+                      f" inner join game g on g.game_id = s.game_id" \
+                      f" inner join passing p on p.pass_id = s.pass_id" \
+                      f" inner join receiving r on s.reception_id = r.reception_id" \
+                      f" inner join rushing r2 on r2.rush_id = s.rush_id" \
+                      f" WHERE position = \'{position}\' AND season_id != {season_id}"
+        train_data = pd.read_sql(train_query, self.engine)
+        y_train = train_data['player_name'].values  # where total_points is the label
+        X_train = train_data.iloc[:, 1:].values
+
+        # Encode player names as integer labels
+        label_encoder = LabelEncoder()
+        y_train_encoded = label_encoder.fit_transform(y_train)
+
+        # Split the data into training and validation sets
+        X_train, X_val, y_train_encoded, y_val_encoded = train_test_split(X_train, y_train_encoded, test_size=0.2,
+                                                                          random_state=42)
+
+        # Standardize/normalize the features
+        scaler = StandardScaler()
+        X_train = scaler.fit_transform(X_train)
+        X_val = scaler.transform(X_val)
+
+        # Define the model
+        num_classes = len(label_encoder.classes_)
+        model = Sequential([
+            Dense(units=64, activation="relu", input_shape=(X_train.shape[1],)),
+            Dense(units=32, activation="relu"),
+            Dense(units=num_classes, activation="softmax")
+        ])
+
+        # Compile the model with a classification loss function
+        model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3), loss='sparse_categorical_crossentropy',
+                      metrics=['accuracy'])
+
+        # Fit the model
+        model.fit(X_train, y_train_encoded, epochs=100, validation_data=(X_val, y_val_encoded))
+
+        # Load and preprocess the test data from the PostgreSQL database
+        test_query = f"SELECT concat(first_name, ' ', last_name) as player_name, total_points, passing_attempts, passing_completions, passing_yards, passing_touchdowns, interceptions," \
+                      f" receptions, receiving_yards, receiving_touchdowns, rushing_attempts, rushing_yards, rushing_touchdowns FROM player" \
+                      f" inner join stats s on player.id = s.player_id" \
+                      f" inner join game g on g.game_id = s.game_id" \
+                      f" inner join passing p on p.pass_id = s.pass_id" \
+                      f" inner join receiving r on s.reception_id = r.reception_id" \
+                      f" inner join rushing r2 on r2.rush_id = s.rush_id" \
+                      f" WHERE position = \'{position}\' AND season_id = {season_id}"
+        test_data = pd.read_sql(test_query, self.engine)
+        X_test = scaler.transform(test_data.iloc[:, 1:].values)
+
+        # Make predictions on the test data
+        predictions_encoded = model.predict(X_test)
+        predictions = np.argmax(predictions_encoded, axis=1)
+        predicted_player_names = label_encoder.inverse_transform(predictions)
+
+        # Create a DataFrame for submission
+        submission_df = pd.DataFrame(
+            {'total_points': test_data['total_points'], 'label': predicted_player_names.flatten()})
+
+        # Save the submission DataFrame to the PostgreSQL database
+        submission_df.to_sql('predictions', self.engine, if_exists='replace', index=False)
 
     def select_players(self):
         players = []

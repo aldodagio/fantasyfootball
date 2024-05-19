@@ -2,8 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Linear Regression Model</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
@@ -30,19 +34,19 @@
 </nav>
 
 <div class="container mt-5">
-    <h1>Welcome to the Fantasy Football App!</h1>
+    <h1>Classification Model</h1>
     <hr>
 
     <!-- Previous Seasons -->
     <div class="card mb-4">
         <div class="card-header">
-            Previous Seasons
+            Predictions
         </div>
         <div class="card-body">
             <ul class="list-group">
                 {% for season in seasons %}
                 <li class="list-group-item">
-                    <a href="/season/{{ season.year }}">{{ season.year }}</a> <a href="/season/{{ season.year }}">All Positions</a> <a href="/season/{{ season.year }}/QB">QB</a> <a href="/season/{{ season.year }}/RB">RB</a> <a href="/season/{{ season.year }}/WR">WR</a> <a href="/season/{{ season.year }}/TE">TE</a> <a href="/season/{{ season.year }}/K">K</a> <a href="/season/{{ season.year }}/DST">D/ST</a>
+                    <a href="/season/{{ season.year }}/QB">QB</a> <a href="/season/{{ season.year }}/RB">RB</a> <a href="/season/{{ season.year }}/WR">WR</a> <a href="/season/{{ season.year }}/TE">TE</a> <a href="/season/{{ season.year }}/K">K</a> <a href="/season/{{ season.year }}/DST">D/ST</a>
                 </li>
                 {% endfor %}
             </ul>
