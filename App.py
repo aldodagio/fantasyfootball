@@ -2,6 +2,8 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask import render_template
 from flask import request
+
+from nfl.Season import Season
 from postgres_db.Connection import Connection
 
 app = Flask(__name__)
@@ -54,38 +56,24 @@ def season_view(season_id):
 def season_QB_view(season_id):
     # Logic to retrieve season data and render the season view template
     season_end = int(season_id)+1
-    if season_id == '2010':
-        id = 1
-    elif season_id == '2011':
-        id = 2
-    elif season_id == '2012':
-        id = 3
-    elif season_id == '2013':
-        id = 4
-    elif season_id == '2014':
-        id = 5
-    elif season_id == '2015':
-        id = 6
-    elif season_id == '2016':
-        id = 7
-    elif season_id == '2017':
-        id = 8
-    elif season_id == '2018':
-        id = 9
-    elif season_id == '2019':
-        id = 10
-    elif season_id == '2020':
-        id = 11
-    elif season_id == '2021':
-        id = 12
-    elif season_id == '2022':
-        id = 13
-    elif season_id == '2023':
-        id = 14
+    s = Season()
+    id = s.toID(season_id)
     connection = Connection()
     players = connection.qb_dropdown(id)
     players_with_points = connection.select_qbs_with_total_points(id)
     return render_template('season_view.html', position='Quarterback',season_id=id, season=season_id, season_end=season_end, players=players, players_with_points=players_with_points)
+
+@app.route('/QB/lr_prediction')
+def lr_prediction_QB_view():
+    connection = Connection()
+    predictions = connection.get_linear_regression_predictions_qb()
+    return render_template('prediction_view.html', predictions=predictions)
+
+@app.route('/QB/class_prediction')
+def class_prediction_QB_view():
+    connection = Connection()
+    predictions = connection.get_classification_predictions_qb()
+    return render_template('prediction_view.html', predictions=predictions)
 
 @app.route('/season/<season_id>/RB')
 def season_RB_view(season_id):

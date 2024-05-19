@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Search Results</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1>Player Prediction Results</h1>
+    <hr>
+
+    <!-- Player Search Results -->
+    <div class="mt-4">
+        <h2>Prediction Results</h2>
+        <ul class="list-group">
+            {% for prediction in predictions %}
+                <li class="list-group-item">
+                    <strong>{{ prediction.name }}</strong>
+                    <br>
+                    Predicted Points: {{ prediction.points }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -8,6 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sqlalchemy import create_engine, text, insert, select, MetaData
 
+from machinelearning.Prediction import Prediction
 from nfl.Game import Game
 from nfl.Passing import Passing
 from nfl.Player import Player
@@ -30,8 +31,79 @@ class Connection:
         self.engine = create_engine(self.connection_string,
                                     connect_args={"options": f"-csearch_path={self.app_schema}"})
 
-    def linear_regression_model(self):
+    def get_linear_regression_predictions_qb(self):
+        predictions = []
+        with self.engine.connect() as conn:
+            query = text("""select SUM(label) as predicted_points, player_name from "Quarterback_lr_predictions_2023" group by player_name order by SUM(label) desc""")
+            res = conn.execute(query)
+            for row in res.all():
+                predictions.append(Prediction(row.player_name,row.predicted_points))
+        return predictions
 
+    def get_classification_predictions_qb(self):
+        predictions = []
+        with self.engine.connect() as conn:
+            query = text("""select SUM(total_points) as predicted_points, label as player_name  from "Quarterback_class_predictions_2023" group by player_name order by SUM(total_points) desc""")
+            res = conn.execute(query)
+            for row in res.all():
+                predictions.append(Prediction(row.player_name,row.predicted_points))
+        return predictions
+
+    def linear_regression_model(self, position, season_id):
+        # Load and preprocess the training data from the PostgreSQL database
+        train_query = f"SELECT concat(first_name, ' ', last_name) as player_name, total_points, passing_attempts, passing_completions, passing_yards, passing_touchdowns, interceptions," \
+                      f" receptions, receiving_yards, receiving_touchdowns, rushing_attempts, rushing_yards, rushing_touchdowns FROM player" \
+                      f" inner join stats s on player.id = s.player_id" \
+                      f" inner join game g on g.game_id = s.game_id" \
+                      f" inner join passing p on p.pass_id = s.pass_id" \
+                      f" inner join receiving r on s.reception_id = r.reception_id" \
+                      f" inner join rushing r2 on r2.rush_id = s.rush_id" \
+                      f" WHERE position = \'{position}\' AND season_id != {season_id}"
+        train_data = pd.read_sql(train_query, self.engine)
+        y_train = train_data['total_points'].values  # where total_points is the label
+        X_train = train_data.iloc[:, 2:].values
+
+        # Handle missing values if any
+        # You can use methods like X_train = X_train.fillna(X_train.mean()) for simplicity
+
+        # Split the data into training and validation sets
+        X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.2, random_state=42)
+
+        # # Standardize/normalize the features
+        scaler = StandardScaler()
+        X_train = scaler.fit_transform(X_train)
+        X_val = scaler.transform(X_val)
+
+        # Define the linear regression model
+        model = Sequential([
+            Dense(units=1, activation="linear")
+        ])
+        # Compile the model with a regression loss function
+        model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3), loss='mean_squared_error',
+                      metrics=['mean_absolute_error'])
+
+        model.fit(X_train, y_train, epochs=100, validation_data=(X_val, y_val))
+
+        # Load and preprocess the test data from the PostgreSQL database
+        test_query = f"SELECT concat(first_name, ' ', last_name) as player_name, total_points, passing_attempts, passing_completions, passing_yards, passing_touchdowns, interceptions," \
+                     f" receptions, receiving_yards, receiving_touchdowns, rushing_attempts, rushing_yards, rushing_touchdowns FROM player" \
+                     f" inner join stats s on player.id = s.player_id" \
+                     f" inner join game g on g.game_id = s.game_id" \
+                     f" inner join passing p on p.pass_id = s.pass_id" \
+                     f" inner join receiving r on s.reception_id = r.reception_id" \
+                     f" inner join rushing r2 on r2.rush_id = s.rush_id" \
+                     f" WHERE position = \'{position}\' AND season_id = {season_id}"
+        test_data = pd.read_sql(test_query, self.engine)
+        X_test = scaler.transform(test_data.iloc[:, 2:].values)
+
+        # Make predictions on the test data
+        predictions = model.predict(X_test)
+
+        # Create a DataFrame for submission
+        submission_df = pd.DataFrame({'player_name': test_data['player_name'], 'label': predictions.flatten()})
+        s = Season(season_id)
+        # Save the submission DataFrame to the PostgreSQL database
+        submission_df.to_sql(position + '_lr_predictions_' + str(s.toYear(season_id)), self.engine, if_exists='replace', index=False)
 
     def classification_model(self, position, season_id):
         # Load and preprocess the training data from the PostgreSQL database
@@ -95,9 +167,9 @@ class Connection:
         # Create a DataFrame for submission
         submission_df = pd.DataFrame(
             {'total_points': test_data['total_points'], 'label': predicted_player_names.flatten()})
-
+        s = Season(season_id)
         # Save the submission DataFrame to the PostgreSQL database
-        submission_df.to_sql('predictions', self.engine, if_exists='replace', index=False)
+        submission_df.to_sql(position + '_class_predictions_' + str(s.toYear(season_id)), self.engine, if_exists='replace', index=False)
 
     def select_players(self):
         players = []
@@ -390,7 +462,7 @@ class Connection:
             query = text("SELECT * FROM season")
             res = conn.execute(query)
             for row in res.all():
-                seasons.append(Season(row.year, row.season_id))
+                seasons.append(Season(row.season_id,row.year))
         return seasons
 
     def select_all_rushing(self):
