@@ -66,13 +66,58 @@ def season_QB_view(season_id):
 @app.route('/QB/lr_prediction')
 def lr_prediction_QB_view():
     connection = Connection()
+    actuals = connection.select_qbs_with_total_points(14)
     predictions = connection.get_linear_regression_predictions_qb()
-    return render_template('prediction_view.html', predictions=predictions)
+    rank_changes = calculate_rank_change(predictions, actuals)
+    return render_template('prediction_view.html', predictions=predictions, actuals=actuals,rank_changes=rank_changes)
+def calculate_rank_change(predictions, actuals):
+    rank_changes = {}
+    i = 1
+    j = 1
+    for prediction in predictions:
+        for actual in actuals:
+            if prediction.name == actual.first_name+ ' ' +actual.last_name:
+                rank_changes[prediction.name] = j - i
+                j=1
+                break
+            j = j + 1
+        else:
+            rank_changes[prediction.name] = None
+        i = i + 1
+    return rank_changes
 
 @app.route('/QB/class_prediction')
 def class_prediction_QB_view():
     connection = Connection()
     predictions = connection.get_classification_predictions_qb()
+    return render_template('prediction_view.html', predictions=predictions)
+
+@app.route('/RB/lr_prediction')
+def lr_prediction_RB_view():
+    connection = Connection()
+    actuals = connection.select_rbs_with_total_points(14)
+    predictions = connection.get_linear_regression_predictions_rb()
+    rank_changes = calculate_rank_change(predictions, actuals)
+    return render_template('prediction_view.html', predictions=predictions, actuals=actuals, rank_changes=rank_changes)
+
+@app.route('/RB/class_prediction')
+def class_prediction_RB_view():
+    connection = Connection()
+    predictions = connection.get_classification_predictions_rb()
+    return render_template('prediction_view.html', predictions=predictions)
+
+@app.route('/WR/lr_prediction')
+def lr_prediction_WR_view():
+    connection = Connection()
+    actuals = connection.select_wrs_with_total_points(14)
+    predictions = connection.get_linear_regression_predictions_wr()
+    rank_changes = calculate_rank_change(predictions, actuals)
+    return render_template('prediction_view.html', predictions=predictions, actuals=actuals, rank_changes=rank_changes)
+
+@app.route('/WR/class_prediction')
+def class_prediction_WR_view():
+    connection = Connection()
+    predictions = connection.get_classification_predictions_wr()
     return render_template('prediction_view.html', predictions=predictions)
 
 @app.route('/season/<season_id>/RB')

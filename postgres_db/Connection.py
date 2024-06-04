@@ -34,16 +34,52 @@ class Connection:
     def get_linear_regression_predictions_qb(self):
         predictions = []
         with self.engine.connect() as conn:
-            query = text("""select SUM(label) as predicted_points, player_name from "Quarterback_lr_predictions_2023" group by player_name order by SUM(label) desc""")
+            query = text("""select * from submission_table order by predicted_stats desc""")
             res = conn.execute(query)
             for row in res.all():
-                predictions.append(Prediction(row.player_name,row.predicted_points))
+                predictions.append(Prediction(row.player_name,row.predicted_stats))
         return predictions
 
     def get_classification_predictions_qb(self):
         predictions = []
         with self.engine.connect() as conn:
             query = text("""select SUM(total_points) as predicted_points, label as player_name  from "Quarterback_class_predictions_2023" group by player_name order by SUM(total_points) desc""")
+            res = conn.execute(query)
+            for row in res.all():
+                predictions.append(Prediction(row.player_name,row.predicted_points))
+        return predictions
+
+    def get_linear_regression_predictions_rb(self):
+        predictions = []
+        with self.engine.connect() as conn:
+            query = text("""select * from submission_table1 order by predicted_stats desc""")
+            res = conn.execute(query)
+            for row in res.all():
+                predictions.append(Prediction(row.player_name,row.predicted_stats))
+        return predictions
+
+    def get_classification_predictions_rb(self):
+        predictions = []
+        with self.engine.connect() as conn:
+            query = text("""select SUM(total_points) as predicted_points, label as player_name  from "Running Back_class_predictions_2023" group by player_name order by SUM(total_points) desc""")
+            res = conn.execute(query)
+            for row in res.all():
+                predictions.append(Prediction(row.player_name,row.predicted_points))
+        return predictions
+
+    def get_linear_regression_predictions_wr(self):
+        predictions = []
+        with self.engine.connect() as conn:
+            query = text("""select * from submission_table2 order by predicted_stats desc""")
+            res = conn.execute(query)
+            for row in res.all():
+                predictions.append(Prediction(row.player_name,row.predicted_stats))
+        return predictions
+
+    def get_classification_predictions_wr(self):
+        predictions = []
+        with self.engine.connect() as conn:
+            query = text("""select SUM(total_points) as predicted_points, label as player_name  from "Wide Receiver_class_predictions_2023" group by player_name order by SUM(total_points) desc""")
             res = conn.execute(query)
             for row in res.all():
                 predictions.append(Prediction(row.player_name,row.predicted_points))
@@ -101,7 +137,7 @@ class Connection:
 
         # Create a DataFrame for submission
         submission_df = pd.DataFrame({'player_name': test_data['player_name'], 'label': predictions.flatten()})
-        s = Season(season_id)
+        s = Season()
         # Save the submission DataFrame to the PostgreSQL database
         submission_df.to_sql(position + '_lr_predictions_' + str(s.toYear(season_id)), self.engine, if_exists='replace', index=False)
 
@@ -145,17 +181,20 @@ class Connection:
                       metrics=['accuracy'])
 
         # Fit the model
-        model.fit(X_train, y_train_encoded, epochs=100, validation_data=(X_val, y_val_encoded))
+        model.fit(X_train, y_train_encoded, epochs=1000, validation_data=(X_val, y_val_encoded))
 
         # Load and preprocess the test data from the PostgreSQL database
-        test_query = f"SELECT concat(first_name, ' ', last_name) as player_name, total_points, passing_attempts, passing_completions, passing_yards, passing_touchdowns, interceptions," \
-                      f" receptions, receiving_yards, receiving_touchdowns, rushing_attempts, rushing_yards, rushing_touchdowns FROM player" \
-                      f" inner join stats s on player.id = s.player_id" \
-                      f" inner join game g on g.game_id = s.game_id" \
-                      f" inner join passing p on p.pass_id = s.pass_id" \
-                      f" inner join receiving r on s.reception_id = r.reception_id" \
-                      f" inner join rushing r2 on r2.rush_id = s.rush_id" \
-                      f" WHERE position = \'{position}\' AND season_id = {season_id}"
+        test_query = f"SELECT concat(first_name, ' ', last_name) as player_name, SUM(total_points) as total_points," \
+                     f"SUM(passing_attempts), SUM(passing_completions), SUM(passing_yards), SUM(passing_touchdowns)," \
+                     f"SUM(interceptions), SUM(receptions), SUM(receiving_yards), SUM(receiving_touchdowns)," \
+                     f"SUM(rushing_attempts), SUM(rushing_yards), SUM(rushing_touchdowns) FROM player" \
+                     f" inner join stats s on player.id = s.player_id" \
+                     f" inner join game g on g.game_id = s.game_id" \
+                     f" inner join passing p on p.pass_id = s.pass_id" \
+                     f" inner join receiving r on s.reception_id = r.reception_id" \
+                     f" inner join rushing r2 on r2.rush_id = s.rush_id" \
+                      f" WHERE position = \'{position}\' AND season_id = {season_id}" \
+                     f" group by last_name, first_name"
         test_data = pd.read_sql(test_query, self.engine)
         X_test = scaler.transform(test_data.iloc[:, 1:].values)
 
@@ -167,7 +206,7 @@ class Connection:
         # Create a DataFrame for submission
         submission_df = pd.DataFrame(
             {'total_points': test_data['total_points'], 'label': predicted_player_names.flatten()})
-        s = Season(season_id)
+        s = Season()
         # Save the submission DataFrame to the PostgreSQL database
         submission_df.to_sql(position + '_class_predictions_' + str(s.toYear(season_id)), self.engine, if_exists='replace', index=False)
 

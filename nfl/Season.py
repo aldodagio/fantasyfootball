@@ -7,29 +7,29 @@ class Season:
             self.year = 2010
         elif season_id == 2:
             self.year = 2011
-        elif season_id == 2:
-            self.year = 2012
         elif season_id == 3:
-            self.year = 2013
+            self.year = 2012
         elif season_id == 4:
-            self.year = 2014
+            self.year = 2013
         elif season_id == 5:
-            self.year = 2015
+            self.year = 2014
         elif season_id == 6:
-            self.year = 2016
+            self.year = 2015
         elif season_id == 7:
-            self.year = 2017
+            self.year = 2016
         elif season_id == 8:
-            self.year = 2018
+            self.year = 2017
         elif season_id == 9:
-            self.year = 2019
+            self.year = 2018
         elif season_id == 10:
-            self.year = 2020
+            self.year = 2019
         elif season_id == 11:
-            self.year = 2021
+            self.year = 2020
         elif season_id == 12:
-            self.year = 2022
+            self.year = 2021
         elif season_id == 13:
+            self.year = 2022
+        elif season_id == 14:
             self.year = 2023
             return self.year
     def toID(self, year):

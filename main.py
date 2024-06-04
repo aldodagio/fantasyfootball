@@ -131,8 +131,8 @@ def insert_stats(row, game_id, player_id, db):
 if __name__ == '__main__':
     #year = 14
     db = Connection()
-    position = 'Quarterback'
-    season_id = 13
+    position = 'Wide Receiver'
+    season_id = 14
     db.linear_regression_model(position, season_id)
     db.classification_model(position, season_id)
     # end_week = 18
