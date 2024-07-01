@@ -5,21 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Player Search Results</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/prediction_view.css') }}">
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/global.css') }}">
 </head>
 <body>
-
+<!-- Header/Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Fantasy Football App</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+      <a class="navbar-brand" href="../linear_regression">Machine Learning</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>
 <div class="container mt-5">
     <h1>Player Prediction Results</h1>
     <hr>
+ <a href="{{ url_for('download_pdf') }}" id="downloadPDF" class="btn btn-primary mb-3">Download as PDF</a>
 
     <!-- Player Search Results -->
     <div class="mt-4 row">
         <div class="col-md-6">
-            <h2>Prediction Results</h2>
+            <h2>2024-2025 Prediction</h2>
             <ul class="list-group">
                 {% for prediction in predictions %}
                     <li class="list-group-item">
-                        <strong>{{ prediction.name }}</strong>
+                        <strong>{{ loop.index }}. {{ prediction.name }}</strong>
                         <br>
                         Predicted Points: {{ prediction.points }}
                         {% set rank_change = rank_changes.get(prediction.name) %}
@@ -39,11 +52,11 @@
             </ul>
         </div>
         <div class="col-md-6">
-            <h2>Actual Results</h2>
+            <h2>2023-2024 Season</h2>
             <ul class="list-group">
                 {% for actual in actuals %}
                     <li class="list-group-item">
-                        <strong>{{ actual.first_name }} {{ actual.last_name }}</strong>
+                        <strong>{{ loop.index }}. {{ actual.first_name }} {{ actual.last_name }}</strong>
                         <br>
                         Actual Points: {{ actual.points }}
                     </li>

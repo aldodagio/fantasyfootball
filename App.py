@@ -1,8 +1,9 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask import render_template
-from flask import request
-
+from flask import request,redirect, url_for, send_file
+import pdfkit
+import io
 from nfl.Season import Season
 from postgres_db.Connection import Connection
 
@@ -14,6 +15,17 @@ def home():
     connection = Connection()
     seasons = connection.select_seasons()
     return render_template('index.html', seasons=seasons)
+
+@app.route('/download-pdf')
+def download_pdf():
+    connection = Connection()
+    actuals = connection.select_all_with_total_points(14)
+    predictions = connection.get_linear_regression_predictions_all()
+    rank_changes = calculate_rank_change(predictions, actuals)
+    rendered = render_template('prediction_view.html',predictions=predictions, actuals=actuals, rank_changes=rank_changes)
+    pdf = pdfkit.from_string(rendered, False)
+    response = io.BytesIO(pdf)
+    return send_file(response, attachment_filename='report.pdf', as_attachment=True, mimetype='application/pdf')
 
 @app.route('/season/<season_id>')
 def season_view(season_id):
@@ -70,6 +82,15 @@ def lr_prediction_QB_view():
     predictions = connection.get_linear_regression_predictions_qb()
     rank_changes = calculate_rank_change(predictions, actuals)
     return render_template('prediction_view.html', predictions=predictions, actuals=actuals,rank_changes=rank_changes)
+
+@app.route('/all/lr_prediction')
+def lr_prediction_all_view():
+    connection = Connection()
+    actuals = connection.select_all_with_total_points(14)
+    predictions = connection.get_linear_regression_predictions_all()
+    rank_changes = calculate_rank_change(predictions, actuals)
+    return render_template('prediction_view.html', predictions=predictions, actuals=actuals,rank_changes=rank_changes)
+
 def calculate_rank_change(predictions, actuals):
     rank_changes = {}
     i = 1
@@ -86,12 +107,6 @@ def calculate_rank_change(predictions, actuals):
         i = i + 1
     return rank_changes
 
-@app.route('/QB/class_prediction')
-def class_prediction_QB_view():
-    connection = Connection()
-    predictions = connection.get_classification_predictions_qb()
-    return render_template('prediction_view.html', predictions=predictions)
-
 @app.route('/RB/lr_prediction')
 def lr_prediction_RB_view():
     connection = Connection()
@@ -99,12 +114,6 @@ def lr_prediction_RB_view():
     predictions = connection.get_linear_regression_predictions_rb()
     rank_changes = calculate_rank_change(predictions, actuals)
     return render_template('prediction_view.html', predictions=predictions, actuals=actuals, rank_changes=rank_changes)
-
-@app.route('/RB/class_prediction')
-def class_prediction_RB_view():
-    connection = Connection()
-    predictions = connection.get_classification_predictions_rb()
-    return render_template('prediction_view.html', predictions=predictions)
 
 @app.route('/WR/lr_prediction')
 def lr_prediction_WR_view():
@@ -114,11 +123,13 @@ def lr_prediction_WR_view():
     rank_changes = calculate_rank_change(predictions, actuals)
     return render_template('prediction_view.html', predictions=predictions, actuals=actuals, rank_changes=rank_changes)
 
-@app.route('/WR/class_prediction')
-def class_prediction_WR_view():
+@app.route('/TE/lr_prediction')
+def lr_prediction_TE_view():
     connection = Connection()
-    predictions = connection.get_classification_predictions_wr()
-    return render_template('prediction_view.html', predictions=predictions)
+    actuals = connection.select_tes_with_total_points(14)
+    predictions = connection.get_linear_regression_predictions_te()
+    rank_changes = calculate_rank_change(predictions, actuals)
+    return render_template('prediction_view.html', predictions=predictions, actuals=actuals, rank_changes=rank_changes)
 
 @app.route('/season/<season_id>/RB')
 def season_RB_view(season_id):
@@ -236,12 +247,6 @@ def linear_regression():
     connection = Connection()
     seasons = connection.select_seasons()
     return render_template('linear_regression.html',seasons=seasons)
-
-@app.route('/classification')
-def classification():
-    connection = Connection()
-    seasons = connection.select_seasons()
-    return render_template('classification.html',seasons=seasons)
 
 @app.route('/search', methods=['GET'])
 def player_search():

@@ -76,6 +76,43 @@ class Connection:
                 predictions.append(Prediction(row.player_name,row.predicted_stats))
         return predictions
 
+    def get_linear_regression_predictions_te(self):
+        predictions = []
+        with self.engine.connect() as conn:
+            query = text("""select * from submission_table3 order by predicted_stats desc""")
+            res = conn.execute(query)
+            for row in res.all():
+                predictions.append(Prediction(row.player_name,row.predicted_stats))
+        return predictions
+
+    def select_all_with_total_points(self, year):
+        players = []
+        with self.engine.connect() as conn:
+            query = text(
+                f"select first_name, last_name, position, s.player_id as id, year, sum(total_points) as points from player "
+                f"inner join stats s on player.id = s.player_id "
+                f"inner join game g on g.game_id = s.game_id "
+                f"inner join season s2 on s2.season_id = g.season_id "
+                f"where g.season_id = {year} "
+                f"group by s.player_id, last_name, position, year, first_name "
+                f"order by points desc")
+            res = conn.execute(query)
+            for row in res.all():
+                players.append(Player.with_points_and_id(row.first_name, row.last_name, row.position, points=row.points,
+                                                         id=row.id))
+        return players
+    def get_linear_regression_predictions_all(self):
+        predictions = []
+        with self.engine.connect() as conn:
+            query = text("""select * from submission_table2 union 
+                    select * from submission_table1 union 
+                    select * from submission_table 
+                    order by predicted_stats desc""")
+            res = conn.execute(query)
+            for row in res.all():
+                predictions.append(Prediction(row.player_name, row.predicted_stats))
+        return predictions
+
     def get_classification_predictions_wr(self):
         predictions = []
         with self.engine.connect() as conn:
