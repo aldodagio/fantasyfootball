@@ -37,16 +37,17 @@ class Connection:
             query = text("""select * from submission_table order by predicted_stats desc""")
             res = conn.execute(query)
             for row in res.all():
-                predictions.append(Prediction(row.player_name,row.predicted_stats))
+                predictions.append(Prediction(row.player_name, row.predicted_stats))
         return predictions
 
     def get_classification_predictions_qb(self):
         predictions = []
         with self.engine.connect() as conn:
-            query = text("""select SUM(total_points) as predicted_points, label as player_name  from "Quarterback_class_predictions_2023" group by player_name order by SUM(total_points) desc""")
+            query = text(
+                """select SUM(total_points) as predicted_points, label as player_name  from "Quarterback_class_predictions_2023" group by player_name order by SUM(total_points) desc""")
             res = conn.execute(query)
             for row in res.all():
-                predictions.append(Prediction(row.player_name,row.predicted_points))
+                predictions.append(Prediction(row.player_name, row.predicted_points))
         return predictions
 
     def get_linear_regression_predictions_rb(self):
@@ -55,16 +56,17 @@ class Connection:
             query = text("""select * from submission_table1 order by predicted_stats desc""")
             res = conn.execute(query)
             for row in res.all():
-                predictions.append(Prediction(row.player_name,row.predicted_stats))
+                predictions.append(Prediction(row.player_name, row.predicted_stats))
         return predictions
 
     def get_classification_predictions_rb(self):
         predictions = []
         with self.engine.connect() as conn:
-            query = text("""select SUM(total_points) as predicted_points, label as player_name  from "Running Back_class_predictions_2023" group by player_name order by SUM(total_points) desc""")
+            query = text(
+                """select SUM(total_points) as predicted_points, label as player_name  from "Running Back_class_predictions_2023" group by player_name order by SUM(total_points) desc""")
             res = conn.execute(query)
             for row in res.all():
-                predictions.append(Prediction(row.player_name,row.predicted_points))
+                predictions.append(Prediction(row.player_name, row.predicted_points))
         return predictions
 
     def get_linear_regression_predictions_wr(self):
@@ -73,7 +75,7 @@ class Connection:
             query = text("""select * from submission_table2 order by predicted_stats desc""")
             res = conn.execute(query)
             for row in res.all():
-                predictions.append(Prediction(row.player_name,row.predicted_stats))
+                predictions.append(Prediction(row.player_name, row.predicted_stats))
         return predictions
 
     def get_linear_regression_predictions_te(self):
@@ -82,7 +84,7 @@ class Connection:
             query = text("""select * from submission_table3 order by predicted_stats desc""")
             res = conn.execute(query)
             for row in res.all():
-                predictions.append(Prediction(row.player_name,row.predicted_stats))
+                predictions.append(Prediction(row.player_name, row.predicted_stats))
         return predictions
 
     def select_all_with_total_points(self, year):
@@ -101,6 +103,7 @@ class Connection:
                 players.append(Player.with_points_and_id(row.first_name, row.last_name, row.position, points=row.points,
                                                          id=row.id))
         return players
+
     def get_linear_regression_predictions_all(self):
         predictions = []
         with self.engine.connect() as conn:
@@ -116,10 +119,13 @@ class Connection:
     def get_classification_predictions_wr(self):
         predictions = []
         with self.engine.connect() as conn:
-            query = text("""select SUM(total_points) as predicted_points, label as player_name  from "Wide Receiver_class_predictions_2023" group by player_name order by SUM(total_points) desc""")
+            query = text("""select SUM(total_points) as predicted_points,
+             label as player_name 
+             from "Wide Receiver_class_predictions_2023" 
+             group by player_name order by SUM(total_points) desc""")
             res = conn.execute(query)
             for row in res.all():
-                predictions.append(Prediction(row.player_name,row.predicted_points))
+                predictions.append(Prediction(row.player_name, row.predicted_points))
         return predictions
 
     def linear_regression_model(self, position, season_id):
@@ -176,7 +182,8 @@ class Connection:
         submission_df = pd.DataFrame({'player_name': test_data['player_name'], 'label': predictions.flatten()})
         s = Season()
         # Save the submission DataFrame to the PostgreSQL database
-        submission_df.to_sql(position + '_lr_predictions_' + str(s.toYear(season_id)), self.engine, if_exists='replace', index=False)
+        submission_df.to_sql(position + '_lr_predictions_' + str(s.toYear(season_id)), self.engine, if_exists='replace',
+                             index=False)
 
     def classification_model(self, position, season_id):
         # Load and preprocess the training data from the PostgreSQL database
@@ -230,7 +237,7 @@ class Connection:
                      f" inner join passing p on p.pass_id = s.pass_id" \
                      f" inner join receiving r on s.reception_id = r.reception_id" \
                      f" inner join rushing r2 on r2.rush_id = s.rush_id" \
-                      f" WHERE position = \'{position}\' AND season_id = {season_id}" \
+                     f" WHERE position = \'{position}\' AND season_id = {season_id}" \
                      f" group by last_name, first_name"
         test_data = pd.read_sql(test_query, self.engine)
         X_test = scaler.transform(test_data.iloc[:, 1:].values)
@@ -245,7 +252,8 @@ class Connection:
             {'total_points': test_data['total_points'], 'label': predicted_player_names.flatten()})
         s = Season()
         # Save the submission DataFrame to the PostgreSQL database
-        submission_df.to_sql(position + '_class_predictions_' + str(s.toYear(season_id)), self.engine, if_exists='replace', index=False)
+        submission_df.to_sql(position + '_class_predictions_' + str(s.toYear(season_id)), self.engine,
+                             if_exists='replace', index=False)
 
     def select_players(self):
         players = []
@@ -259,11 +267,12 @@ class Connection:
     def player_dropdown(self, year):
         players = []
         with self.engine.connect() as conn:
-            query = text(f"select DISTINCT(concat(first_name,' ', last_name)) as player_name, first_name, last_name, position, year from player "
-                         f"inner join stats s on player.id = s.player_id "
-                         f"inner join game g on g.game_id = s.game_id "
-                         f"inner join season s2 on s2.season_id = g.season_id "
-                         f"where g.season_id = {year}")
+            query = text(
+                f"select DISTINCT(concat(first_name,' ', last_name)) as player_name, first_name, last_name, position, year from player "
+                f"inner join stats s on player.id = s.player_id "
+                f"inner join game g on g.game_id = s.game_id "
+                f"inner join season s2 on s2.season_id = g.season_id "
+                f"where g.season_id = {year}")
             res = conn.execute(query)
             for row in res.all():
                 players.append(Player(row.first_name, row.last_name, row.position))
@@ -273,11 +282,12 @@ class Connection:
         players = []
         with self.engine.connect() as conn:
             qb = 'Quarterback'
-            query = text(f"select DISTINCT(concat(first_name,' ', last_name)) as player_name, first_name, last_name, position, year from player "
-                         f"inner join stats s on player.id = s.player_id "
-                         f"inner join game g on g.game_id = s.game_id "
-                         f"inner join season s2 on s2.season_id = g.season_id "
-                         f"where g.season_id = {year} and position = \'{qb}\'")
+            query = text(
+                f"select DISTINCT(concat(first_name,' ', last_name)) as player_name, first_name, last_name, position, year from player "
+                f"inner join stats s on player.id = s.player_id "
+                f"inner join game g on g.game_id = s.game_id "
+                f"inner join season s2 on s2.season_id = g.season_id "
+                f"where g.season_id = {year} and position = \'{qb}\'")
             res = conn.execute(query)
             for row in res.all():
                 players.append(Player(row.first_name, row.last_name, row.position))
@@ -302,16 +312,18 @@ class Connection:
         players = []
         with self.engine.connect() as conn:
             qb = 'Quarterback'
-            query = text(f"select player.id as id, first_name, last_name, position, year, sum(total_points) as points from player "
-                         f"inner join stats s on player.id = s.player_id "
-                         f"inner join game g on g.game_id = s.game_id "
-                         f"inner join season s2 on s2.season_id = g.season_id "
-                         f"where g.season_id = {year} and position = \'{qb}\' "
-                         f"group by player.id, last_name, position, year, first_name "
-                         f"order by points desc")
+            query = text(
+                f"select player.id as id, first_name, last_name, position, year, sum(total_points) as points from player "
+                f"inner join stats s on player.id = s.player_id "
+                f"inner join game g on g.game_id = s.game_id "
+                f"inner join season s2 on s2.season_id = g.season_id "
+                f"where g.season_id = {year} and position = \'{qb}\' "
+                f"group by player.id, last_name, position, year, first_name "
+                f"order by points desc")
             res = conn.execute(query)
             for row in res.all():
-                players.append(Player.with_points_and_id(row.first_name, row.last_name, row.position, points=row.points, id=row.id))
+                players.append(Player.with_points_and_id(row.first_name, row.last_name, row.position, points=row.points,
+                                                         id=row.id))
         return players
 
     def get_qb_stats(self, player_id, season_id):
@@ -331,9 +343,13 @@ class Connection:
                 f"where g.season_id = {season_id} and position = \'{qb}\' and s.player_id = {player_id}")
             res = conn.execute(query)
             for row in res.all():
-                players.append(Player.qb_with_all_stats(row.first_name, row.last_name, qb, row.total_points, row.fumbles, row.passing_yards, row.passing_touchdowns,
-                    row.passing_attempts, row.rushing_yards, row.rushing_attempts, row.rushing_touchdowns,
-                          row.receiving_touchdowns, row.receptions, row.receiving_yards, row.interceptions))
+                players.append(
+                    Player.qb_with_all_stats(row.first_name, row.last_name, qb, row.total_points, row.fumbles,
+                                             row.passing_yards, row.passing_touchdowns,
+                                             row.passing_attempts, row.rushing_yards, row.rushing_attempts,
+                                             row.rushing_touchdowns,
+                                             row.receiving_touchdowns, row.receptions, row.receiving_yards,
+                                             row.interceptions))
         return players
 
     def get_wrs_stats(self, player_id, season_id):
@@ -353,9 +369,13 @@ class Connection:
                 f"where g.season_id = {season_id} and position = \'{qb}\' and s.player_id = {player_id}")
             res = conn.execute(query)
             for row in res.all():
-                players.append(Player.qb_with_all_stats(row.first_name, row.last_name, qb, row.total_points, row.fumbles, row.passing_yards, row.passing_touchdowns,
-                    row.passing_attempts, row.rushing_yards, row.rushing_attempts, row.rushing_touchdowns,
-                          row.receiving_touchdowns, row.receptions, row.receiving_yards, row.interceptions))
+                players.append(
+                    Player.qb_with_all_stats(row.first_name, row.last_name, qb, row.total_points, row.fumbles,
+                                             row.passing_yards, row.passing_touchdowns,
+                                             row.passing_attempts, row.rushing_yards, row.rushing_attempts,
+                                             row.rushing_touchdowns,
+                                             row.receiving_touchdowns, row.receptions, row.receiving_yards,
+                                             row.interceptions))
         return players
 
     def get_te_stats(self, player_id, season_id):
@@ -375,9 +395,13 @@ class Connection:
                 f"where g.season_id = {season_id} and position = \'{qb}\' and s.player_id = {player_id}")
             res = conn.execute(query)
             for row in res.all():
-                players.append(Player.qb_with_all_stats(row.first_name, row.last_name, qb, row.total_points, row.fumbles, row.passing_yards, row.passing_touchdowns,
-                    row.passing_attempts, row.rushing_yards, row.rushing_attempts, row.rushing_touchdowns,
-                          row.receiving_touchdowns, row.receptions, row.receiving_yards, row.interceptions))
+                players.append(
+                    Player.qb_with_all_stats(row.first_name, row.last_name, qb, row.total_points, row.fumbles,
+                                             row.passing_yards, row.passing_touchdowns,
+                                             row.passing_attempts, row.rushing_yards, row.rushing_attempts,
+                                             row.rushing_touchdowns,
+                                             row.receiving_touchdowns, row.receptions, row.receiving_yards,
+                                             row.interceptions))
         return players
 
     def get_rb_stats(self, player_id, season_id):
@@ -397,9 +421,13 @@ class Connection:
                 f"where g.season_id = {season_id} and position = \'{qb}\' and s.player_id = {player_id}")
             res = conn.execute(query)
             for row in res.all():
-                players.append(Player.qb_with_all_stats(row.first_name, row.last_name, qb, row.total_points, row.fumbles, row.passing_yards, row.passing_touchdowns,
-                    row.passing_attempts, row.rushing_yards, row.rushing_attempts, row.rushing_touchdowns,
-                          row.receiving_touchdowns, row.receptions, row.receiving_yards, row.interceptions))
+                players.append(
+                    Player.qb_with_all_stats(row.first_name, row.last_name, qb, row.total_points, row.fumbles,
+                                             row.passing_yards, row.passing_touchdowns,
+                                             row.passing_attempts, row.rushing_yards, row.rushing_attempts,
+                                             row.rushing_touchdowns,
+                                             row.receiving_touchdowns, row.receptions, row.receiving_yards,
+                                             row.interceptions))
         return players
 
     def select_teams(self):
@@ -432,16 +460,18 @@ class Connection:
         players = []
         with self.engine.connect() as conn:
             rb = 'Running Back'
-            query = text(f"select first_name, last_name, position, year, sum(total_points) as points, s.player_id as id from player "
-                         f"inner join stats s on player.id = s.player_id "
-                         f"inner join game g on g.game_id = s.game_id "
-                         f"inner join season s2 on s2.season_id = g.season_id "
-                         f"where g.season_id = {year} and position = \'{rb}\' "
-                         f"group by s.player_id, last_name, position, year, first_name "
-                         f"order by points desc")
+            query = text(
+                f"select first_name, last_name, position, year, sum(total_points) as points, s.player_id as id from player "
+                f"inner join stats s on player.id = s.player_id "
+                f"inner join game g on g.game_id = s.game_id "
+                f"inner join season s2 on s2.season_id = g.season_id "
+                f"where g.season_id = {year} and position = \'{rb}\' "
+                f"group by s.player_id, last_name, position, year, first_name "
+                f"order by points desc")
             res = conn.execute(query)
             for row in res.all():
-                players.append(Player.with_points_and_id(row.first_name, row.last_name, row.position, points=row.points, id=row.id))
+                players.append(Player.with_points_and_id(row.first_name, row.last_name, row.position, points=row.points,
+                                                         id=row.id))
         return players
 
     def rb_dropdown(self, year):
@@ -449,7 +479,8 @@ class Connection:
         with self.engine.connect() as conn:
             rb = 'Running Back'
             query = text(
-                f"select DISTINCT(concat(first_name,' ', last_name)) as player_name, first_name, last_name, position, year from player "
+                f"select DISTINCT(concat(first_name,' ', last_name)) as player_name, "
+                f"first_name, last_name, position, year from player "
                 f"inner join stats s on player.id = s.player_id "
                 f"inner join game g on g.game_id = s.game_id "
                 f"inner join season s2 on s2.season_id = g.season_id "
@@ -463,16 +494,18 @@ class Connection:
         players = []
         with self.engine.connect() as conn:
             wr = 'Wide Receiver'
-            query = text(f"select first_name, last_name, position, year, s.player_id as id, sum(total_points) as points from player "
-                         f"inner join stats s on player.id = s.player_id "
-                         f"inner join game g on g.game_id = s.game_id "
-                         f"inner join season s2 on s2.season_id = g.season_id "
-                         f"where g.season_id = {year} and position = \'{wr}\' "
-                         f"group by s.player_id, last_name, position, year, first_name "
-                         f"order by points desc")
+            query = text(
+                f"select first_name, last_name, position, year, s.player_id as id, sum(total_points) as points from player "
+                f"inner join stats s on player.id = s.player_id "
+                f"inner join game g on g.game_id = s.game_id "
+                f"inner join season s2 on s2.season_id = g.season_id "
+                f"where g.season_id = {year} and position = \'{wr}\' "
+                f"group by s.player_id, last_name, position, year, first_name "
+                f"order by points desc")
             res = conn.execute(query)
             for row in res.all():
-                players.append(Player.with_points_and_id(row.first_name, row.last_name, row.position, points=row.points, id=row.id))
+                players.append(Player.with_points_and_id(row.first_name, row.last_name, row.position, points=row.points,
+                                                         id=row.id))
         return players
 
     def wr_dropdown(self, year):
@@ -494,16 +527,18 @@ class Connection:
         players = []
         with self.engine.connect() as conn:
             te = 'Tight End'
-            query = text(f"select first_name, last_name, position, s.player_id as id, year, sum(total_points) as points from player "
-                         f"inner join stats s on player.id = s.player_id "
-                         f"inner join game g on g.game_id = s.game_id "
-                         f"inner join season s2 on s2.season_id = g.season_id "
-                         f"where g.season_id = {year} and position = \'{te}\' "
-                         f"group by s.player_id, last_name, position, year, first_name "
-                         f"order by points desc")
+            query = text(
+                f"select first_name, last_name, position, s.player_id as id, year, sum(total_points) as points from player "
+                f"inner join stats s on player.id = s.player_id "
+                f"inner join game g on g.game_id = s.game_id "
+                f"inner join season s2 on s2.season_id = g.season_id "
+                f"where g.season_id = {year} and position = \'{te}\' "
+                f"group by s.player_id, last_name, position, year, first_name "
+                f"order by points desc")
             res = conn.execute(query)
             for row in res.all():
-                players.append(Player.with_points_and_id(row.first_name, row.last_name, row.position, points=row.points, id=row.id))
+                players.append(Player.with_points_and_id(row.first_name, row.last_name, row.position, points=row.points,
+                                                         id=row.id))
         return players
 
     def te_dropdown(self, year):
@@ -538,7 +573,7 @@ class Connection:
             query = text("SELECT * FROM season")
             res = conn.execute(query)
             for row in res.all():
-                seasons.append(Season(row.season_id,row.year))
+                seasons.append(Season(row.season_id, row.year))
         return seasons
 
     def select_all_rushing(self):
@@ -584,7 +619,8 @@ class Connection:
             query = text("""INSERT INTO player (first_name, last_name, position, team_id) 
                          SELECT :first_name,:last_name,:position,:team_id 
                          WHERE NOT EXISTS (SELECT 1 FROM player WHERE first_name=:first_name AND last_name=:last_name)""")
-            result = conn.execute(query, {'first_name' : first_name,'last_name' : last_name,'position' : position,'team_id' : team_id})
+            result = conn.execute(query, {'first_name': first_name, 'last_name': last_name, 'position': position,
+                                          'team_id': team_id})
             conn.commit()
 
     def insert_game(self, home_team_id, away_team_id, season_id, week):
@@ -592,27 +628,30 @@ class Connection:
             query = text("""INSERT INTO game (home_team_id, away_team_id, season_id, week) 
                          SELECT :home_team_id,:away_team_id,:season_id,:week 
                          WHERE NOT EXISTS (SELECT 1 FROM game WHERE home_team_id=:home_team_id AND away_team_id=:away_team_id AND season_id=:season_id AND week=:week)""")
-            result = conn.execute(query, {'home_team_id' : home_team_id, 'away_team_id' : away_team_id, 'season_id' : season_id, 'week' : week})
+            result = conn.execute(query,
+                                  {'home_team_id': home_team_id, 'away_team_id': away_team_id, 'season_id': season_id,
+                                   'week': week})
             conn.commit()
 
     def select_player_id(self, first_name, last_name):
         with self.engine.connect() as conn:
             query = text("""SELECT id FROM player WHERE first_name = :first_name AND last_name = :last_name""")
-            result = conn.execute(query, {'first_name' : first_name, 'last_name' : last_name})
+            result = conn.execute(query, {'first_name': first_name, 'last_name': last_name})
             id = result.scalar()
             return id
 
     def select_position(self, first_name, last_name):
         with self.engine.connect() as conn:
             query = text("""SELECT position FROM player WHERE first_name = :first_name AND last_name = :last_name""")
-            result = conn.execute(query, {'first_name' : first_name, 'last_name' : last_name})
+            result = conn.execute(query, {'first_name': first_name, 'last_name': last_name})
             position = result.scalar()
             return position
 
     def select_game_id(self, home_team_id, away_team_id, year):
         with self.engine.connect() as conn:
-            query = text("""SELECT game_id FROM game WHERE home_team_id = :home_team_id AND away_team_id = :away_team_id AND season_id = :year""")
-            result = conn.execute(query, {'home_team_id' : home_team_id, 'away_team_id' : away_team_id, 'year' : year})
+            query = text(
+                """SELECT game_id FROM game WHERE home_team_id = :home_team_id AND away_team_id = :away_team_id AND season_id = :year""")
+            result = conn.execute(query, {'home_team_id': home_team_id, 'away_team_id': away_team_id, 'year': year})
             id = result.scalar()
             return id
 
@@ -621,7 +660,9 @@ class Connection:
             query = text("""INSERT INTO stats (pass_id, rush_id, reception_id, total_points, fumbles, game_id, player_id) 
                          SELECT :pass_id, :rush_id, :reception_id, :total_points, :fumbles, :game_id, :player_id 
                          WHERE NOT EXISTS (SELECT 1 FROM stats WHERE game_id=:game_id AND player_id=:player_id AND pass_id=:pass_id AND rush_id=:rush_id AND reception_id=:reception_id)""")
-            result = conn.execute(query, {'fumbles' : int(fumbles), 'game_id' : game_id, 'player_id' : player_id, 'pass_id' : pass_id, 'rush_id' : rush_id, 'reception_id' : reception_id, 'total_points' : float(total_points)})
+            result = conn.execute(query, {'fumbles': int(fumbles), 'game_id': game_id, 'player_id': player_id,
+                                          'pass_id': pass_id, 'rush_id': rush_id, 'reception_id': reception_id,
+                                          'total_points': float(total_points)})
             conn.commit()
 
     def insert_stats(self, stats):
@@ -650,7 +691,7 @@ class Connection:
     def select_pass_id(self, game_id, player_id):
         with self.engine.connect() as conn:
             query = text("""SELECT pass_id FROM passing WHERE game_id = :game_id AND player_id = :player_id""")
-            result = conn.execute(query, {'game_id' : game_id, 'player_id' : player_id})
+            result = conn.execute(query, {'game_id': game_id, 'player_id': player_id})
             id = result.scalar()
             return id
 
@@ -664,7 +705,7 @@ class Connection:
     def select_reception_id(self, game_id, player_id):
         with self.engine.connect() as conn:
             query = text("""SELECT reception_id FROM receiving WHERE game_id = :game_id AND player_id = :player_id""")
-            result = conn.execute(query, {'game_id' : game_id, 'player_id' : player_id})
+            result = conn.execute(query, {'game_id': game_id, 'player_id': player_id})
             id = result.scalar()
             return id
 
@@ -674,20 +715,26 @@ class Connection:
             result = conn.execute(stmt)
             conn.commit()
 
-    def insert_passing(self, passing_attempts, passing_completions, passing_yards, passing_touchdowns, interceptions, passing_2pt_conversions):
+    def insert_passing(self, passing_attempts, passing_completions, passing_yards, passing_touchdowns, interceptions,
+                       passing_2pt_conversions):
         with self.engine.connect() as conn:
-            stmt = insert("passing").values(passing_attempts=passing_attempts, passing_completions=passing_completions, passing_yards=passing_yards,
-                                           passing_touchdowns=passing_touchdowns, interceptions=interceptions, passing_2pt_conversions=passing_2pt_conversions)
+            stmt = insert("passing").values(passing_attempts=passing_attempts, passing_completions=passing_completions,
+                                            passing_yards=passing_yards,
+                                            passing_touchdowns=passing_touchdowns, interceptions=interceptions,
+                                            passing_2pt_conversions=passing_2pt_conversions)
             result = conn.execute(stmt)
             conn.commit()
 
-    def insert_rushing(self, rushing_attempts, rushing_yards, rushing_touchdowns, rushing_two_point_conversions, game_id, player_id):
+    def insert_rushing(self, rushing_attempts, rushing_yards, rushing_touchdowns, rushing_two_point_conversions,
+                       game_id, player_id):
         with self.engine.connect() as conn:
             query = text("""INSERT INTO rushing (rushing_attempts, rushing_yards, rushing_touchdowns, rushing_two_point_conversions, game_id, player_id) 
                                 SELECT :rushing_attempts, :rushing_yards, :rushing_touchdowns, :rushing_two_point_conversions, :game_id, :player_id
                                 WHERE NOT EXISTS (SELECT 1 FROM rushing WHERE game_id=:game_id AND player_id=:player_id)""")
             result = conn.execute(query,
-                                  {'rushing_attempts': int(rushing_attempts), 'rushing_yards': int(rushing_yards), 'rushing_touchdowns': int(rushing_touchdowns), 'rushing_two_point_conversions': int(rushing_two_point_conversions),
+                                  {'rushing_attempts': int(rushing_attempts), 'rushing_yards': int(rushing_yards),
+                                   'rushing_touchdowns': int(rushing_touchdowns),
+                                   'rushing_two_point_conversions': int(rushing_two_point_conversions),
                                    'game_id': game_id, 'player_id': player_id})
             conn.commit()
 
@@ -706,7 +753,8 @@ class Connection:
             })
             conn.commit()
 
-    def insert_receiving(self, receptions, receiving_yards, receiving_touchdowns, receiving_two_point_conversions, game_id, player_id):
+    def insert_receiving(self, receptions, receiving_yards, receiving_touchdowns, receiving_two_point_conversions,
+                         game_id, player_id):
         with self.engine.connect() as conn:
             query = text("""INSERT INTO receiving (receptions, receiving_yards, receiving_touchdowns, receiving_two_point_conversions, game_id, player_id) 
                                             SELECT :receptions, :receiving_yards, :receiving_touchdowns, :receiving_two_point_conversions, :game_id, :player_id
@@ -732,6 +780,7 @@ class Connection:
                 'player_id': receiving.player_id
             })
             conn.commit()
+
     def insert_passing(self, passing):
         with self.engine.connect() as conn:
             query = text("""INSERT INTO passing (passing_attempts, passing_completions, passing_yards, passing_touchdowns, passing_two_point_conversions, interceptions, game_id, player_id) 
@@ -748,5 +797,3 @@ class Connection:
                 'player_id': passing.player_id
             })
             conn.commit()
-
-    
