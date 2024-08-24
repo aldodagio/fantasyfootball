@@ -5,24 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/global.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/global.css') }}">
 </head>
 <body>
 
 <!-- Header/Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Fantasy Football App</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="/">The Fantasy Football Cheat Code</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-      <a class="navbar-brand" href="/linear_regression">Machine Learning</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="/linear_regression">Machine Learning</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 </nav>
 
 <div class="container mt-5">
-    <h1>Welcome to the Fantasy Football App!</h1>
+    <h1>Welcome to The Fantasy Football Cheat Code!</h1>
     <hr>
 
     <!-- Previous Seasons -->
@@ -34,7 +36,10 @@
             <ul class="list-group">
                 {% for season in seasons %}
                 <li class="list-group-item">
-                    <a href="/season/{{ season.year }}">{{ season.year }}</a> <a href="/season/{{ season.year }}">All Positions</a> <a href="/season/{{ season.year }}/QB">QB</a> <a href="/season/{{ season.year }}/RB">RB</a> <a href="/season/{{ season.year }}/WR">WR</a> <a href="/season/{{ season.year }}/TE">TE</a> <a href="/season/{{ season.year }}/K">K</a> <a href="/season/{{ season.year }}/DST">D/ST</a>
+                    <a href="/season/{{ season.year }}">{{ season.year }}</a> <a href="/season/{{ season.year }}">All
+                    Positions</a> <a href="/season/{{ season.year }}/QB">QB</a> <a href="/season/{{ season.year }}/RB">RB</a>
+                    <a href="/season/{{ season.year }}/WR">WR</a> <a href="/season/{{ season.year }}/TE">TE</a> <a
+                        href="/season/{{ season.year }}/K">K</a> <a href="/season/{{ season.year }}/DST">D/ST</a>
                 </li>
                 {% endfor %}
             </ul>

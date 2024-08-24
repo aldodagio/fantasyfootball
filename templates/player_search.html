@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Player Search Results</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/global.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/global.css') }}">
 </head>
 <body>
 
@@ -18,21 +18,21 @@
         <h2>Search Results</h2>
         <ul class="list-group">
             {% if player_stats %}
-                {% for player in player_stats %}
-                <li class="list-group-item">
-                    <strong>{{ player.first_name }} {{ player.last_name }}</strong>
-                    <br>
-                    Position: {{ player.position }}
-                    <br>
-                    Points: {{ player.points }}
-                    <br>
-                    Week: {{ loop.index }}
-                </li>
-                {% endfor %}
+            {% for player in player_stats %}
+            <li class="list-group-item">
+                <strong>{{ player.first_name }} {{ player.last_name }}</strong>
+                <br>
+                Position: {{ player.position }}
+                <br>
+                Points: {{ player.points }}
+                <br>
+                Week: {{ loop.index }}
+            </li>
+            {% endfor %}
             {% else %}
-                <li class="list-group-item">
-                    No players found.
-                </li>
+            <li class="list-group-item">
+                No players found.
+            </li>
             {% endif %}
         </ul>
     </div>

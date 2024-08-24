@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI vs MB</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS for table */
+        .custom-table {
+            border: 1px solid #ddd;
+            border-collapse: collapse;
+        }
+        .custom-table th, .custom-table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        .custom-table th {
+            background-color: #f2f2f2;
+        }
+         .yellow-row {
+            background-color: yellow;
+        }
+        .red-row {
+            background-color: red;
+        }
+        .green-row {
+            background-color: green;
+        }
+        .yellow-cell {
+            background-color: yellow;
+        }
+        .red-cell {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <table class="table custom-table">
+            <thead>
+                <tr>
+                    {% for col in columns %}
+                    <th>{{ col }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr class="{% if row[columns[2]] == 0 %}green-row{% elif row[columns[2]]|is_digit and row[columns[2]] < 0 %}yellow-row{% elif row[columns[2]]|is_digit and row[columns[2]] > 0 %}red-row{% endif %}">
+                    {% for col in columns %}
+                    <td class="{% if col == columns[2] and row[col]|is_digit and row[col] < 0 %}yellow-row{% elif col == columns[2] and row[col]|is_digit and row[col] > 0 %}red-row{% endif %}">
+                        {% if col in columns[2:4] and row[col]|is_digit %}
+                            {{ row[col]|int }}
+                        {% else %}
+                            {{ row[col] }}
+                        {% endif %}
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -10,22 +10,28 @@ from nfl.Rushing import Rushing
 from nfl.Stats import Stats
 from postgres_db.Connection import Connection
 
+
 def setup_cleaner(input_csv_path, output_csv_path, cleaner):
     cleaner.setInputCSV(input_csv_path)
     cleaner.setOutputCSV(output_csv_path)
 
+
 def build_path(path, fantasy_year, position, week_num):
-    return path + str(fantasy_year) + '/fantasyfootballdata_' + position + str(fantasy_year) + '_week' + str(week_num) + '.csv'
+    return path + str(fantasy_year) + '/fantasyfootballdata_' + position + '_' + str(fantasy_year) + '_week' + str(
+        week_num) + '.csv'
+
 
 def get_home_team_id(game, db):
     teams = game.split('@', 1)
     team = teams[0]
     return db.select_team_id(team)
 
+
 def get_away_team_id(game, db):
     teams = game.split('@', 1)
     team = teams[1]
     return db.select_team_id(team)
+
 
 def insert_players(row, pos, db):
     player = row[0].split(' ', 1)
@@ -37,6 +43,7 @@ def insert_players(row, pos, db):
     except IntegrityError as e:
         # Handle the exception gracefully (e.g., log an error message)
         print(f"Failed to insert data: {e}")
+
 
 def insert_games_and_players(row, year, pos, db, week):
     # INSERT GAMES
@@ -59,6 +66,7 @@ def insert_games_and_players(row, year, pos, db, week):
     except IntegrityError as e:
         # Handle the exception gracefully (e.g., log an error message)
         print(f"Failed to insert data: {e}")
+
 
 def insert_rushing_passing_receiving_stats(row, game_id, player_id, db):
     player_full_name = row[0]
@@ -114,6 +122,7 @@ def insert_rushing_passing_receiving_stats(row, game_id, player_id, db):
             # Handle the exception gracefully (e.g., log an error message)
             print(f"Failed to insert data: {e}")
 
+
 def insert_stats(row, game_id, player_id, db):
     pass_id = db.select_pass_id(game_id, player_id)
     rush_id = db.select_rush_id(game_id, player_id)
@@ -127,41 +136,43 @@ def insert_stats(row, game_id, player_id, db):
         # Handle the exception gracefully (e.g., log an error message)
         print(f"Failed to insert data: {e}")
 
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    year = 2011
+    year = 2010
     db = Connection()
     position = 'Tight End'
     season_id = 1
+    week = 1
     end_week = 18
-    while year < 2024:
-        week = 1
-        if year == 2023:
-            end_week = 19
-        while week < end_week:
-            pos = 'TE'
-            root = 'C:/Users/aldod/PycharmProjects/fantasyfootball/data'
-            output_folder = '/clean_data/'
-            output_path = build_path(root + output_folder, year, pos, week)
-            db = Connection()
-            #Open the CSV file in read mode
-            with open(output_path, "r", newline="") as file:
-                # Create a CSV reader object
-                reader = csv.reader(file)
-                next(reader)
-                #Iterate through each row in the CSV file
-                for row in reader:
-                    game = row[2]
-                    home_team_id = get_home_team_id(game,db)
-                    away_team_id = get_away_team_id(game,db)
-                    season_id = db.select_season_id(year)
-                    game_id = db.select_game_id(home_team_id, away_team_id, season_id)
-                    player_full_name = row[0]
-                    player = player_full_name.split(' ', 1)
-                    first_name = player[0]
-                    last_name = player[1]
-                    player_id = db.select_player_id(first_name, last_name)
-                    insert_stats(row, game_id, player_id, db)
-                    # insert_rushing_passing_receiving_stats(row, game_id, player_id, db)
-            week = week + 1
-        year = year + 1
+    #while year < 2024:
+        #week = 1
+        #if year == 2023:
+         #   end_week = 19
+    while week < end_week:
+        pos = 'TE'
+        root = 'C:/Users/aldod/PycharmProjects/fantasyfootball/data'
+        output_folder = '/clean_data/'
+        output_path = build_path(root + output_folder, year, pos, week)
+        db = Connection()
+        # Open the CSV file in read mode
+        with open(output_path, "r", newline="") as file:
+            # Create a CSV reader object
+            reader = csv.reader(file)
+            next(reader)
+            # Iterate through each row in the CSV file
+            for row in reader:
+                game = row[2]
+                home_team_id = get_home_team_id(game, db)
+                away_team_id = get_away_team_id(game, db)
+                season_id = db.select_season_id(year)
+                game_id = db.select_game_id(home_team_id, away_team_id, season_id)
+                player_full_name = row[0]
+                player = player_full_name.split(' ', 1)
+                first_name = player[0]
+                last_name = player[1]
+                player_id = db.select_player_id(first_name, last_name)
+                insert_stats(row, game_id, player_id, db)
+                #insert_rushing_passing_receiving_stats(row, game_id, player_id, db)
+        week = week + 1
+        #year = year + 1

@@ -4,18 +4,20 @@
     <meta charset="UTF-8">
     <title>Prediction Model</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/global.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/global.css') }}">
 </head>
 <body>
 
 <!-- Header/Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Fantasy Football App</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="/">The Fantasy Football Cheat Code</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-      <a class="navbar-brand" href="/linear_regression">Machine Learning</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="/linear_regression">Machine Learning</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 </nav>
@@ -27,12 +29,28 @@
     <!-- Previous Seasons -->
     <div class="card mb-4">
         <div class="card-header">
-            Predictions
+            Artificial Intelligence Predictions
         </div>
         <div class="card-body">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <a href="/all/lr_prediction">All</a> <a href="/QB/lr_prediction">QB</a> <a href="/RB/lr_prediction">RB</a> <a href="/WR/lr_prediction">WR</a> <a href="/TE/lr_prediction">TE</a> <a href="/K/lr_prediction">K</a> <a href="/DST/lr_prediction">D/ST</a>
+                    <a href="/all/lr_prediction">All</a> <a href="/non-qb/lr_prediction">All Non-QB</a> <a href="/QB/lr_prediction">QB</a> <a href="/RB/lr_prediction">RB</a>
+                    <a href="/WR/lr_prediction">WR</a> <a href="/TE/lr_prediction">TE</a> <a
+                        href="/K/lr_prediction">K</a> <a href="/DST/lr_prediction">D/ST</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            Matthew Berry's Predictions
+        </div>
+        <div class="card-body">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <a href="/QB/mb_prediction">QB</a> <a href="/RB/mb_prediction">RB</a>
+                    <a href="/WR/mb_prediction">WR</a> <a href="/TE/mb_prediction">TE</a>
                 </li>
             </ul>
         </div>
