@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/global.css') }}">
+    <title>About Us</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">The Fantasy Football Cheat Code</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/linear_regression">Machine Learning</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/about_us">About Us</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>
+<h1>About the Application</h1>
+<p>The idea for this application began during my final semester at California State University, Long Beach. I was taking a Machine Learning
+class and it was taking place during the Fantasy Football season. I had been so focused on school and work, that I didn't have any time to
+prepare for my Fantasy Football drafts. The previous year I had made the playoffs in all three of my leagues, but this time I didn't make it
+in any of my leagues and even came in last in one of my leagues. This motivated me to create a tool which would logically predict what players
+to take in the upcoming draft, even if I didn't have time to prepare.</p>
+<h1>About the Founder</h1>
+<p>I'm Aldo Dagio-Ortega and I am the founder of The Fantasy Football Cheat Code. I was born in Modesto and raised in Sacramento, CA.
+At the age of 18, I raised my right hand to serve in the United States Army where I served honorably from 2014-2018. Upon completion
+    of my active duty contract, I decided not to reenlist and instead focus all my time into getting a Computer Science Bachelor's Degree.
+    I attended community college from 2018 to 2021 at Golden West College and De Anza College. In 2021, I transferred from De Anza College
+    to California State University, Long Beach. I completed my Bachelor's Degree in December of 2023.<br><br>
+    When I am not working as a Software Developer, I enjoy watching sports. My favorite sports to watch are basketball, football, boxing,
+    mma, and soccer. I enjoy working out, whether that be weightlifting, running, or playing sports. I love hanging out with family and friends
+    when possible. I love to travel and recently visited Paris, Dublin, and Barcelona. I love hanging out with my pets, Apollo and Manchado.
+    Apollo is a two year old Great Dane and Manchado is a 4 year old Tuxedo cat. I also create applications like this one in my spare time.
+</p>
+<div style="display:inline-flex;">
+<img style="width:450px;height:450px;" src="{{ url_for('static', filename='images/businessHeadshot3-min.png') }}">
+<img style="width:450px;height:450px;" src="{{ url_for('static', filename='images/A1183264.0844314.jpg') }}">
+<img style="width:450px;height:450px;" src="{{ url_for('static', filename='images/apollo.jpg') }}">
+<img style="width:450px;height:450px;" src="{{ url_for('static', filename='images/IMG_0869.jpg') }}">
+</div>
+</body>
+</html>

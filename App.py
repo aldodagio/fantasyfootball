@@ -386,6 +386,10 @@ def linear_regression():
     seasons = connection.select_seasons()
     return render_template('linear_regression.html', seasons=seasons)
 
+@app.route('/about_us')
+def about_us():
+    return render_template('about_us.html')
+
 
 @app.route('/search', methods=['GET'])
 def player_search():

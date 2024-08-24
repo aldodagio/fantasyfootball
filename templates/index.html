@@ -21,6 +21,11 @@
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+    <a class="navbar-brand" href="/about_us">About Us</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 </nav>
 
 <div class="container mt-5">
@@ -38,8 +43,7 @@
                 <li class="list-group-item">
                     <a href="/season/{{ season.year }}">{{ season.year }}</a> <a href="/season/{{ season.year }}">All
                     Positions</a> <a href="/season/{{ season.year }}/QB">QB</a> <a href="/season/{{ season.year }}/RB">RB</a>
-                    <a href="/season/{{ season.year }}/WR">WR</a> <a href="/season/{{ season.year }}/TE">TE</a> <a
-                        href="/season/{{ season.year }}/K">K</a> <a href="/season/{{ season.year }}/DST">D/ST</a>
+                    <a href="/season/{{ season.year }}/WR">WR</a> <a href="/season/{{ season.year }}/TE">TE</a>
                 </li>
                 {% endfor %}
             </ul>
