@@ -7,13 +7,21 @@ import io
 import os
 import pandas as pd
 from nfl.Season import Season
+import psycopg2
 from postgres_db.Connection import Connection
 
 app = Flask(__name__)
 static_folder = os.path.join(app.root_path, 'static', 'excel_files')
 bootstrap = Bootstrap(app)
 
-
+def get_db_connection():
+    conn = psycopg2.connect(
+        host="ffdatabase.c1c4gq8ucek3.us-east-2.rds.amazonaws.com",
+        database="ffdatabase",
+        user="adagio",
+        password="Apollo&Manchado916!"
+    )
+    return conn
 @app.route("/")
 def home():
     connection = Connection()
@@ -407,3 +415,7 @@ def player_search():
     elif pos == 'Tight End':
         player_stats = connection.get_te_stats(player_id, season_id)
     return render_template('player_search.html', player_stats=player_stats)
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')
