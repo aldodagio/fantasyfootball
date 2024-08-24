@@ -1,8 +1,3 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sqlalchemy import create_engine, text, insert, select, MetaData
 
 from machinelearning.Prediction import Prediction
