@@ -14,14 +14,6 @@ app = Flask(__name__)
 static_folder = os.path.join(app.root_path, 'static', 'excel_files')
 bootstrap = Bootstrap(app)
 
-def get_db_connection():
-    conn = psycopg2.connect(
-        host="ffdatabase.c1c4gq8ucek3.us-east-2.rds.amazonaws.com",
-        database="ffdatabase",
-        user="adagio",
-        password="Apollo&Manchado916!"
-    )
-    return conn
 @app.route("/")
 def home():
     connection = Connection()
