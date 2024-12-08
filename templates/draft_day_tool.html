@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Draft Day Tool</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/global.css') }}">
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+</head>
+<body>
+<!-- Header/Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">The Fantasy Football Cheat Code</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/linear_regression">Machine Learning</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/about_us">About Us</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/draft_day_tool">Draft Day Tool</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>
+    <div class="container">
+        <h1>Draft Day Tool</h1>
+        <div class="row">
+            <!-- QB Predictions -->
+            <div class="col-md-2">
+                <h3>QB Predictions</h3>
+                <ul id="qb_list" class="list-group">
+                    {% for prediction in qb_predictions %}
+                        <li class="list-group-item" onclick="movePlayer(this, 'qb_list')">
+                            <strong>
+                                {{ loop.index }}. {{ prediction.name }}
+                            </strong>
+                            <br>
+                                Predicted Points: {{ prediction.points | round(2) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- RB Predictions -->
+            <div class="col-md-2">
+                <h3>RB Predictions</h3>
+                <ul id="rb_list" class="list-group">
+                    {% for prediction in rb_predictions %}
+                    <li class="list-group-item" onclick="movePlayer(this, 'rb_list')">
+                            <strong>
+                                {{ loop.index }}. {{ prediction.name }}
+                            </strong>
+                            <br>
+                                Predicted Points: {{ prediction.points | round(2) }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- WR Predictions -->
+            <div class="col-md-2">
+                <h3>WR Predictions</h3>
+                <ul id="wr_list" class="list-group">
+                    {% for prediction in wr_predictions %}
+                    <li class="list-group-item" onclick="movePlayer(this, 'wr_list')">
+                            <strong>
+                                {{ loop.index }}. {{ prediction.name }}
+                            </strong>
+                            <br>
+                                Predicted Points: {{ prediction.points | round(2) }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- TE Predictions -->
+            <div class="col-md-2">
+                <h3>TE Predictions</h3>
+                <ul id="te_list" class="list-group">
+                    {% for prediction in te_predictions %}
+                    <li class="list-group-item" onclick="movePlayer(this, 'te_list')">
+                            <strong>
+                                {{ loop.index }}. {{ prediction.name }}
+                            </strong>
+                            <br>
+                                Predicted Points: {{ prediction.points | round(2) }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Drafted by Others -->
+            <div class="col-md-2">
+                <h3>Drafted by Others</h3>
+                <ul id="others_list" class="list-group">
+                </ul>
+            </div>
+
+            <!-- Drafted by Me -->
+            <div class="col-md-2">
+                <h3>Drafted by Me</h3>
+                <ul id="my_list" class="list-group">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript to handle moving items between lists -->
+    <script>
+    function movePlayer(element, origin) {
+        const targetColumn = prompt(`Move ${element.textContent.trim()} to: \n1. Drafted by Others \n2. Drafted by Me`);
+
+        if (targetColumn === '1') {
+            document.getElementById('others_list').appendChild(element);
+        } else if (targetColumn === '2') {
+            document.getElementById('my_list').appendChild(element);
+        }
+    }
+</script>
+
+
+</body>
+</html>

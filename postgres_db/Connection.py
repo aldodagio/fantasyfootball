@@ -13,24 +13,24 @@ from nfl.Team import Team
 
 class Connection:
     def __init__(self):
-        self.username = 'adagio'
-        self.password = 'Apollo&Manchado916!'
-        self.host_url = 'ffdatabase.c1c4gq8ucek3.us-east-2.rds.amazonaws.com'
-        self.port = 5432
-        self.database_name = 'fantasyfootball'
-        self.app_schema = 'fantasyfootball'
-        self.connection_string = f"postgresql+psycopg2://{self.username}:{self.password}@{self.host_url}:{self.port}/{self.database_name}"
-        self.engine = create_engine(self.connection_string,
-                                connect_args={"options": f"-csearch_path={self.app_schema}"})
-        # self.username = 'postgres'
-        # self.password = 'root'
-        # self.host_url = 'localhost'
+        # self.username = 'adagio'
+        # self.password = 'Apollo&Manchado916!'
+        # self.host_url = 'ffdatabase.c1c4gq8ucek3.us-east-2.rds.amazonaws.com'
         # self.port = 5432
-        # self.database_name = 'postgres'
+        # self.database_name = 'fantasyfootball'
         # self.app_schema = 'fantasyfootball'
         # self.connection_string = f"postgresql+psycopg2://{self.username}:{self.password}@{self.host_url}:{self.port}/{self.database_name}"
         # self.engine = create_engine(self.connection_string,
-        #                             connect_args={"options": f"-csearch_path={self.app_schema}"})
+        #                         connect_args={"options": f"-csearch_path={self.app_schema}"})
+        self.username = 'postgres'
+        self.password = 'root'
+        self.host_url = 'localhost'
+        self.port = 5432
+        self.database_name = 'postgres'
+        self.app_schema = 'fantasyfootball'
+        self.connection_string = f"postgresql+psycopg2://{self.username}:{self.password}@{self.host_url}:{self.port}/{self.database_name}"
+        self.engine = create_engine(self.connection_string,
+                                    connect_args={"options": f"-csearch_path={self.app_schema}"})
 
     def get_linear_regression_predictions_qb(self):
         predictions = []

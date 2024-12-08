@@ -301,7 +301,6 @@ def season_RB_view(season_id):
     return render_template('season_view.html', position='Running Back', season_id=id, season=season_id,
                            season_end=season_end, players=players, players_with_points=players_with_points)
 
-
 @app.route('/season/<season_id>/WR')
 def season_WR_view(season_id):
     # Logic to retrieve season data and render the season view template
@@ -389,6 +388,19 @@ def linear_regression():
 @app.route('/about_us')
 def about_us():
     return render_template('about_us.html')
+
+@app.route('/draft_day_tool')
+def draft_day_tool():
+    connection = Connection()
+    qb_predictions = connection.get_linear_regression_predictions_qb()
+    rb_predictions = connection.get_linear_regression_predictions_rb()
+    wr_predictions = connection.get_linear_regression_predictions_wr()
+    te_predictions = connection.get_linear_regression_predictions_te()
+    return render_template('draft_day_tool.html',
+                           qb_predictions=qb_predictions,
+                           rb_predictions=rb_predictions,
+                           wr_predictions=wr_predictions,
+                           te_predictions=te_predictions)
 
 
 @app.route('/search', methods=['GET'])
