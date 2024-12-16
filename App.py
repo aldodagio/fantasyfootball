@@ -1,4 +1,5 @@
-from flask import Flask
+import requests
+from flask import Flask, make_response
 from flask_bootstrap import Bootstrap
 from flask import render_template
 from flask import request, redirect, url_for, send_file
@@ -23,16 +24,7 @@ def home():
 
 @app.route('/download-pdf')
 def download_pdf():
-    connection = Connection()
-    actuals = connection.select_all_with_total_points(14)
-    predictions = connection.get_linear_regression_predictions_all()
-    rank_changes = calculate_rank_change(predictions, actuals)
-    rendered = render_template('prediction_view.html', predictions=predictions, actuals=actuals,
-                               rank_changes=rank_changes)
-    pdf = pdfkit.from_string(rendered, False)
-    response = io.BytesIO(pdf)
-    return send_file(response, attachment_filename='report.pdf', as_attachment=True, mimetype='application/pdf')
-
+    pdfkit.from_file('prediction_view.html', 'out.pdf')
 
 @app.route('/season/<season_id>')
 def season_view(season_id):
