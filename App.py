@@ -381,6 +381,44 @@ def linear_regression():
 def about_us():
     return render_template('about_us.html')
 
+@app.route('/database_manager')
+def database_manager():
+    return render_template('database_manager.html')
+
+@app.route('/game_manager')
+def game_manager():
+    return render_template('game_manager.html')
+
+@app.route('/passing_manager')
+def passing_manager():
+    return render_template('passing_manager.html')
+
+@app.route('/player_manager')
+def player_manager():
+    return render_template('player_manager.html')
+
+@app.route('/receiving_manager')
+def receiving_manager():
+    return render_template('receiving_manager.html')
+
+@app.route('/rushing_manager')
+def rushing_manager():
+    return render_template('rushing_manager.html')
+
+@app.route('/season_manager')
+def season_manager():
+    return render_template('season_manager.html')
+
+@app.route('/stats_manager')
+def stats_manager():
+    return render_template('stats_manager.html')
+
+@app.route('/team_manager')
+def team_manager():
+    connection = Connection()
+    teams = connection.select_teams()
+    return render_template('team_manager.html', teams=teams)
+
 @app.route('/draft_day_tool')
 def draft_day_tool():
     connection = Connection()

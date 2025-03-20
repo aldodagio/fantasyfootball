@@ -14,7 +14,8 @@ class Scraper:
         self.url = "https://www.footballdb.com/fantasy-football/index.html?pos=" + pos + "&yr=" + str(
             year) + "&wk=" + str(week) + "&key=" + str(key)
         self.headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36"}
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36"
+        }
 
     def setYear(self, year):
         self.year = year
@@ -60,7 +61,7 @@ class Scraper:
             # Parse the HTML content
             soup = BeautifulSoup(response.text, 'html.parser')
             # Find the table with the desired data
-            table = soup.find('table', {'class': 'statistics scrollable'})
+            table = soup.find('table', {'class': 'statistics scrollable scrollable-fixed'})
             if table:
                 # Create a CSV file for writing
                 with open('C:/Users/aldod/PycharmProjects/fantasyfootball/data/raw_data/' + str(

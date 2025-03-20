@@ -1,3 +1,4 @@
+from psycopg2 import IntegrityError
 class Player:
     def __init__(self, first_name, last_name, position, team_id=None, id=None, points=None, fumbles=None, passing_touchdowns=None, passing_yards=None,
                  passing_attempts=None, rushing_yards=None, rushing_touchdowns=None, rushing_attempts=None, receiving_touchdowns=None,
@@ -43,3 +44,22 @@ class Player:
         return cls(first_name, last_name, position, points=total_points, fumbles=fumbles, passing_yards=passing_yards, passing_touchdowns=passing_touchdowns,
                     passing_attempts=passing_attempts, rushing_yards=rushing_yards, rushing_attempts=rushing_attempts, rushing_touchdowns=rushing_touchdowns,
                           receiving_touchdowns=receiving_touchdowns, receptions=receptions, receiving_yards=receiving_yards, interceptions=interceptions)
+
+    def insert_players(self, row, pos, db):
+        player = row[0].split(' ', 1)
+        first_name = player[0]
+        last_name = player[1]
+        team_id = db.select_team_id(row[1])
+        try:
+            db.insert_player(first_name, last_name, pos, team_id)
+        except IntegrityError as e:
+            # Handle the exception gracefully (e.g., log an error message)
+            print(f"Failed to insert data: {e}")
+
+    # def search_player(self):
+    #
+    # def insert_player(self):
+    #
+    # def update_player(self):
+    #
+    # def delete_player(self):

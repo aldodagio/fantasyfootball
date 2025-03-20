@@ -1,5 +1,5 @@
 import csv
-
+import re
 import pandas as pd
 
 team_mapping = {
@@ -114,3 +114,17 @@ class Cleaner:
                 writer.writerow(row)
 
         print("Team column updated successfully.")
+
+    def extract_team_abbreviation(self,s):
+        # Extract using regex that finds capital letters at the end
+        match = re.search(r'[A-Z]{2,3}(?=[A-Z]\.)', s)
+        return match.group() if match else None
+
+    def extract_player_name(self,s):
+        # Extract using the pattern of capitalizing the first letter of the last name
+        match = re.match(r'([A-Za-z\-\.\s]+)([A-Z]{2,3})', s)
+        if match:
+            full_name = match.group(1).strip()
+            # Handle potential extra space or periods
+            return ' '.join(full_name.split())
+        return None
