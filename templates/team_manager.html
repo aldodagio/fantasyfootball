@@ -32,15 +32,55 @@
             <h2>Click a team to update or delete</h2>
             <ul class="list-group">
                 {% for t in teams %}
-                <li class="list-group-item">
+                <li class="list-group-item" id="team-{{ loop.index }}">
                     <strong>{{ loop.index }}.</strong> {{ t.name }}
-                    <br>
+                    <button class="btn btn-warning btn-sm ml-2" onclick="updateTeam('{{ t.name }}', {{ loop.index }})">Update</button>
+                    <button class="btn btn-danger btn-sm ml-2" onclick="deleteTeam('{{ t.name }}', {{ loop.index }})">Delete</button>
                 </li>
                 {% endfor %}
             </ul>
         </div>
     </div>
-
 </div>
+<script>
+function updateTeam(currentName, index) {
+    const newName = prompt("Enter the new name for the team:", currentName);
+    if (newName) {
+        fetch(`/update_team`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ current_name: currentName, new_name: newName })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Team updated successfully!');
+                location.reload();
+            } else {
+                alert('Error updating team: ' + data.error);
+            }
+        });
+    }
+}
+
+function deleteTeam(name, index) {
+    if (confirm(`Are you sure you want to delete ${name}?`)) {
+        fetch(`/delete_team`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Team deleted successfully!');
+                document.getElementById(`team-${index}`).remove();
+            } else {
+                alert('Error deleting team: ' + data.error);
+            }
+        });
+    }
+}
+</script>
 </body>
 </html>

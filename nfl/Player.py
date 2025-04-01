@@ -2,7 +2,7 @@ from psycopg2 import IntegrityError
 class Player:
     def __init__(self, first_name, last_name, position, team_id=None, id=None, points=None, fumbles=None, passing_touchdowns=None, passing_yards=None,
                  passing_attempts=None, rushing_yards=None, rushing_touchdowns=None, rushing_attempts=None, receiving_touchdowns=None,
-                 receptions=None, receiving_yards=None, interceptions=None):
+                 receptions=None, receiving_yards=None, interceptions=None, team=None):
         self.first_name = first_name
         self.last_name = last_name
         self.position = position
@@ -20,6 +20,7 @@ class Player:
         self.receptions = receptions
         self.receiving_yards = receiving_yards
         self.interceptions = interceptions
+        self.team = team
 
     @classmethod
     def with_team_id(cls, first_name, last_name, position, team_id):

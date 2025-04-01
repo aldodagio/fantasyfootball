@@ -1,5 +1,5 @@
 import requests
-from flask import Flask, make_response
+from flask import Flask, make_response, jsonify
 from flask_bootstrap import Bootstrap
 from flask import render_template
 from flask import request, redirect, url_for, send_file
@@ -7,6 +7,8 @@ import pdfkit
 import io
 import os
 import pandas as pd
+from sqlalchemy import engine, text
+
 from nfl.Season import Season
 import psycopg2
 from postgres_db.Connection import Connection
@@ -385,39 +387,99 @@ def about_us():
 def database_manager():
     return render_template('database_manager.html')
 
-@app.route('/game_manager')
-def game_manager():
-    return render_template('game_manager.html')
-
-@app.route('/passing_manager')
-def passing_manager():
-    return render_template('passing_manager.html')
-
+@app.route('/qb_manager')
+def qb_manager():
+    connection = Connection()
+    players = connection.select_current_qbs()
+    return render_template('qb_manager.html', players=players)
+@app.route('/rb_manager')
+def rb_manager():
+    connection = Connection()
+    players = connection.select_currrent_rbs()
+    return render_template('rb_manager.html', players=players)
+@app.route('/wr_manager')
+def wr_manager():
+    connection = Connection()
+    players = connection.select_current_wrs()
+    return render_template('wr_manager.html', players=players)
+@app.route('/te_manager')
+def te_manager():
+    connection = Connection()
+    players = connection.select_current_tes()
+    return render_template('te_manager.html', players=players)
 @app.route('/player_manager')
 def player_manager():
     return render_template('player_manager.html')
-
-@app.route('/receiving_manager')
-def receiving_manager():
-    return render_template('receiving_manager.html')
-
-@app.route('/rushing_manager')
-def rushing_manager():
-    return render_template('rushing_manager.html')
-
-@app.route('/season_manager')
-def season_manager():
-    return render_template('season_manager.html')
-
-@app.route('/stats_manager')
-def stats_manager():
-    return render_template('stats_manager.html')
 
 @app.route('/team_manager')
 def team_manager():
     connection = Connection()
     teams = connection.select_teams()
     return render_template('team_manager.html', teams=teams)
+
+@app.route('/update_team', methods=['POST'])
+def update_team():
+    data = request.get_json()
+    current_name = data.get('current_name')
+    new_name = data.get('new_name')
+
+    if not current_name or not new_name:
+        return jsonify({"success": False, "error": "Missing data"})
+
+    try:
+        connection = Connection()
+        connection.update_team(current_name, new_name)
+        return jsonify({"success": True})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)})
+
+@app.route('/update_player_last_name', methods=['POST'])
+def update_player_last_name():
+    data = request.get_json()
+    last_name = data.get('last_name')
+    player_id = data.get('player_id')
+
+    if not id or not last_name:
+        return jsonify({"success": False, "error": "Missing data"})
+
+    try:
+        connection = Connection()
+        connection.update_player_last_name(player_id, last_name)
+        return jsonify({"success": True})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)})
+
+@app.route('/update_player_first_name', methods=['POST'])
+def update_player_first_name():
+    data = request.get_json()
+    first_name = data.get('first_name')
+    player_id = data.get('player_id')
+
+    if not id or not first_name:
+        return jsonify({"success": False, "error": "Missing data"})
+
+    try:
+        connection = Connection()
+        connection.update_player_first_name(player_id, first_name)
+        return jsonify({"success": True})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)})
+
+@app.route('/update_player_team', methods=['POST'])
+def update_player_team():
+    data = request.get_json()
+    team_name = data.get('team_name')
+    player_id = data.get('player_id')
+
+    if not id or not team_name:
+        return jsonify({"success": False, "error": "Missing data"})
+
+    try:
+        connection = Connection()
+        connection.update_player_team(player_id, team_name)
+        return jsonify({"success": True})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)})
 
 @app.route('/draft_day_tool')
 def draft_day_tool():

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Search Results</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/prediction_view.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/global.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+<!-- Header/Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">The Fantasy Football Cheat Code</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="../linear_regression">Machine Learning</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>
+<div class="container mt-5">
+    <h1>Player Manager</h1>
+    <a href="qb_manager">Quarterback Manager</a>
+    <a href="rb_manager">Running Back Manager</a>
+    <a href="wr_manager">Wide Receiver Manager</a>
+    <a href="te_manager">Tight End Manager</a>
+</div>
+<script>
+function updateTeam(currentName, index) {
+    const newName = prompt("Enter the new name for the team:", currentName);
+    if (newName) {
+        fetch(`/update_team`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ current_name: currentName, new_name: newName })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Team updated successfully!');
+                location.reload();
+            } else {
+                alert('Error updating team: ' + data.error);
+            }
+        });
+    }
+}
+
+function deleteTeam(name, index) {
+    if (confirm(`Are you sure you want to delete ${name}?`)) {
+        fetch(`/delete_team`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Team deleted successfully!');
+                document.getElementById(`team-${index}`).remove();
+            } else {
+                alert('Error deleting team: ' + data.error);
+            }
+        });
+    }
+}
+</script>
+</body>
+</html>

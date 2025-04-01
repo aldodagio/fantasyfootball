@@ -13,15 +13,6 @@ from nfl.Team import Team
 
 class Connection:
     def __init__(self):
-        # self.username = 'adagio'
-        # self.password = 'Apollo&Manchado916!'
-        # self.host_url = 'ffdatabase.c1c4gq8ucek3.us-east-2.rds.amazonaws.com'
-        # self.port = 5432
-        # self.database_name = 'fantasyfootball'
-        # self.app_schema = 'fantasyfootball'
-        # self.connection_string = f"postgresql+psycopg2://{self.username}:{self.password}@{self.host_url}:{self.port}/{self.database_name}"
-        # self.engine = create_engine(self.connection_string,
-        #                         connect_args={"options": f"-csearch_path={self.app_schema}"})
         self.username = 'postgres'
         self.password = 'root'
         self.host_url = 'localhost'
@@ -168,6 +159,56 @@ class Connection:
                 players.append(Player(row.first_name, row.last_name, row.position, row.team_id, row.id))
         return players
 
+    def select_current_qbs(self):
+        players = []
+        qb = 'Quarterback'
+        with self.engine.connect() as conn:
+            query = text(f"select first_name, last_name, player.id as player_id, g.season_id as season_id, name from player "
+                         f"INNER JOIN stats s on player.id = s.player_id "
+                         f"INNER JOIN game g on g.game_id = s.game_id "
+                         f"INNER JOIN team t on player.team_id = t.id "
+                         f"where g.season_id=14 and position = \'{qb}\' "
+                         f"GROUP BY first_name, last_name, player.id, g.season_id, name "
+                         f"ORDER BY first_name ASC")
+            res = conn.execute(query)
+            for row in res.all():
+                players.append(Player(row.first_name, row.last_name, position=qb, id=row.player_id, team=row.name))
+        return players
+
+    def select_current_rbs(self):
+        players = []
+        rb = 'Running Back'
+        with self.engine.connect() as conn:
+            query = text(f"select first_name, last_name, player.id as player_id, g.season_id as season_id, name from player "
+                         f"INNER JOIN stats s on player.id = s.player_id "
+                         f"INNER JOIN game g on g.game_id = s.game_id "
+                         f"INNER JOIN team t on player.team_id = t.id "
+                         f"where g.season_id=14 and position = \'{rb}\' "
+                         f"GROUP BY first_name, last_name, player.id, g.season_id, name "
+                         f"ORDER BY first_name ASC")
+            res = conn.execute(query)
+            for row in res.all():
+                players.append(Player(row.first_name, row.last_name, position=rb, id=row.player_id, team=row.name))
+        return players
+
+    def select_current_wrs(self):
+        players = []
+        wr = 'Wide Receiver'
+        with self.engine.connect() as conn:
+            query = text(f"select first_name, last_name, player.id as player_id, g.season_id as season_id, name from player "
+                         f"INNER JOIN stats s on player.id = s.player_id "
+                         f"INNER JOIN game g on g.game_id = s.game_id "
+                         f"INNER JOIN team t on player.team_id = t.id "
+                         f"where g.season_id=14 and position = \'{wr}\' "
+                         f"GROUP BY first_name, last_name, player.id, g.season_id, name "
+                         f"ORDER BY first_name ASC")
+            res = conn.execute(query)
+            for row in res.all():
+                players.append(Player(row.first_name, row.last_name, position=wr,id=row.player_id,team=row.name))
+        return players
+
+
+
     def player_dropdown(self, year):
         players = []
         with self.engine.connect() as conn:
@@ -180,6 +221,21 @@ class Connection:
             res = conn.execute(query)
             for row in res.all():
                 players.append(Player(row.first_name, row.last_name, row.position))
+        return players
+
+    def select_current_tes(self):
+        players = []
+        te = 'Tight End'
+        with self.engine.connect() as conn:
+            query = text(f"select first_name, last_name, player.id as player_id, g.season_id as season_id, name from player "
+                         f"INNER JOIN stats s on player.id = s.player_id "
+                         f"INNER JOIN game g on g.game_id = s.game_id "
+                         f"where g.season_id=14 and position = \'{te}\' "
+                         f"GROUP BY first_name, last_name, player.id, g.season_id, name "
+                         f"ORDER BY first_name ASC")
+            res = conn.execute(query)
+            for row in res.all():
+                players.append(Player(row.first_name, row.last_name, position=te, id=row.player_id, team=row.name))
         return players
 
     def qb_dropdown(self, year):
@@ -211,6 +267,15 @@ class Connection:
             for row in res.all():
                 players.append(Player.with_points(row.first_name, row.last_name, row.position, points=row.points))
         return players
+
+    def select_all_teams(self):
+        teams = []
+        with self.engine.connect() as conn:
+            query = text(f"select name, id from team")
+            res = conn.execute(query)
+            for row in res.all():
+                teams.append(Team(row.name, row.id))
+        return teams
 
     def select_qbs_with_total_points(self, year):
         players = []
@@ -333,6 +398,29 @@ class Connection:
                                              row.receiving_touchdowns, row.receptions, row.receiving_yards,
                                              row.interceptions))
         return players
+
+    def update_team(self, name, new_name):
+        with self.engine.connect() as conn:
+            query = text(f"UPDATE team SET name = \'{new_name}\' WHERE name = \'{name}\'")
+            res = conn.execute(query)
+
+    def update_player_last_name(self, id, last_name):
+        with self.engine.connect() as conn:
+            query = text(f"UPDATE player SET last_name = :last_name WHERE id = :id")
+            conn.execute(query, {'last_name': last_name, 'id': id})
+            conn.commit()
+
+    def update_player_first_name(self, id, first_name):
+        with self.engine.connect() as conn:
+            query = text(f"UPDATE player SET first_name = :first_name WHERE id = :id")
+            conn.execute(query, {'first_name': first_name, 'id': id})
+            conn.commit()
+
+    def update_player_team(self, id, team_name):
+        with self.engine.connect() as conn:
+            query = text(f"UPDATE player SET team_id=(select id from team where name = :team_name) FROM team WHERE player.id = :id")
+            conn.execute(query, {'team_name': team_name, 'id': id})
+            conn.commit()
 
     def select_teams(self):
         teams = []
