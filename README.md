@@ -15,3 +15,26 @@
 #              week = week + 1
 # 3. The raw data will now be in the \data\raw_data\{year} folder(s). The next step
 #    is to clean the data.
+# How to use the cleaner object to prepare the data to insert into the database.
+# 1. Call the set_up_cleaner function inside the main function.
+#    The function takes 2 arguments - path_to_csv, output_csv.
+#    The path_to_csv parameter should be the path to the CSV that you want to clean.
+#    The output_csv parameter should be the path to the new cleaned CSV. This one will be created if there isn't already a file there.
+#    The function will return a cleaner object.
+# 2. First, clean the 'Team' column from the raw_data file.
+#    Simply call cleaner.clean_team_names().
+#    On the next line, call cleaner.clean_non_numeric_values().
+#    Run the main method.
+# 3. Second, comment the previous functions out - cleaner.clean_team_names() and cleaner.clean_non_numeric_values().
+#    Now, we want to clean the 'Player' column.
+#    Refresh the CSV files in the cleaner. The path_to_csv should be the path to the file that was just cleaned and 
+#    the output_csv should be where you want the output csv to be placed.
+#    Simply call cleaner.clean_player_column().
+#    Run the main method.
+# 4. Lastly, comment the previous function out - cleaner.clean_player_column().
+#    Now, we want to clean the 'Game' column.
+#    Refresh the CSV files in the cleaner. The path_to_csv should be the path to the file that was just cleaned and 
+#    the output_csv should be where you want the output csv to be placed.
+#    Simply call cleaner.clean_game_column().
+#    Run the main method.
+# 

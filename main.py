@@ -25,19 +25,18 @@ def set_up_cleaner(path_to_csv, output_csv):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    db = Connection()
-    db.select_current_wrs()
-    # week = 1
-    # end_week = 19
-    # #scraper = set_up_scraper(2024, 1, '48ca46aa7d721af4d58dccc0c249a1c4', 'TE')
-    # while week < end_week:
-    #     cleaner = set_up_cleaner(
-    #        'C:\\Users\\aldod\\PycharmProjects\\fantasyfootball\\data\\raw_data\\2024\\fantasyfootballdata_WR2024_week' + str(week) + '.csv',
-    #        'C:\\Users\\aldod\\PycharmProjects\\fantasyfootball\\data\\clean_data\\2024\\fantasyfootballdata_WR2024_week' + str(week) + '.csv')
-    #     cleaner.clean_player_column()
-    #     cleaner.clean_non_numeric_values()
-    #     cleaner.clean_team_names()
-    #     week = week + 1
+    week = 1
+    end_week = 19
+    #scraper = set_up_scraper(2024, 1, '48ca46aa7d721af4d58dccc0c249a1c4', 'TE')
+    while week < end_week:
+        cleaner = set_up_cleaner(
+           'C:\\Users\\aldod\\PycharmProjects\\fantasyfootball\\data\\clean_data_1\\2024\\fantasyfootballdata_TE2024_week' + str(week) + '.csv',
+           'C:\\Users\\aldod\\PycharmProjects\\fantasyfootball\\data\\clean_data\\2024\\fantasyfootballdata_TE2024_week' + str(week) + '.csv')
+        #cleaner.clean_player_column()
+        #cleaner.clean_non_numeric_values()
+        #cleaner.clean_team_names()
+        cleaner.clean_game_column()
+        week = week + 1
     # year = 2010
     # db = Connection()
     # position = 'Tight End'
