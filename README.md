@@ -36,4 +36,9 @@
     Refresh the CSV files in the cleaner. The path_to_csv should be the path to the file that was just cleaned and\
     the output_csv should be where you want the output csv to be placed.\
     Simply call cleaner.clean_game_column().\
-    Run the main method. 
+    Run the main method.
+# How to insert csv file data into database entities
+## Insert Season
+insert into season(year) values (2024);\
+This command is simple enough to just run in DataGrip.
+## Insert Game(s)
