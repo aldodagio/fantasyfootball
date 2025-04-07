@@ -6,7 +6,7 @@
     The key parameter is the api key or the session key.
     The pos paramter is the position you are interested in scraping, ex. WR.
     The function will return a scraper object.
-##  Example URL: https://www.footballdb.com/fantasy-football/index.html?yr=2024&pos=QB&wk=18&key=48ca46aa7d721af4d58dccc0c249a1c4
+    Example URL: https://www.footballdb.com/fantasy-football/index.html?yr=2024&pos=QB&wk=18&key=48ca46aa7d721af4d58dccc0c249a1c4
  2. Use the scrape function from the Scraper object.
     You will have to loop the function and iterate through weeks 1-18.
     Example: while week < end_week:
