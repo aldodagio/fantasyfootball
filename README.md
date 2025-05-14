@@ -11,6 +11,7 @@
     You will have to loop the function and iterate through weeks 1-18.\
     Example: while week < end_week:\
               scraper.setWeek(week)\
+              scraper.setURL()\
               scraper.scrape()\
               week = week + 1
  3. The raw data will now be in the \data\raw_data\{year} folder(s). The next step\

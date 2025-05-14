@@ -36,7 +36,7 @@ class Scraper:
         return self.key
 
     def setURL(self):
-        self.url = "https://www.footballdb.com/fantasy-football/index.html?pos=OFF&yr=" + str(self.year) + "&wk=" + str(
+        self.url = "https://www.footballdb.com/fantasy-football/index.html?pos=" + self.pos + "&yr=" + str(self.year) + "&wk=" + str(
             self.week) + "&key=" + str(self.key)
 
     def getURL(self):

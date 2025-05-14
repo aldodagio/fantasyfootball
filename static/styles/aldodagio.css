@@ -58,7 +58,6 @@ nav ul li a:hover {
 /* Content Section Styles */
 section {
     padding: 60px 20px;
-    margin: 20px 0;
 }
 
 .content-container {
@@ -113,4 +112,37 @@ footer p {
         width: 150px;
         height: 150px;
     }
+}
+#awards {
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+}
+
+#awards h2 {
+    font-size: 2em;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#awards p {
+    font-size: 1.2em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#awards ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#awards ul li {
+    margin: 10px 0;
+}
+
+#awards ul ul {
+    margin-left: 20px;
+    list-style-type: disc;
 }
