@@ -68,3 +68,33 @@ To insert all games for an entire season, you can loop through weeks 1 through 1
                 db.insert_game(home_team_id,away_team_id,season_id,week)
 ```
 Above is a somewhat working piece of code to insert all games played in a given season, such as 2024.
+## Insert Players
+To insert new players, we will need to use the insert_player method from the Connection.py class.\
+The insert_player method takes 4 arguments - first_name, last_name, position, team_id\
+To insert all new players from the new season, you can loop through weeks 1 through 18 for the given season.
+```
+    week = 1
+    end_week = 19
+    year = 2024
+    db = Connection()
+    season_id = 15
+    pos = 'Wide Receiver'
+    while week < end_week:
+        root = '../fantasyfootball/data'
+        output_folder = '/clean_data/'
+        output_path = build_path(root + output_folder, year, 'WR', week)
+        with open(output_path, "r", newline="") as file:
+            reader = csv.reader(file)
+            next(reader)
+            for row in reader:
+                full_name = row[0].strip()
+                parts = full_name.split()
+                if len(parts) >= 2:
+                    first_name = parts[0]
+                    last_name = " ".join(parts[1:])
+                else:
+                    raise ValueError(f"Unexpected player name format: '{full_name}'")
+                team_id = db.select_team_id(row[1])
+                db.insert_player(first_name,last_name,pos,team_id)
+```
+Above is a somewhat working piece of code to insert all new players from a given season, such as 2024.
