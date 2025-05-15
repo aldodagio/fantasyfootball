@@ -45,7 +45,7 @@ This command is simple enough to just run in DataGrip.
 ## Insert Game(s)
 To insert a game, we will need to use the insert_game method from the Connection.py class.\
 The insert_game method takes 4 arguments - home_team_id, away_team_id, season_id, week.\
-To insert all games for an entire season, you can loop through weeks 1 through 18 for any given season.\
+To insert all games for an entire season, you can loop through weeks 1 through 18 for any given season.
 ```
     week = 1
     end_week = 19
