@@ -46,26 +46,25 @@ This command is simple enough to just run in DataGrip.
 To insert a game, we will need to use the insert_game method from the Connection.py class.\
 The insert_game method takes 4 arguments - home_team_id, away_team_id, season_id, week.\
 To insert all games for an entire season, you can loop through weeks 1 through 18 for any given season.\
-    week = 1\
-    end_week = 19\
-    year = 2024\
-    db = Connection()\
-    pos = 'Wide Receiver'\
-    while week < end_week:\
-        root = '../fantasyfootball/data'\
-        output_folder = '/clean_data/'\
-        output_path = build_path(root + output_folder, year, 'WR', week)\
-        #Open the CSV file in read mode\
-        with open(output_path, "r", newline="") as file:\
-            # Create a CSV reader object\
-            reader = csv.reader(file)\
-            next(reader)\
-            # Iterate through each row in the CSV file\
-            for row in reader:\
-                season_id = db.select_season_id(year)\
-                game = row[2]\
-                team = Team()\
-                away_team_id = team.get_away_team_id(game, db)\
-                home_team_id = team.get_home_team_id(game, db)\
-                db.insert_game(home_team_id,away_team_id,season_id,week)\
+```
+    week = 1
+    end_week = 19
+    year = 2024
+    db = Connection()
+    pos = 'Wide Receiver'
+    while week < end_week:
+        root = '../fantasyfootball/data'
+        output_folder = '/clean_data/'
+        output_path = build_path(root + output_folder, year, 'WR', week)
+        with open(output_path, "r", newline="") as file:
+            reader = csv.reader(file)
+            next(reader)
+            for row in reader:
+                season_id = db.select_season_id(year)
+                game = row[2]
+                team = Team()
+                away_team_id = team.get_away_team_id(game, db)
+                home_team_id = team.get_home_team_id(game, db)
+                db.insert_game(home_team_id,away_team_id,season_id,week)
+```
 Above is a somewhat working piece of code to insert all games played in a given season, such as 2024.
