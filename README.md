@@ -66,6 +66,7 @@ To insert all games for an entire season, you can loop through weeks 1 through 1
                 away_team_id = team.get_away_team_id(game, db)
                 home_team_id = team.get_home_team_id(game, db)
                 db.insert_game(home_team_id,away_team_id,season_id,week)
+        week = week + 1
 ```
 Above is a somewhat working piece of code to insert all games played in a given season, such as 2024.
 ## Insert Players
@@ -96,5 +97,162 @@ To insert all new players from the new season, you can loop through weeks 1 thro
                     raise ValueError(f"Unexpected player name format: '{full_name}'")
                 team_id = db.select_team_id(row[1])
                 db.insert_player(first_name,last_name,pos,team_id)
+        week = week + 1
 ```
 Above is a somewhat working piece of code to insert all new players from a given season, such as 2024.
+## Insert Rushing Stats
+To insert rushing stats for each player from the data files, we will need to use the insert_rushing method from the Connection.py class.\
+The insert_rushing method takes 6 arguments - rushing_attempts, rushing_yards, rushing_tds, rushing_two_pt_conversions, game_id, player_id.\
+To insert all new rushing stats from the given season, you can loop through weeks 1 through 18 in the main method.\
+Make sure to identify that the columns in the row[index] are valid each season, as the format of the file can change.
+```
+    week = 1
+    end_week = 19
+    year = 2024
+    db = Connection()
+    season_id = 15
+    pos = 'Wide Receiver'
+    while week < end_week:
+        root = '../fantasyfootball/data'
+        output_folder = '/clean_data/'
+        output_path = build_path(root + output_folder, year, 'WR', week)
+        with open(output_path, "r", newline="") as file:
+            reader = csv.reader(file)
+            next(reader)
+            for row in reader:
+                full_name = row[0].strip()
+                parts = full_name.split()
+                if len(parts) >= 2:
+                    first_name = parts[0]
+                    last_name = " ".join(parts[1:])
+                else:
+                    raise ValueError(f"Unexpected player name format: '{full_name}'")
+                player_id = db.select_player_id(first_name,last_name)
+                game_id = db.select_game_id(home_team_id, away_team_id, season_id)
+                rushing_attempts = row[10]
+                rushing_yards = row[11]
+                rushing_tds = row[12]
+                rushing_two_pt_conversions = row[13]
+                db.insert_rushing(rushing_attempts, rushing_yards, rushing_tds, rushing_two_pt_conversions, game_id,player_id)
+        week = week + 1
+```
+Above is a somewhat working piece of code to insert all new rushing stats from a given season, such as 2024.
+## Insert Receiving Stats
+To insert receiving stats for each player from the data files, we will need to use the insert_receiving method from the Connection.py class.\
+The insert_receiving method takes 6 arguments - receptions, receiving_yards, receiving_tds, receiving_two_pt_conversions, game_id, player_id.\
+To insert all new receiving stats from the given season, you can loop through weeks 1 through 18 in the main method.\
+Make sure to identify that the columns in the row[index] are valid each season, as the format of the file can change.
+```
+    week = 1
+    end_week = 19
+    year = 2024
+    db = Connection()
+    season_id = 15
+    pos = 'Wide Receiver'
+    while week < end_week:
+        root = '../fantasyfootball/data'
+        output_folder = '/clean_data/'
+        output_path = build_path(root + output_folder, year, 'WR', week)
+        with open(output_path, "r", newline="") as file:
+            reader = csv.reader(file)
+            next(reader)
+            for row in reader:
+                full_name = row[0].strip()
+                parts = full_name.split()
+                if len(parts) >= 2:
+                    first_name = parts[0]
+                    last_name = " ".join(parts[1:])
+                else:
+                    raise ValueError(f"Unexpected player name format: '{full_name}'")
+                player_id = db.select_player_id(first_name,last_name)
+                game_id = db.select_game_id(home_team_id, away_team_id, season_id)
+                receptions = row[14]
+                receiving_yards = row[15]
+                receiving_tds = row[16]
+                receiving_two_pt_conversions = row[17]
+                db.insert_receiving(receptions,receiving_yards,receiving_tds,receiving_two_pt_conversions,game_id,player_id)
+        week = week + 1
+```
+Above is a somewhat working piece of code to insert all new receiving stats from a given season, such as 2024.
+## Insert Passing Stats
+To insert passing stats for each player from the data files, we will need to use the insert_receiving method from the Connection.py class.\
+The insert_passing method takes 8 arguments - passing_attempts, passing_completions, passing_yards, passing_tds, interceptions, passing_two_pt_conv, game_id, player_id.\
+To insert all new passing stats from the given season, you can loop through weeks 1 through 18 in the main method.\
+Make sure to identify that the columns in the row[index] are valid each season, as the format of the file can change.
+```
+    week = 1
+    end_week = 19
+    year = 2024
+    db = Connection()
+    season_id = 15
+    pos = 'Wide Receiver'
+    while week < end_week:
+        root = '../fantasyfootball/data'
+        output_folder = '/clean_data/'
+        output_path = build_path(root + output_folder, year, 'WR', week)
+        with open(output_path, "r", newline="") as file:
+            reader = csv.reader(file)
+            next(reader)
+            for row in reader:
+                full_name = row[0].strip()
+                parts = full_name.split()
+                if len(parts) >= 2:
+                    first_name = parts[0]
+                    last_name = " ".join(parts[1:])
+                else:
+                    raise ValueError(f"Unexpected player name format: '{full_name}'")
+                player_id = db.select_player_id(first_name,last_name)
+                game_id = db.select_game_id(home_team_id, away_team_id, season_id)
+                passing_attempts = row[4]
+                passing_completions = row[5]
+                passing_yards = row[6]
+                passing_tds = row[7]
+                interceptions = row[8]
+                passing_two_pt_conv = row[9]
+                db.insert_passing(passing_attempts, passing_completions, passing_yards, passing_tds,interceptions,passing_two_pt_conv,game_id,player_id)
+        week = week + 1
+```
+Above is a somewhat working piece of code to insert all new passing stats from a given season, such as 2024.
+## Insert Stats
+Once we have added all the rushing, receiving, and passing stats for the season, we can add the total stats.
+The insert_stats method takes 7 arguments - pass_id, rush_id, reception_id, total_points, fumbles, game_id, player_id.\
+To insert all the total stats for a given season, you can loop through weeks 1 through 18 in the main method.\
+Make sure to identify that the columns in the row[index] are valid each season, as the format of the file can change.
+```
+    week = 1
+    end_week = 19
+    year = 2024
+    db = Connection()
+    season_id = 15
+    pos = 'Wide Receiver'
+    while week < end_week:
+        root = '../fantasyfootball/data'
+        output_folder = '/clean_data/'
+        output_path = build_path(root + output_folder, year, 'WR', week)
+        with open(output_path, "r", newline="") as file:
+            reader = csv.reader(file)
+            next(reader)
+            for row in reader:
+                full_name = row[0].strip()
+                parts = full_name.split()
+                if len(parts) >= 2:
+                    first_name = parts[0]
+                    last_name = " ".join(parts[1:])
+                else:
+                    raise ValueError(f"Unexpected player name format: '{full_name}'")
+                player_id = db.select_player_id(first_name,last_name)
+                season_id = db.select_season_id(year)
+                game = row[2]
+                team = Team()
+                away_team_id = team.get_away_team_id(game, db)
+                home_team_id = team.get_home_team_id(game, db)
+                game_id = db.select_game_id(home_team_id, away_team_id, season_id)
+                total_points = row[3]
+                fumbles = row[18]
+                pass_id = db.select_pass_id(game_id, player_id)
+                rush_id = db.select_rush_id(game_id, player_id)
+                reception_id = db.select_reception_id(game_id, player_id)
+                db.insert_stats(pass_id, rush_id, reception_id, total_points, fumbles, game_id, player_id)
+        week = week + 1
+```
+Above is a somewhat working piece of code to insert all new stats from a given season, such as 2024.
