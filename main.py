@@ -22,18 +22,25 @@ def set_up_cleaner(path_to_csv, output_csv):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    week = 1
-    end_week = 18 # end week will be week 19 after season gets extended
     year = 2010
-    db = Connection()
-    season_id = 1
-    pos = 'K'
-    scraper = Scraper(year,week,'b6406b7aea3872d5bb677f064673c57f',pos)
-    while week < end_week:
-        root = 'C:/Users/aldod/PycharmProjects/fantasyfootball/data'
-        output_folder = '/raw_data/'
-        output_path = build_path(root + output_folder, year, 'K', week)
-        scraper.setWeek(week)
-        scraper.setURL()
-        scraper.scrape()
-        week = week + 1
+    end_year = 2025
+    #db = Connection()
+    #season_id = 1
+    pos = 'DST'
+    scraper = Scraper(2012,1,'b6406b7aea3872d5bb677f064673c57f',pos)
+    while year < end_year:
+        week = 1
+        scraper.setYear(year)
+        if year >= 2021:
+            end_week = 19
+        else:
+            end_week = 18  # end week will be week 19 after season gets extended
+        while week < end_week:
+            root = 'C:/Users/aldod/PycharmProjects/fantasyfootball/data'
+            output_folder = '/raw_data/'
+            output_path = build_path(root + output_folder, year, 'DST', week)
+            scraper.setWeek(week)
+            scraper.setURL()
+            scraper.scrape()
+            week = week + 1
+        year = year + 1
