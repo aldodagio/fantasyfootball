@@ -26,7 +26,42 @@
                 <br>
                 Points: {{ player.points }}
                 <br>
+                {% if player.position == 'Quarterback' %}
+                Passing Attempts: {{ player.passing_attempts }}
+                <br>
+                Passing Completions: {{ player.passing_completions }}
+                <br>
+                Passing Yards: {{ player.passing_yards }}
+                <br>
+                Passing TDs: {{ player.passing_touchdowns }}
+                <br>
+                Interceptions: {{ player.interceptions }}
+                <br>
+                {% elif player.position == 'Running Back' %}
+                Rushing Attempts: {{ player.rushing_attempts }}
+                <br>
+                Rushing Yards: {{ player.rushing_yards }}
+                <br>
+                Rushing TDs: {{ player.rushing_touchdowns }}
+                <br>
+                {% elif player.position == 'Wide Receiver' %}
+                Receptions: {{ player.receptions }}
+                <br>
+                Receiving Yards: {{ player.receiving_yards }}
+                <br>
+                Receiving TDs: {{ player.receiving_touchdowns }}
+                <br>
+                {% elif player.position == 'Tight End' %}
+                Receptions: {{ player.receptions }}
+                <br>
+                Receiving Yards: {{ player.receiving_yards }}
+                <br>
+                Receiving TDs: {{ player.receiving_touchdowns }}
+                <br>
+                {% endif %}
                 Week: {{ loop.index }}
+                <br>
+                Game: {{ player.home_team }} vs {{ player.away_team }}
             </li>
             {% endfor %}
             {% else %}

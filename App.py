@@ -1,21 +1,16 @@
-import requests
-from flask import Flask, make_response, jsonify
+from flask import Flask, jsonify
 from flask_bootstrap import Bootstrap
 from flask import render_template
-from flask import request, redirect, url_for, send_file
+from flask import request
 import pdfkit
-import io
 import os
 import pandas as pd
-from sqlalchemy import engine, text
-
-from nfl.Season import Season
-import psycopg2
 from postgres_db.Connection import Connection
 
 app = Flask(__name__)
 static_folder = os.path.join(app.root_path, 'static', 'excel_files')
 bootstrap = Bootstrap(app)
+
 
 @app.route("/")
 def home():
@@ -27,6 +22,7 @@ def home():
 @app.route('/download-pdf')
 def download_pdf():
     pdfkit.from_file('prediction_view.html', 'out.pdf')
+
 
 @app.route('/season/<season_id>')
 def season_view(season_id):
@@ -60,6 +56,8 @@ def season_view(season_id):
         id = 13
     elif season_id == '2023':
         id = 14
+    elif season_id == '2024':
+        id = 15
     connection = Connection()
     players = connection.player_dropdown(id)
     players_with_points = connection.select_players_with_total_points(id)
@@ -99,6 +97,8 @@ def season_QB_view(season_id):
         id = 13
     elif season_id == '2023':
         id = 14
+    elif season_id == '2024':
+        id = 15
     connection = Connection()
     players = connection.qb_dropdown(id)
     players_with_points = connection.select_qbs_with_total_points(id)
@@ -122,6 +122,7 @@ def lr_prediction_nonqb_view():
     predictions = connection.get_linear_regression_predictions_nonqb()
     rank_changes = calculate_rank_change(predictions, actuals)
     return render_template('prediction_view.html', predictions=predictions, actuals=actuals, rank_changes=rank_changes)
+
 
 @app.route('/all/lr_prediction')
 def lr_prediction_all_view():
@@ -175,6 +176,7 @@ def lr_prediction_TE_view():
     rank_changes = calculate_rank_change(predictions, actuals)
     return render_template('prediction_view.html', predictions=predictions, actuals=actuals, rank_changes=rank_changes)
 
+
 # Custom filter to check if a value is a digit
 def is_digit(value):
     if value is None:
@@ -185,7 +187,10 @@ def is_digit(value):
     except (ValueError, TypeError):
         return False
 
+
 app.jinja_env.filters['is_digit'] = is_digit
+
+
 @app.route('/QB/mb_prediction')
 def mb_prediction_QB_view():
     filename = 'MatthewBerryQBs.xlsx'
@@ -202,6 +207,8 @@ def mb_prediction_QB_view():
         return render_template('mb_predictions.html', data=data, columns=columns, filename=filename)
     else:
         return "File not found", 404
+
+
 @app.route('/RB/mb_prediction')
 def mb_prediction_RB_view():
     filename = 'MatthewBerryRBs.xlsx'
@@ -244,7 +251,8 @@ def mb_prediction_TE_view():
     file_path = os.path.join(static_folder, filename)
     if os.path.exists(file_path):
         df = pd.read_excel(file_path)
-        columns_to_keep = ['Matthew Berry Ranks', 'Wide Receiver', 'Difference', 'Artificial Intelligence Ranks', 'Average Difference']
+        columns_to_keep = ['Matthew Berry Ranks', 'Wide Receiver', 'Difference', 'Artificial Intelligence Ranks',
+                           'Average Difference']
         df = df[columns_to_keep]
         # Convert third and fourth columns to integers if they are floats
         for col in df.columns[2:4]:
@@ -256,6 +264,7 @@ def mb_prediction_TE_view():
         return render_template('mb_predictions.html', data=data, columns=columns, filename=filename)
     else:
         return "File not found", 404
+
 
 @app.route('/season/<season_id>/RB')
 def season_RB_view(season_id):
@@ -289,11 +298,14 @@ def season_RB_view(season_id):
         id = 13
     elif season_id == '2023':
         id = 14
+    elif season_id == '2024':
+        id = 15
     connection = Connection()
     players = connection.rb_dropdown(id)
     players_with_points = connection.select_rbs_with_total_points(id)
     return render_template('season_view.html', position='Running Back', season_id=id, season=season_id,
                            season_end=season_end, players=players, players_with_points=players_with_points)
+
 
 @app.route('/season/<season_id>/WR')
 def season_WR_view(season_id):
@@ -327,6 +339,8 @@ def season_WR_view(season_id):
         id = 13
     elif season_id == '2023':
         id = 14
+    elif season_id == '2024':
+        id = 15
     connection = Connection()
     players = connection.wr_dropdown(id)
     players_with_points = connection.select_wrs_with_total_points(id)
@@ -366,6 +380,8 @@ def season_TE_view(season_id):
         id = 13
     elif season_id == '2023':
         id = 14
+    elif season_id == '2024':
+        id = 15
     connection = Connection()
     players = connection.te_dropdown(id)
     players_with_points = connection.select_tes_with_total_points(id)
@@ -379,43 +395,56 @@ def linear_regression():
     seasons = connection.select_seasons()
     return render_template('linear_regression.html', seasons=seasons)
 
+
 @app.route('/about_us')
 def about_us():
     return render_template('about_us.html')
 
+
 @app.route('/database_manager')
 def database_manager():
     return render_template('database_manager.html')
+
 
 @app.route('/qb_manager')
 def qb_manager():
     connection = Connection()
     players = connection.select_current_qbs()
     return render_template('qb_manager.html', players=players)
+
+
 @app.route('/rb_manager')
 def rb_manager():
     connection = Connection()
     players = connection.select_currrent_rbs()
     return render_template('rb_manager.html', players=players)
+
+
 @app.route('/wr_manager')
 def wr_manager():
     connection = Connection()
     players = connection.select_current_wrs()
     return render_template('wr_manager.html', players=players)
+
+
 @app.route('/te_manager')
 def te_manager():
     connection = Connection()
     players = connection.select_current_tes()
     return render_template('te_manager.html', players=players)
+
+
 @app.route('/player_manager')
 def player_manager():
     return render_template('player_manager.html')
+
 
 @app.route('/team_manager')
 def team_manager():
     connection = Connection()
     teams = connection.select_teams()
     return render_template('team_manager.html', teams=teams)
+
 
 @app.route('/update_team', methods=['POST'])
 def update_team():
@@ -433,6 +462,7 @@ def update_team():
     except Exception as e:
         return jsonify({"success": False, "error": str(e)})
 
+
 @app.route('/update_player_last_name', methods=['POST'])
 def update_player_last_name():
     data = request.get_json()
@@ -448,6 +478,7 @@ def update_player_last_name():
         return jsonify({"success": True})
     except Exception as e:
         return jsonify({"success": False, "error": str(e)})
+
 
 @app.route('/update_player_first_name', methods=['POST'])
 def update_player_first_name():
@@ -465,6 +496,7 @@ def update_player_first_name():
     except Exception as e:
         return jsonify({"success": False, "error": str(e)})
 
+
 @app.route('/update_player_team', methods=['POST'])
 def update_player_team():
     data = request.get_json()
@@ -480,6 +512,7 @@ def update_player_team():
         return jsonify({"success": True})
     except Exception as e:
         return jsonify({"success": False, "error": str(e)})
+
 
 @app.route('/draft_day_tool')
 def draft_day_tool():
