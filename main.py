@@ -26,7 +26,7 @@ if __name__ == '__main__':
     end_year = 2025
     #db = Connection()
     #season_id = 1
-    pos = 'DST'
+    pos = 'K'
     scraper = Scraper(2010,1,'b6406b7aea3872d5bb677f064673c57f',pos)
     while year < end_year:
         week = 1
@@ -38,10 +38,10 @@ if __name__ == '__main__':
         while week < end_week:
             root = 'C:/Users/aldod/PycharmProjects/fantasyfootball/data'
             output_folder = '/raw_data/'
-            output_path = build_path(root + output_folder, year, 'DST', week)
+            output_path = build_path(root + output_folder, year, 'K', week)
             scraper.setWeek(week)
             scraper.setURL()
             scraper.scrape()
             week = week + 1
-        print(year + " completed data scraping.")
+        print(str(year) + " completed data scraping.")
         year = year + 1
