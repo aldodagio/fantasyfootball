@@ -27,7 +27,7 @@ if __name__ == '__main__':
     #db = Connection()
     #season_id = 1
     pos = 'DST'
-    scraper = Scraper(2012,1,'b6406b7aea3872d5bb677f064673c57f',pos)
+    scraper = Scraper(2010,1,'b6406b7aea3872d5bb677f064673c57f',pos)
     while year < end_year:
         week = 1
         scraper.setYear(year)
@@ -43,4 +43,5 @@ if __name__ == '__main__':
             scraper.setURL()
             scraper.scrape()
             week = week + 1
+        print(year + " completed data scraping.")
         year = year + 1

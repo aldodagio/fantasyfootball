@@ -68,13 +68,19 @@ class Scraper:
                         self.year) + '/fantasyfootballdata_' + self.pos + str(
                         self.year) + '_week' + str(self.week) + '.csv', 'w+', newline='') as csv_file:
                     csv_writer = csv.writer(csv_file)
-
-                    # Extract and write the header rows
-                    headers_row2 = ['Player', 'Team', 'Game', 'Points', 'Passing Attempts', 'Passing Completions',
-                                    'Passing Yards', 'Passing TDs', 'Interceptions', 'Passing 2Pt Conv',
-                                    'Rushing Attempts', 'Rushing Yards', 'Rushing TDs', 'Rushing 2Pt Conv',
-                                    'Receptions', 'Receiving Yards', 'Receiving TDs', 'Receiving 2Pt Conv',
-                                    'Fumbles', 'Fumble TDs']
+                    if self.pos == 'K':
+                        headers_row2 = ['Player', 'Team', 'Game', 'Points', 'Extra Points Attempted', 'Extra Points Made',
+                                        'Field Goals Attempted', 'Field Goals Made', 'Fifty Yard Field Goals Made']
+                    elif self.pos == 'DST':
+                        headers_row2 = ['Player', 'Team', 'Game', 'Points', 'Sacks', 'Interceptions',
+                                        'Safeties', 'Fumble Recoveries', 'Blocked Kicks', 'Touchdowns',
+                                        'Points Allowed', 'Pass Yards Allowed', 'Rush Yards Allowed', 'Total Yards Allowed']
+                    else:
+                        headers_row2 = ['Player', 'Team', 'Game', 'Points', 'Passing Attempts', 'Passing Completions',
+                                        'Passing Yards', 'Passing TDs', 'Interceptions', 'Passing 2Pt Conv',
+                                        'Rushing Attempts', 'Rushing Yards', 'Rushing TDs', 'Rushing 2Pt Conv',
+                                        'Receptions', 'Receiving Yards', 'Receiving TDs', 'Receiving 2Pt Conv',
+                                        'Fumbles', 'Fumble TDs']
                     csv_writer.writerow(headers_row2)
 
                     # Extract and write the data rows
