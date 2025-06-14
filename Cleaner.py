@@ -41,6 +41,24 @@ team_mapping = {
     'WAS': 'Washington Commanders'
 }
 
+historic_team_mapping = {
+    "Washington Redskins": "Washington Commanders",
+    "St. Louis Rams": "Los Angeles Rams",
+    "San Diego Chargers": "Los Angeles Chargers",
+    "Oakland Raiders": "Las Vegas Raiders"
+}
+
+nfl_teams = [
+    "Arizona Cardinals", "Atlanta Falcons", "Baltimore Ravens", "Buffalo Bills",
+    "Carolina Panthers", "Chicago Bears", "Cincinnati Bengals", "Cleveland Browns",
+    "Dallas Cowboys", "Denver Broncos", "Detroit Lions", "Green Bay Packers",
+    "Houston Texans", "Indianapolis Colts", "Jacksonville Jaguars", "Kansas City Chiefs",
+    "Las Vegas Raiders", "Los Angeles Chargers", "Los Angeles Rams", "Miami Dolphins",
+    "Minnesota Vikings", "New England Patriots", "New Orleans Saints", "New York Giants",
+    "New York Jets", "Philadelphia Eagles", "Pittsburgh Steelers", "San Francisco 49ers",
+    "Seattle Seahawks", "Tampa Bay Buccaneers", "Tennessee Titans", "Washington Commanders",
+    "Oakland Raiders", "San Diego Chargers", "St. Louis Rams", "Washington Redskins"
+]
 
 class Cleaner:
     def __init__(self, path_to_csv, output_csv):
@@ -53,7 +71,7 @@ class Cleaner:
     def setOutputCSV(self, output_csv):
         self.output_csv = output_csv
 
-    def clean_player_column(self):
+    def clean_player_column(self, pos):
         with open(self.input_csv, 'r', newline='', encoding='latin1') as infile, open(self.output_csv, 'w', newline='',
                                                                                       encoding='latin1') as outfile:
             reader = csv.reader(infile)
@@ -63,11 +81,21 @@ class Cleaner:
             header = next(reader)
             writer.writerow(header)
 
-            # Process each row
-            for row in reader:
-                if row:  # Ensure row isn't empty
-                    row[0] = self.extract_player_name(row[0])  # Assuming 'Player' column is at index 0
-                writer.writerow(row)
+            if pos != 'DST':
+                # Process each row
+                for row in reader:
+                    if row:  # Ensure row isn't empty
+                        row[0] = self.extract_player_name(row[0])  # Assuming 'Player' column is at index 0
+                    writer.writerow(row)
+            else:
+                # Iterate through each row in the CSV file
+                for row in reader:
+                    # Extract the actual team abbreviation from the 'Player' column
+                    if row:  # Ensure the row isn't empty
+                        extracted_team = self.get_modern_team_name(
+                            row[0])  # Assuming 'Player' column is at index 01
+                        row[0] = extracted_team
+                    writer.writerow(row)
 
         print("Player column cleaned successfully.")
 
@@ -86,7 +114,7 @@ class Cleaner:
         df.to_csv(self.output_csv, index=False)
 
 
-    def clean_team_names(self):
+    def clean_team_names(self, pos):
         with open(self.input_csv, 'r', newline='', encoding='latin1') as infile, open(self.output_csv, 'w', newline='', encoding='latin1') as outfile:
             reader = csv.reader(infile)
             writer = csv.writer(outfile)
@@ -95,25 +123,36 @@ class Cleaner:
             header = next(reader)
             writer.writerow(header)
 
-            # Iterate through each row in the CSV file
-            for row in reader:
-                # Extract the actual team abbreviation from the 'Player' column
-                if row:  # Ensure the row isn't empty
-                    extracted_team = self.extract_team_abbreviation(row[0])  # Assuming 'Player' column is at index 0
-                    if extracted_team and extracted_team in team_mapping:
-                        row[1] = team_mapping[extracted_team]  # Update 'Team' column at index 1
+            if pos != 'DST':
+                # Iterate through each row in the CSV file
+                for row in reader:
+                    # Extract the actual team abbreviation from the 'Player' column
+                    if row:  # Ensure the row isn't empty
+                        extracted_team = self.extract_team_abbreviation(row[0])  # Assuming 'Player' column is at index 0
+                        if extracted_team and extracted_team in team_mapping:
+                            row[1] = team_mapping[extracted_team]  # Update 'Team' column at index 1
 
-                # Update the 'Game' column if needed
-                if len(row) > 2:  # Ensure there is a 'Game' column at index 2
-                    game_teams = row[2].split('@')
-                    for index, team in enumerate(game_teams):
-                        if team in team_mapping:
-                            game_teams[index] = team_mapping[team]
-                    row[2] = '@'.join(game_teams)
+                    # Update the 'Game' column if needed
+                    if len(row) > 2:  # Ensure there is a 'Game' column at index 2
+                        game_teams = row[2].split('@')
+                        for index, team in enumerate(game_teams):
+                            if team in team_mapping:
+                                game_teams[index] = team_mapping[team]
+                        row[2] = '@'.join(game_teams)
 
-                # Write the updated row to the output CSV file
-                writer.writerow(row)
+                    # Write the updated row to the output CSV file
+                    writer.writerow(row)
+            else:
+                # Iterate through each row in the CSV file
+                for row in reader:
+                    # Extract the actual team abbreviation from the 'Player' column
+                    if row:  # Ensure the row isn't empty
+                        extracted_team = self.get_modern_team_name(
+                            row[0])  # Assuming 'Player' column is at index 01
+                        row[1] = extracted_team
 
+                    # Write the updated row to the output CSV file
+                    writer.writerow(row)
         print("Team column updated successfully.")
 
 
@@ -121,6 +160,18 @@ class Cleaner:
         # Extract using regex that finds capital letters at the end
         match = re.search(r'[A-Z]{2,3}(?=[A-Z]\.)', s)
         return match.group() if match else None
+
+    def extract_full_team_name(self, s):
+        for team in nfl_teams:
+            if s.startswith(team):
+                return team
+        return None
+
+    def get_modern_team_name(self, s):
+        team = self.extract_full_team_name(s)
+        if not team:
+            return None
+        return historic_team_mapping.get(team, team)
 
     def extract_player_name(self, s):
         # Find where the last name ends using lowercase to uppercase transition, allowing apostrophes

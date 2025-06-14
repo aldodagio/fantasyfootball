@@ -658,6 +658,14 @@ class Connection:
             id = result.scalar()
             return id
 
+    def select_game_id_based_on_players_team(self, team, season_id, week):
+        with self.engine.connect() as conn:
+            query = text(
+                """SELECT game_id FROM game 
+                WHERE season_id = :season_id AND week = :week and (home_team_id=:team or away_team_id=:team)""")
+            result = conn.execute(query, {'team': team, 'season_id': season_id, 'week': week})
+            id = result.scalar()
+            return id
     def insert_stats(self, pass_id, rush_id, reception_id, total_points, fumbles, game_id, player_id):
         with self.engine.connect() as conn:
             query = text("""INSERT INTO stats (pass_id, rush_id, reception_id, total_points, fumbles, game_id, player_id) 
@@ -742,6 +750,19 @@ class Connection:
                                   {'rushing_attempts': int(rushing_attempts), 'rushing_yards': int(rushing_yards),
                                    'rushing_touchdowns': int(rushing_touchdowns),
                                    'rushing_two_point_conversions': int(rushing_two_point_conversions),
+                                   'game_id': game_id, 'player_id': player_id})
+            conn.commit()
+
+    def insert_kicking(self, extra_point_attempts, extra_points_made, field_goal_attempts, field_goals_made, fifty_yard_field_goals_made, player_id, game_id):
+        with self.engine.connect() as conn:
+            query = text("""INSERT INTO kicking (extra_point_attempts, extra_points_made, field_goal_attempts, field_goals_made, fifty_yard_field_goals_made, player_id, game_id) 
+                                SELECT :extra_point_attempts, :extra_points_made, :field_goal_attempts, :field_goals_made, :fifty_yard_field_goals_made, :player_id, :game_id
+                                WHERE NOT EXISTS (SELECT 1 FROM kicking WHERE game_id=:game_id AND player_id=:player_id)""")
+            result = conn.execute(query,
+                                  {'extra_point_attempts': int(extra_point_attempts), 'extra_points_made': int(extra_points_made),
+                                   'field_goal_attempts': int(field_goal_attempts),
+                                   'field_goals_made': int(field_goals_made),
+                                   'fifty_yard_field_goals_made': int(fifty_yard_field_goals_made),
                                    'game_id': game_id, 'player_id': player_id})
             conn.commit()
 
