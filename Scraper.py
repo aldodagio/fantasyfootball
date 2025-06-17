@@ -83,8 +83,13 @@ class Scraper:
                                         'Fumbles', 'Fumble TDs']
                     csv_writer.writerow(headers_row2)
 
+                    if self.pos == 'DST' or self.pos == 'K':
+                        header_rows_skipped = 1
+                    else:
+                        header_rows_skipped = 2
+
                     # Extract and write the data rows
-                    for row in table.find_all('tr')[2:]:  # Skip the first two header rows
+                    for row in table.find_all('tr')[header_rows_skipped:]:  # Skip the first two header rows
                         data_row = []
                         cells = row.find_all(['th', 'td'])
                         for index, cell in enumerate(cells):
