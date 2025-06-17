@@ -3,6 +3,7 @@ from Scraper import Scraper
 import csv
 from nfl.Team import Team
 from postgres_db.Connection import Connection
+import re
 
 
 def setup_cleaner(input_csv_path, output_csv_path, cleaner):
@@ -16,6 +17,25 @@ def build_path(path, fantasy_year, position, week_num):
 
 def set_up_scraper(fantasy_year, week, key, pos):
     return Scraper(fantasy_year, week, key, pos)
+
+
+def get_other_team_name(team_name_1, game_string):
+    # Split on " vs " or " @ ", case-insensitive and surrounded by optional whitespace
+    match = re.split(r'\s+vs\s+|\s+@\s+', game_string, flags=re.IGNORECASE)
+
+    if len(match) != 2:
+        return None  # Unexpected format
+
+    team_1 = match[0].strip()
+    team_2 = match[1].strip()
+
+    if team_name_1 == team_1:
+        return team_2
+    elif team_name_1 == team_2:
+        return team_1
+    else:
+        return None  # Given team_name_1 not found in string
+
 
 def set_up_cleaner(path_to_csv, output_csv):
     return Cleaner(path_to_csv, output_csv)
@@ -41,10 +61,9 @@ if __name__ == '__main__':
                 reader = csv.reader(file)
                 next(reader)
                 for row in reader:
+                    team = row[1]
                     game = row[2]
-                    team = Team()
-                    away_team_id = team.get_home_team_id(game, db)
-                    home_team_id = team.get_away_team_id(game, db)
+                    team_id = db.select_team_id_from_team_name(team)
                     full_name = row[0].strip()
                     parts = full_name.split()
                     if len(parts) >= 2:
@@ -53,7 +72,11 @@ if __name__ == '__main__':
                     else:
                         raise ValueError(f"Unexpected player name format: '{full_name}'")
                     player_id = db.select_player_id(first_name, last_name)
-                    game_id = db.select_game_id(home_team_id, away_team_id, season_id)
+                    game_id = db.select_game_id_based_on_players_team(team_id, season_id, week)
+                    if game_id is None:
+                        team_name_2 = get_other_team_name(team, game)
+                        team_id_2 = db.select_team_id_from_team_name(team_name_2)
+                        game_id = db.select_game_id_based_on_players_team(team_id_2, season_id, week)
                     extra_point_attempts = row[4]
                     extra_points_made = row[5]
                     field_goal_attempts = row[6]

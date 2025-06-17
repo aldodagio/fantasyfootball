@@ -666,6 +666,14 @@ class Connection:
             result = conn.execute(query, {'team': team, 'season_id': season_id, 'week': week})
             id = result.scalar()
             return id
+
+    def select_team_id_from_team_name(self, team_name):
+        with self.engine.connect() as conn:
+            query = text(
+                """SELECT id FROM team WHERE name=:team_name""")
+            result = conn.execute(query, {'team_name': team_name})
+            id = result.scalar()
+            return id
     def insert_stats(self, pass_id, rush_id, reception_id, total_points, fumbles, game_id, player_id):
         with self.engine.connect() as conn:
             query = text("""INSERT INTO stats (pass_id, rush_id, reception_id, total_points, fumbles, game_id, player_id) 
