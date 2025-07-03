@@ -77,13 +77,9 @@ if __name__ == '__main__':
                         team_name_2 = get_other_team_name(team, game)
                         team_id_2 = db.select_team_id_from_team_name(team_name_2)
                         game_id = db.select_game_id_based_on_players_team(team_id_2, season_id, week)
-                    extra_point_attempts = row[4]
-                    extra_points_made = row[5]
-                    field_goal_attempts = row[6]
-                    field_goals_made = row[7]
-                    fifty_yard_field_goals_made = row[8]
-                    db.insert_kicking(extra_point_attempts, extra_points_made, field_goal_attempts, field_goals_made,
-                                        fifty_yard_field_goals_made, player_id, game_id)
+                    total_points = row[3]
+                    kicker_id = db.select_kicking_id(game_id, player_id)
+                    db.insert_stats_for_kicker(kicker_id, total_points, game_id, player_id)
             week = week + 1
         print(str(year) + " kicking stats added.")
         year = year + 1
