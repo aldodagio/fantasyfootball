@@ -42,10 +42,10 @@ def set_up_cleaner(path_to_csv, output_csv):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    year = 2020
+    year = 2010
     end_year = 2025
     db = Connection()
-    season_id = 11
+    season_id = 1
     pos = 'Defense/Special Teams'
     while year < end_year:
         week = 1
@@ -77,20 +77,10 @@ if __name__ == '__main__':
                         team_name_2 = get_other_team_name(team, game)
                         team_id_2 = db.select_team_id_from_team_name(team_name_2)
                         game_id = db.select_game_id_based_on_players_team(team_id_2, season_id, week)
-                    sacks = row[4]
-                    interceptions = row[5]
-                    safeties = row[6]
-                    fumble_recoveries = row[7]
-                    blocked_kicks = row[8]
-                    touchdowns = row[9]
-                    points_allowed = row[10]
-                    pass_yards_allowed = row[11]
-                    rush_yards_allowed = row[12]
-                    total_yards_allowed = row[13]
-                    db.insert_defense_special_teams(sacks, interceptions, safeties, fumble_recoveries, blocked_kicks,
-                                                 touchdowns, points_allowed, pass_yards_allowed, rush_yards_allowed,
-                                                 total_yards_allowed, player_id, game_id)
+                    total_points = row[3]
+                    defense_id = db.select_dst_id(game_id, player_id)
+                    db.insert_stats_for_dst(defense_id, total_points, game_id, player_id)
             week = week + 1
-        print(str(year) + " kicking stats added.")
+        print(str(year) + " d/st stats added.")
         year = year + 1
         season_id = season_id + 1

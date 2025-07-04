@@ -693,6 +693,15 @@ class Connection:
                                           'kicker_id': kicker_id, 'total_points': float(total_points)})
             conn.commit()
 
+    def insert_stats_for_dst(self, defense_id, total_points, game_id, player_id):
+        with self.engine.connect() as conn:
+            query = text("""INSERT INTO stats (defense_id, total_points, game_id, player_id) 
+                         SELECT :defense_id, :total_points, :game_id, :player_id 
+                         WHERE NOT EXISTS (SELECT 1 FROM stats WHERE game_id=:game_id AND player_id=:player_id AND defense_id=:defense_id)""")
+            result = conn.execute(query, {'game_id': game_id, 'player_id': player_id,
+                                          'defense_id': defense_id, 'total_points': float(total_points)})
+            conn.commit()
+
     # def insert_stats(self, stats):
     #     with self.engine.connect() as conn:
     #         query = text("""INSERT INTO stats (pass_id, rush_id, reception_id, total_points, fumbles, game_id, player_id)
@@ -725,6 +734,13 @@ class Connection:
     def select_kicking_id(self, game_id, player_id):
         with self.engine.connect() as conn:
             query = text("""SELECT kicker_id FROM kicking WHERE game_id = :game_id AND player_id = :player_id""")
+            result = conn.execute(query, {'game_id': game_id, 'player_id': player_id})
+            id = result.scalar()
+            return id
+
+    def select_dst_id(self, game_id, player_id):
+        with self.engine.connect() as conn:
+            query = text("""SELECT defense_id FROM defense WHERE game_id = :game_id AND player_id = :player_id""")
             result = conn.execute(query, {'game_id': game_id, 'player_id': player_id})
             id = result.scalar()
             return id
