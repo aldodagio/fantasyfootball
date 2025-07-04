@@ -790,6 +790,17 @@ class Connection:
                                    'game_id': game_id, 'player_id': player_id})
             conn.commit()
 
+    def insert_defense_special_teams(self, sacks, interceptions, safeties, fumble_recoveries, blocked_kicks, touchdowns, points_allowed, pass_yards_allowed, rush_yards_allowed, total_yards_allowed, player_id, game_id):
+        with self.engine.connect() as conn:
+            query = text("""INSERT INTO defense (sacks, interceptions, safeties, fumble_recoveries, blocked_kicks, touchdowns, points_allowed, pass_yards_allowed, rush_yards_allowed, total_yards_allowed, player_id, game_id) 
+                            SELECT :sacks, :interceptions, :safeties, :fumble_recoveries, :blocked_kicks, :touchdowns, :points_allowed, :pass_yards_allowed, :rush_yards_allowed, :total_yards_allowed, :player_id, :game_id
+                            WHERE NOT EXISTS (SELECT 1 FROM defense WHERE game_id=:game_id AND player_id=:player_id)""")
+            result = conn.execute(query,
+                                  {'sacks' : float(sacks), 'interceptions' : int(interceptions), 'safeties' : int(safeties),
+                                   'fumble_recoveries' : int(fumble_recoveries), 'blocked_kicks' : int(blocked_kicks), 'touchdowns' : int(touchdowns),
+                                   'points_allowed' : int(points_allowed), 'pass_yards_allowed' : int(pass_yards_allowed), 'rush_yards_allowed' : int(rush_yards_allowed),
+                                   'total_yards_allowed' : int(total_yards_allowed), 'game_id' : game_id, 'player_id' : player_id})
+            conn.commit()
     # def insert_rushing(self, rushing):
     #     with self.engine.connect() as conn:
     #         query = text("""INSERT INTO rushing (rushing_attempts, rushing_yards, rushing_touchdowns, rushing_two_point_conversions, game_id, player_id)

@@ -42,21 +42,21 @@ def set_up_cleaner(path_to_csv, output_csv):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    year = 2010
+    year = 2020
     end_year = 2025
     db = Connection()
-    season_id = 1
-    pos = 'Kicker'
+    season_id = 11
+    pos = 'Defense/Special Teams'
     while year < end_year:
         week = 1
-        if year >= 2021:
+        if year >= 2023:
             end_week = 19
         else:
             end_week = 18  # end week will be week 19 after season gets extended
         while week < end_week:
             root = 'C:/Users/aldod/PycharmProjects/fantasyfootball/data'
             output_folder = '/clean_data/'
-            output_path = build_path(root + output_folder, year, 'K', week)
+            output_path = build_path(root + output_folder, year, 'DST', week)
             with open(output_path, "r", newline="") as file:
                 reader = csv.reader(file)
                 next(reader)
@@ -77,9 +77,19 @@ if __name__ == '__main__':
                         team_name_2 = get_other_team_name(team, game)
                         team_id_2 = db.select_team_id_from_team_name(team_name_2)
                         game_id = db.select_game_id_based_on_players_team(team_id_2, season_id, week)
-                    total_points = row[3]
-                    kicker_id = db.select_kicking_id(game_id, player_id)
-                    db.insert_stats_for_kicker(kicker_id, total_points, game_id, player_id)
+                    sacks = row[4]
+                    interceptions = row[5]
+                    safeties = row[6]
+                    fumble_recoveries = row[7]
+                    blocked_kicks = row[8]
+                    touchdowns = row[9]
+                    points_allowed = row[10]
+                    pass_yards_allowed = row[11]
+                    rush_yards_allowed = row[12]
+                    total_yards_allowed = row[13]
+                    db.insert_defense_special_teams(sacks, interceptions, safeties, fumble_recoveries, blocked_kicks,
+                                                 touchdowns, points_allowed, pass_yards_allowed, rush_yards_allowed,
+                                                 total_yards_allowed, player_id, game_id)
             week = week + 1
         print(str(year) + " kicking stats added.")
         year = year + 1
