@@ -49,6 +49,8 @@ class Player:
                     passing_attempts=passing_attempts, passing_completions=passing_completions, rushing_yards=rushing_yards, rushing_attempts=rushing_attempts, rushing_touchdowns=rushing_touchdowns,
                           receiving_touchdowns=receiving_touchdowns, receptions=receptions, receiving_yards=receiving_yards, interceptions=interceptions, away_team=away_team, home_team=home_team)
 
+
+
     def insert_players(self, row, pos, db):
         player = row[0].split(' ', 1)
         first_name = player[0]

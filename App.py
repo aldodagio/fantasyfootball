@@ -11,6 +11,72 @@ app = Flask(__name__)
 static_folder = os.path.join(app.root_path, 'static', 'excel_files')
 bootstrap = Bootstrap(app)
 
+def getYear(season_id):
+    if season_id == 1:
+        year = '2010'
+    elif season_id == 2:
+        year = '2011'
+    elif season_id == 3:
+        year = '2012'
+    elif season_id == 4:
+        year = '2013'
+    elif season_id == 5:
+        year = '2014'
+    elif season_id == 6:
+        year = '2015'
+    elif season_id == 7:
+        year = '2016'
+    elif season_id == 8:
+        year = '2017'
+    elif season_id == 9:
+        year = '2018'
+    elif season_id == 10:
+        year = '2019'
+    elif season_id == 11:
+        year = '2020'
+    elif season_id == 12:
+        year = '2021'
+    elif season_id == 13:
+        year = '2022'
+    elif season_id == 14:
+        year = '2023'
+    elif season_id == 15:
+        year = '2024'
+    elif season_id == 16:
+        year = '2025'
+    return year
+def getSeasonID(year):
+    if year == '2010':
+        id = 1
+    elif year == '2011':
+        id = 2
+    elif year == '2012':
+        id = 3
+    elif year == '2013':
+        id = 4
+    elif year == '2014':
+        id = 5
+    elif year == '2015':
+        id = 6
+    elif year == '2016':
+        id = 7
+    elif year == '2017':
+        id = 8
+    elif year == '2018':
+        id = 9
+    elif year == '2019':
+        id = 10
+    elif year == '2020':
+        id = 11
+    elif year == '2021':
+        id = 12
+    elif year == '2022':
+        id = 13
+    elif year == '2023':
+        id = 14
+    elif year == '2024':
+        id = 15
+    return id
 
 @app.route("/")
 def home():
@@ -28,36 +94,7 @@ def download_pdf():
 def season_view(season_id):
     # Logic to retrieve season data and render the season view template
     season_end = int(season_id) + 1
-    if season_id == '2010':
-        id = 1
-    elif season_id == '2011':
-        id = 2
-    elif season_id == '2012':
-        id = 3
-    elif season_id == '2013':
-        id = 4
-    elif season_id == '2014':
-        id = 5
-    elif season_id == '2015':
-        id = 6
-    elif season_id == '2016':
-        id = 7
-    elif season_id == '2017':
-        id = 8
-    elif season_id == '2018':
-        id = 9
-    elif season_id == '2019':
-        id = 10
-    elif season_id == '2020':
-        id = 11
-    elif season_id == '2021':
-        id = 12
-    elif season_id == '2022':
-        id = 13
-    elif season_id == '2023':
-        id = 14
-    elif season_id == '2024':
-        id = 15
+    id = getSeasonID(season_id)
     connection = Connection()
     players = connection.player_dropdown(id)
     players_with_points = connection.select_players_with_total_points(id)
@@ -69,36 +106,7 @@ def season_view(season_id):
 def season_QB_view(season_id):
     # Logic to retrieve season data and render the season view template
     season_end = int(season_id) + 1
-    if season_id == '2010':
-        id = 1
-    elif season_id == '2011':
-        id = 2
-    elif season_id == '2012':
-        id = 3
-    elif season_id == '2013':
-        id = 4
-    elif season_id == '2014':
-        id = 5
-    elif season_id == '2015':
-        id = 6
-    elif season_id == '2016':
-        id = 7
-    elif season_id == '2017':
-        id = 8
-    elif season_id == '2018':
-        id = 9
-    elif season_id == '2019':
-        id = 10
-    elif season_id == '2020':
-        id = 11
-    elif season_id == '2021':
-        id = 12
-    elif season_id == '2022':
-        id = 13
-    elif season_id == '2023':
-        id = 14
-    elif season_id == '2024':
-        id = 15
+    id = getSeasonID(season_id)
     connection = Connection()
     players = connection.qb_dropdown(id)
     players_with_points = connection.select_qbs_with_total_points(id)
@@ -106,29 +114,45 @@ def season_QB_view(season_id):
                            season_end=season_end, players=players, players_with_points=players_with_points)
 
 
-@app.route('/QB/lr_prediction')
-def lr_prediction_QB_view():
+@app.route('/QB/lr_prediction/<season_id>')
+def lr_prediction_QB_view(season_id):
     connection = Connection()
-    actuals = connection.select_qbs_with_total_points(14)
-    predictions = connection.get_linear_regression_predictions_qb()
+    actuals = connection.select_qbs_with_total_points(season_id)
+    predictions = connection.get_linear_regression_predictions_qb(getYear(int(season_id)+1))
+    rank_changes = calculate_rank_change(predictions, actuals)
+    return render_template('prediction_view.html', predictions=predictions, actuals=actuals, rank_changes=rank_changes)
+
+@app.route('/K/lr_prediction/<season_id>')
+def lr_prediction_K_view(season_id):
+    connection = Connection()
+    actuals = connection.select_k_with_total_points(season_id)
+    predictions = connection.get_linear_regression_predictions_k(getYear(int(season_id)+1))
+    rank_changes = calculate_rank_change(predictions, actuals)
+    return render_template('prediction_view.html', predictions=predictions, actuals=actuals, rank_changes=rank_changes)
+
+@app.route('/DST/lr_prediction/<season_id>')
+def lr_prediction_DST_view(season_id):
+    connection = Connection()
+    actuals = connection.select_dst_with_total_points(season_id)
+    predictions = connection.get_linear_regression_predictions_dst(getYear(int(season_id)+1))
     rank_changes = calculate_rank_change(predictions, actuals)
     return render_template('prediction_view.html', predictions=predictions, actuals=actuals, rank_changes=rank_changes)
 
 
-@app.route('/non-qb/lr_prediction')
-def lr_prediction_nonqb_view():
+@app.route('/non-qb/lr_prediction/<season_id>')
+def lr_prediction_nonqb_view(season_id):
     connection = Connection()
-    actuals = connection.select_nonqb_with_total_points(14)
-    predictions = connection.get_linear_regression_predictions_nonqb()
+    actuals = connection.select_nonqb_with_total_points(season_id)
+    predictions = connection.get_linear_regression_predictions_nonqb(getYear(int(season_id)+1))
     rank_changes = calculate_rank_change(predictions, actuals)
     return render_template('prediction_view.html', predictions=predictions, actuals=actuals, rank_changes=rank_changes)
 
 
-@app.route('/all/lr_prediction')
-def lr_prediction_all_view():
+@app.route('/all/lr_prediction/<season_id>')
+def lr_prediction_all_view(season_id):
     connection = Connection()
-    actuals = connection.select_all_with_total_points(14)
-    predictions = connection.get_linear_regression_predictions_all()
+    actuals = connection.select_all_with_total_points(season_id)
+    predictions = connection.get_linear_regression_predictions_all(getYear(int(season_id)+1))
     rank_changes = calculate_rank_change(predictions, actuals)
     return render_template('prediction_view.html', predictions=predictions, actuals=actuals, rank_changes=rank_changes)
 
@@ -150,29 +174,29 @@ def calculate_rank_change(predictions, actuals):
     return rank_changes
 
 
-@app.route('/RB/lr_prediction')
-def lr_prediction_RB_view():
+@app.route('/RB/lr_prediction/<season_id>')
+def lr_prediction_RB_view(season_id):
     connection = Connection()
-    actuals = connection.select_rbs_with_total_points(14)
-    predictions = connection.get_linear_regression_predictions_rb()
+    actuals = connection.select_rbs_with_total_points(season_id)
+    predictions = connection.get_linear_regression_predictions_rb(getYear(int(season_id)+1))
     rank_changes = calculate_rank_change(predictions, actuals)
     return render_template('prediction_view.html', predictions=predictions, actuals=actuals, rank_changes=rank_changes)
 
 
-@app.route('/WR/lr_prediction')
-def lr_prediction_WR_view():
+@app.route('/WR/lr_prediction/<season_id>')
+def lr_prediction_WR_view(season_id):
     connection = Connection()
-    actuals = connection.select_wrs_with_total_points(14)
-    predictions = connection.get_linear_regression_predictions_wr()
+    actuals = connection.select_wrs_with_total_points(season_id)
+    predictions = connection.get_linear_regression_predictions_wr(getYear(int(season_id)+1))
     rank_changes = calculate_rank_change(predictions, actuals)
     return render_template('prediction_view.html', predictions=predictions, actuals=actuals, rank_changes=rank_changes)
 
 
-@app.route('/TE/lr_prediction')
-def lr_prediction_TE_view():
+@app.route('/TE/lr_prediction/<season_id>')
+def lr_prediction_TE_view(season_id):
     connection = Connection()
-    actuals = connection.select_tes_with_total_points(14)
-    predictions = connection.get_linear_regression_predictions_te()
+    actuals = connection.select_tes_with_total_points(season_id)
+    predictions = connection.get_linear_regression_predictions_te(getYear(int(season_id)+1))
     rank_changes = calculate_rank_change(predictions, actuals)
     return render_template('prediction_view.html', predictions=predictions, actuals=actuals, rank_changes=rank_changes)
 
@@ -191,115 +215,11 @@ def is_digit(value):
 app.jinja_env.filters['is_digit'] = is_digit
 
 
-@app.route('/QB/mb_prediction')
-def mb_prediction_QB_view():
-    filename = 'MatthewBerryQBs.xlsx'
-    file_path = os.path.join(static_folder, filename)
-    if os.path.exists(file_path):
-        df = pd.read_excel(file_path)
-        # Convert third and fourth columns to integers if they are floats
-        for col in df.columns[2:4]:
-            df[col] = pd.to_numeric(df[col], errors='coerce').astype('Int64')
-
-        # Convert dataframe to dictionary
-        data = df.to_dict(orient='records')
-        columns = df.columns.tolist()
-        return render_template('mb_predictions.html', data=data, columns=columns, filename=filename)
-    else:
-        return "File not found", 404
-
-
-@app.route('/RB/mb_prediction')
-def mb_prediction_RB_view():
-    filename = 'MatthewBerryRBs.xlsx'
-    file_path = os.path.join(static_folder, filename)
-    if os.path.exists(file_path):
-        df = pd.read_excel(file_path)
-        # Convert third and fourth columns to integers if they are floats
-        for col in df.columns[2:4]:
-            df[col] = pd.to_numeric(df[col], errors='coerce').astype('Int64')
-
-        # Convert dataframe to dictionary
-        data = df.to_dict(orient='records')
-        columns = df.columns.tolist()
-        return render_template('mb_predictions.html', data=data, columns=columns, filename=filename)
-    else:
-        return "File not found", 404
-
-
-@app.route('/WR/mb_prediction')
-def mb_prediction_WR_view():
-    filename = 'MatthewBerryWRs.xlsx'
-    file_path = os.path.join(static_folder, filename)
-    if os.path.exists(file_path):
-        df = pd.read_excel(file_path)
-        # Convert third and fourth columns to integers if they are floats
-        for col in df.columns[2:4]:
-            df[col] = pd.to_numeric(df[col], errors='coerce').astype('Int64')
-
-        # Convert dataframe to dictionary
-        data = df.to_dict(orient='records')
-        columns = df.columns.tolist()
-        return render_template('mb_predictions.html', data=data, columns=columns, filename=filename)
-    else:
-        return "File not found", 404
-
-
-@app.route('/TE/mb_prediction')
-def mb_prediction_TE_view():
-    filename = 'MatthewBerryTEs.xlsx'
-    file_path = os.path.join(static_folder, filename)
-    if os.path.exists(file_path):
-        df = pd.read_excel(file_path)
-        columns_to_keep = ['Matthew Berry Ranks', 'Wide Receiver', 'Difference', 'Artificial Intelligence Ranks',
-                           'Average Difference']
-        df = df[columns_to_keep]
-        # Convert third and fourth columns to integers if they are floats
-        for col in df.columns[2:4]:
-            df[col] = pd.to_numeric(df[col], errors='coerce').astype('Int64')
-
-        # Convert dataframe to dictionary
-        data = df.to_dict(orient='records')
-        columns = df.columns.tolist()
-        return render_template('mb_predictions.html', data=data, columns=columns, filename=filename)
-    else:
-        return "File not found", 404
-
-
 @app.route('/season/<season_id>/RB')
 def season_RB_view(season_id):
     # Logic to retrieve season data and render the season view template
     season_end = int(season_id) + 1
-    if season_id == '2010':
-        id = 1
-    elif season_id == '2011':
-        id = 2
-    elif season_id == '2012':
-        id = 3
-    elif season_id == '2013':
-        id = 4
-    elif season_id == '2014':
-        id = 5
-    elif season_id == '2015':
-        id = 6
-    elif season_id == '2016':
-        id = 7
-    elif season_id == '2017':
-        id = 8
-    elif season_id == '2018':
-        id = 9
-    elif season_id == '2019':
-        id = 10
-    elif season_id == '2020':
-        id = 11
-    elif season_id == '2021':
-        id = 12
-    elif season_id == '2022':
-        id = 13
-    elif season_id == '2023':
-        id = 14
-    elif season_id == '2024':
-        id = 15
+    id = getSeasonID(season_id)
     connection = Connection()
     players = connection.rb_dropdown(id)
     players_with_points = connection.select_rbs_with_total_points(id)
@@ -311,36 +231,7 @@ def season_RB_view(season_id):
 def season_WR_view(season_id):
     # Logic to retrieve season data and render the season view template
     season_end = int(season_id) + 1
-    if season_id == '2010':
-        id = 1
-    elif season_id == '2011':
-        id = 2
-    elif season_id == '2012':
-        id = 3
-    elif season_id == '2013':
-        id = 4
-    elif season_id == '2014':
-        id = 5
-    elif season_id == '2015':
-        id = 6
-    elif season_id == '2016':
-        id = 7
-    elif season_id == '2017':
-        id = 8
-    elif season_id == '2018':
-        id = 9
-    elif season_id == '2019':
-        id = 10
-    elif season_id == '2020':
-        id = 11
-    elif season_id == '2021':
-        id = 12
-    elif season_id == '2022':
-        id = 13
-    elif season_id == '2023':
-        id = 14
-    elif season_id == '2024':
-        id = 15
+    id = getSeasonID(season_id)
     connection = Connection()
     players = connection.wr_dropdown(id)
     players_with_points = connection.select_wrs_with_total_points(id)
@@ -352,42 +243,34 @@ def season_WR_view(season_id):
 def season_TE_view(season_id):
     # Logic to retrieve season data and render the season view template
     season_end = int(season_id) + 1
-    if season_id == '2010':
-        id = 1
-    elif season_id == '2011':
-        id = 2
-    elif season_id == '2012':
-        id = 3
-    elif season_id == '2013':
-        id = 4
-    elif season_id == '2014':
-        id = 5
-    elif season_id == '2015':
-        id = 6
-    elif season_id == '2016':
-        id = 7
-    elif season_id == '2017':
-        id = 8
-    elif season_id == '2018':
-        id = 9
-    elif season_id == '2019':
-        id = 10
-    elif season_id == '2020':
-        id = 11
-    elif season_id == '2021':
-        id = 12
-    elif season_id == '2022':
-        id = 13
-    elif season_id == '2023':
-        id = 14
-    elif season_id == '2024':
-        id = 15
+    id = getSeasonID(season_id)
     connection = Connection()
     players = connection.te_dropdown(id)
     players_with_points = connection.select_tes_with_total_points(id)
     return render_template('season_view.html', position='Tight End', season_id=id, season=season_id,
                            season_end=season_end, players=players, players_with_points=players_with_points)
 
+@app.route('/season/<season_id>/K')
+def season_K_view(season_id):
+    # Logic to retrieve season data and render the season view template
+    season_end = int(season_id) + 1
+    id = getSeasonID(season_id)
+    connection = Connection()
+    players = connection.k_dropdown(id)
+    players_with_points = connection.select_k_with_total_points(id)
+    return render_template('season_view.html', position='Kicker', season_id=id, season=season_id,
+                           season_end=season_end, players=players, players_with_points=players_with_points)
+
+@app.route('/season/<season_id>/DST')
+def season_DST_view(season_id):
+    # Logic to retrieve season data and render the season view template
+    season_end = int(season_id) + 1
+    id = getSeasonID(season_id)
+    connection = Connection()
+    players = connection.dst_dropdown(id)
+    players_with_points = connection.select_dst_with_total_points(id)
+    return render_template('season_view.html', position='Defense/Special Teams', season_id=id, season=season_id,
+                           season_end=season_end, players=players, players_with_points=players_with_points)
 
 @app.route('/linear_regression')
 def linear_regression():
@@ -543,6 +426,10 @@ def player_search():
         player_stats = connection.get_wrs_stats(player_id, season_id)
     elif pos == 'Tight End':
         player_stats = connection.get_te_stats(player_id, season_id)
+    elif pos == 'Kicker':
+        player_stats = connection.get_k_stats(player_id, season_id)
+    elif pos == 'Defense/Special Teams':
+        player_stats = connection.get_dst_stats(player_id, season_id)
     return render_template('player_search.html', player_stats=player_stats)
 
 
