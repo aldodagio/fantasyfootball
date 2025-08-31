@@ -400,10 +400,10 @@ def update_player_team():
 @app.route('/draft_day_tool')
 def draft_day_tool():
     connection = Connection()
-    qb_predictions = connection.get_linear_regression_predictions_qb()
-    rb_predictions = connection.get_linear_regression_predictions_rb()
-    wr_predictions = connection.get_linear_regression_predictions_wr()
-    te_predictions = connection.get_linear_regression_predictions_te()
+    qb_predictions = connection.get_linear_regression_predictions_qb(2025)
+    rb_predictions = connection.get_linear_regression_predictions_rb(2025)
+    wr_predictions = connection.get_linear_regression_predictions_wr(2025)
+    te_predictions = connection.get_linear_regression_predictions_te(2025)
     return render_template('draft_day_tool.html',
                            qb_predictions=qb_predictions,
                            rb_predictions=rb_predictions,

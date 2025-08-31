@@ -3,7 +3,6 @@ from Scraper import Scraper
 import csv
 from nfl.Team import Team
 from postgres_db.Connection import Connection
-import re
 
 
 def setup_cleaner(input_csv_path, output_csv_path, cleaner):
@@ -18,69 +17,35 @@ def build_path(path, fantasy_year, position, week_num):
 def set_up_scraper(fantasy_year, week, key, pos):
     return Scraper(fantasy_year, week, key, pos)
 
-
-def get_other_team_name(team_name_1, game_string):
-    # Split on " vs " or " @ ", case-insensitive and surrounded by optional whitespace
-    match = re.split(r'\s+vs\s+|\s+@\s+', game_string, flags=re.IGNORECASE)
-
-    if len(match) != 2:
-        return None  # Unexpected format
-
-    team_1 = match[0].strip()
-    team_2 = match[1].strip()
-
-    if team_name_1 == team_1:
-        return team_2
-    elif team_name_1 == team_2:
-        return team_1
-    else:
-        return None  # Given team_name_1 not found in string
-
-
 def set_up_cleaner(path_to_csv, output_csv):
     return Cleaner(path_to_csv, output_csv)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    year = 2010
-    end_year = 2025
-    db = Connection()
-    season_id = 1
-    pos = 'Defense/Special Teams'
-    while year < end_year:
-        week = 1
-        if year >= 2023:
-            end_week = 19
-        else:
-            end_week = 18  # end week will be week 19 after season gets extended
-        while week < end_week:
-            root = 'C:/Users/aldod/PycharmProjects/fantasyfootball/data'
-            output_folder = '/clean_data/'
-            output_path = build_path(root + output_folder, year, 'DST', week)
-            with open(output_path, "r", newline="") as file:
-                reader = csv.reader(file)
-                next(reader)
-                for row in reader:
-                    team = row[1]
-                    game = row[2]
-                    team_id = db.select_team_id_from_team_name(team)
-                    full_name = row[0].strip()
-                    parts = full_name.split()
-                    if len(parts) >= 2:
-                        first_name = parts[0]
-                        last_name = " ".join(parts[1:])
-                    else:
-                        raise ValueError(f"Unexpected player name format: '{full_name}'")
-                    player_id = db.select_player_id(first_name, last_name)
-                    game_id = db.select_game_id_based_on_players_team(team_id, season_id, week)
-                    if game_id is None:
-                        team_name_2 = get_other_team_name(team, game)
-                        team_id_2 = db.select_team_id_from_team_name(team_name_2)
-                        game_id = db.select_game_id_based_on_players_team(team_id_2, season_id, week)
-                    total_points = row[3]
-                    defense_id = db.select_dst_id(game_id, player_id)
-                    db.insert_stats_for_dst(defense_id, total_points, game_id, player_id)
-            week = week + 1
-        print(str(year) + " d/st stats added.")
-        year = year + 1
-        season_id = season_id + 1
+    s = Scraper(2009, 1, '', '')
+    s.setYear(2009)
+    s.set_college_url('rushing')
+
+    table_id_rushing = "rushing_standard"
+    columns_rushing = [
+        "name_display", "team_name_abbr", "conf_abbr", "games",
+        "rush_att", "rush_yds", "rush_yds_per_att", "rush_td", "rush_yds_per_g"
+    ]
+    s.scrape_ncaaf(table_id_rushing, columns_rushing, "rushing_stats_" + str(s.getYear()) + ".csv")
+
+    s.set_college_url('receiving')
+    table_id_receiving = "receiving_standard"
+    columns_receiving = [
+        "name_display", "team_name_abbr", "conf_abbr", "games",
+        "rec", "rec_yds", "rec_yds_per_rec", "rec_td", "rec_yds_per_g"
+    ]
+    s.scrape_ncaaf(table_id_receiving, columns_receiving, "receiving_stats_" + str(s.getYear()) + ".csv")
+
+    s.set_college_url('passing')
+    table_id_passing = "passing_standard"
+    columns_passing = [
+        "name_display", "team_name_abbr", "conf_abbr", "games",
+        "pass_cmp", "pass_att", "pass_cmp_perc", "pass_yds", "pass_td",
+        "pass_int", "pass_yds_per_att", "pass_rating"
+    ]
+    s.scrape_ncaaf(table_id_passing, columns_passing, "passing_stats_" + str(s.getYear()) + ".csv")

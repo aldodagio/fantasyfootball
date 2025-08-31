@@ -1,3 +1,4 @@
+import pandas as pd
 import requests
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -39,6 +40,9 @@ class Scraper:
         self.url = "https://www.footballdb.com/fantasy-football/index.html?pos=" + self.pos + "&yr=" + str(self.year) + "&wk=" + str(
             self.week) + "&key=" + str(self.key)
 
+    def set_college_url(self, stat_type):
+        self.url = "https://www.sports-reference.com/cfb/years/" + str(self.year) + "-" + stat_type + ".html"
+
     def getURL(self):
         return self.url
 
@@ -47,6 +51,48 @@ class Scraper:
 
     def getHeaders(self):
         return self.headers
+
+    def scrape_ncaaf(self, table_id, columns, output_csv):
+        response = requests.get(self.url, headers=self.headers)
+        # Check if the page is accessible
+        if response.status_code == 200:
+            chrome_options = Options()
+            chrome_options.add_argument('--headless')  # Run Chrome in headless mode (without opening a window)
+            driver = webdriver.Chrome(options=chrome_options)
+            driver.get(self.url)
+            page_source = driver.page_source
+            driver.quit()
+            response.raise_for_status()
+            soup = BeautifulSoup(response.text, "html.parser")
+
+            # Find the table
+            table = soup.find("table", {"id": table_id})
+            if table is None:
+                raise ValueError(f"No table found with id '{table_id}'")
+
+            rows = table.find("tbody").find_all("tr")
+
+            data = []
+            for row in rows:
+                # Skip every 25th "header repeat" row
+                if "class" in row.attrs and "thead" in row["class"]:
+                    continue
+
+                row_data = []
+                for col in columns:
+                    cell = row.find("td", {"data-stat": col})
+                    value = cell.get_text(strip=True) if cell else ""
+                    row_data.append(value)
+
+                # Only add if we actually got player data
+                if any(row_data):
+                    data.append(row_data)
+
+            # Save to CSV
+            df = pd.DataFrame(data, columns=columns)
+            df.to_csv(output_csv, index=False)
+            #print(f"✅ Scraping complete! Data saved to {output_csv}")
+
 
     def scrape(self):
         response = requests.get(self.url, headers=self.headers)
