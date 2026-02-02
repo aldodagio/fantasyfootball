@@ -1,3 +1,5 @@
+# UML Design for PostgreSQL relational database
+![alt text](fantasyfootball.drawio.png)
 # How to use the scraper object to collect our fantasy data for our postgres db
  1. Call the set_up_scraper function inside the main function.\
     The function takes 4 arguments - fantasy_year, week, key, pos.\
