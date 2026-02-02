@@ -22,30 +22,6 @@ def set_up_cleaner(path_to_csv, output_csv):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    s = Scraper(2009, 1, '', '')
-    s.setYear(2009)
-    s.set_college_url('rushing')
-
-    table_id_rushing = "rushing_standard"
-    columns_rushing = [
-        "name_display", "team_name_abbr", "conf_abbr", "games",
-        "rush_att", "rush_yds", "rush_yds_per_att", "rush_td", "rush_yds_per_g"
-    ]
-    s.scrape_ncaaf(table_id_rushing, columns_rushing, "rushing_stats_" + str(s.getYear()) + ".csv")
-
-    s.set_college_url('receiving')
-    table_id_receiving = "receiving_standard"
-    columns_receiving = [
-        "name_display", "team_name_abbr", "conf_abbr", "games",
-        "rec", "rec_yds", "rec_yds_per_rec", "rec_td", "rec_yds_per_g"
-    ]
-    s.scrape_ncaaf(table_id_receiving, columns_receiving, "receiving_stats_" + str(s.getYear()) + ".csv")
-
-    s.set_college_url('passing')
-    table_id_passing = "passing_standard"
-    columns_passing = [
-        "name_display", "team_name_abbr", "conf_abbr", "games",
-        "pass_cmp", "pass_att", "pass_cmp_perc", "pass_yds", "pass_td",
-        "pass_int", "pass_yds_per_att", "pass_rating"
-    ]
-    s.scrape_ncaaf(table_id_passing, columns_passing, "passing_stats_" + str(s.getYear()) + ".csv")
+    c = Cleaner('C:\\Users\\aldod\\PycharmProjects\\fantasyfootball\\data\\ncaaf\\raw_data\\2024\\receiving_stats_2024.csv',
+                'C:\\Users\\aldod\\PycharmProjects\\fantasyfootball\\data\\ncaaf\\clean_data_2\\2024\\receiving_stats_2024.csv')
+    c.clean_name_display_column()

@@ -71,6 +71,26 @@ class Cleaner:
     def setOutputCSV(self, output_csv):
         self.output_csv = output_csv
 
+    def clean_name_display_column(self):
+        # Read original CSV
+        df = pd.read_csv(self.input_csv)
+
+        # Remove the '*' from names
+        df['name_display'] = df['name_display'].str.replace('*', '', regex=False).str.strip()
+
+        # Split into first and last name
+        # This assumes names are "First Last"
+        # For multi-part names like "LaMichael James" or "Jacquizz Rodgers", this still works
+        df[['first_name', 'last_name']] = df['name_display'].str.split(' ', n=1, expand=True)
+
+        # Reorder columns: put first_name and last_name at the front
+        cols = ['first_name', 'last_name'] + [c for c in df.columns if
+                                              c not in ['first_name', 'last_name', 'name_display']]
+        df_cleaned = df[cols]
+
+        # Write to new CSV
+        df_cleaned.to_csv(self.output_csv, index=False)
+
     def clean_player_column(self, pos):
         with open(self.input_csv, 'r', newline='', encoding='latin1') as infile, open(self.output_csv, 'w', newline='',
                                                                                       encoding='latin1') as outfile:
